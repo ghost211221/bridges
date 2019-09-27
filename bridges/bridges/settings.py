@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mainapp',
+    'productsapp',
 ]
 
 MIDDLEWARE = [
@@ -83,7 +84,6 @@ DATABASES = {
         'PASSWORD': 'bridges',
         'HOST': 'localhost'
     }
-
 }
 
 # Password validation
