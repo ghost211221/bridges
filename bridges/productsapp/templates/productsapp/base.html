@@ -16,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- Theme Style -->
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
 
     <!-- Favicon and touch icons  -->
     <link rel="shortcut icon" href="assets/icon/favicon.png">
@@ -39,7 +39,7 @@
     <div id="top-bar" class="style-2">
         <div id="top-bar-inner" class="container">
             <div class="top-bar-inner-wrap">
-                
+
                 <div class="top-bar-socials">
                     <div class="inner">
                         <span class="icons">
@@ -66,7 +66,7 @@
     <!-- Header -->
     <header id="site-header" class="header-front-page style-1">
         <div id="site-header-inner" class="container">
-            <div class="wrap-inner">          
+            <div class="wrap-inner">
                 <div id="site-logo" class="clearfix">
                     <div id="site-logo-inner">
                         <a href="home-slider-full-screen.html" title="Construction" rel="home" class="main-logo">
@@ -123,7 +123,7 @@
                                 <li class="menu-item"><a href="page-project-detail.html">Project Detail 1</a></li>
                                 <li class="menu-item"><a href="page-project-detail-2.html">Project Detail 2</a></li>
                                 <li class="menu-item"><a href="page-project-detail-3.html">Project Detail 3</a></li>
-                                <li class="menu-item"><a href="page-project-detail-4.html">Project Detail 4</a></li>                               
+                                <li class="menu-item"><a href="page-project-detail-4.html">Project Detail 4</a></li>
                             </ul>
                         </li>
                         <li class="menu-item"><a href="blog.html">Blog</a></li>
@@ -157,7 +157,7 @@
                                         <img width="160" height="160" src="assets/img/shop-item.png" alt="image">
                                         Shop Item 01
                                     </a>
-                                                
+
                                     <span class="quantity">1 × <span class="woocommerce-Price-amount amount">
                                         <span class="woocommerce-Price-currencySymbol">$</span>200.00</span>
                                     </span>
@@ -168,7 +168,7 @@
                                         <img width="160" height="160" src="assets/img/shop-item.png" alt="image">
                                         Shop Item 02
                                     </a>
-                                                
+
                                     <span class="quantity">1 × <span class="woocommerce-Price-amount amount">
                                         <span class="woocommerce-Price-currencySymbol">$</span>70.00</span>
                                     </span>
@@ -179,7 +179,7 @@
                                         <img width="160" height="160" src="assets/img/shop-item.png" alt="image">
                                         Shop Item 03
                                     </a>
-                                                
+
                                     <span class="quantity">1 × <span class="woocommerce-Price-amount amount">
                                         <span class="woocommerce-Price-currencySymbol">$</span>30.00</span>
                                     </span>
@@ -192,7 +192,7 @@
                                     <span class="woocommerce-Price-currencySymbol">$</span>300.00
                                 </span>
                             </p>
-        
+
                             <p class="buttons">
                                 <a href="#" class="wprt-button small">View Cart</a>
                                 <a href="#" class="wprt-button small checkout">Checkout</a>
@@ -205,8 +205,8 @@
     </header><!-- /#site-header -->
 </div><!-- /#site-header-wrap -->
 
-        {% block content-container %}
-        {% endblock %}
+{% block content-container %}
+{% endblock %}
 
 <!-- Footer -->
 <footer id="footer">
