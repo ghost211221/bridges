@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="20b77c26-32b6-43e9-ac41-bb57606db489" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 =======
       <change beforePath="$PROJECT_DIR$/mainapp/templates/mainapp/includes/inc__top_bar.html" beforeDir="false" afterPath="$PROJECT_DIR$/mainapp/templates/mainapp/includes/inc__top_bar.html" afterDir="false" />
@@ -11,6 +12,8 @@
       <change beforePath="$PROJECT_DIR$/productsapp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/productsapp/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/text.txt" beforeDir="false" />
 >>>>>>> 11b44cabf24d271f3f6944b30c7a3e0c491f5f68
+=======
+>>>>>>> Stashed changes
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -115,7 +118,7 @@
       <updated>1569592160523</updated>
       <workItem from="1569764127775" duration="118000" />
       <workItem from="1569765322542" duration="2000" />
-      <workItem from="1569765987637" duration="267000" />
+      <workItem from="1569765987637" duration="778000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1569597910938</created>
@@ -145,7 +148,21 @@
       <option name="project" value="LOCAL" />
       <updated>1569604724109</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="productsapp admin done">
+      <created>1569766295685</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1569766295685</updated>
+    </task>
+    <task id="LOCAL-00006" summary="class Meta contactapp">
+      <created>1569766390082</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1569766390082</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
 <<<<<<< HEAD
@@ -211,7 +228,9 @@
     <MESSAGE value="first commit" />
     <MESSAGE value="productsapp template" />
     <MESSAGE value="base template is done" />
-    <option name="LAST_COMMIT_MESSAGE" value="base template is done" />
+    <MESSAGE value="productsapp admin done" />
+    <MESSAGE value="class Meta contactapp" />
+    <option name="LAST_COMMIT_MESSAGE" value="class Meta contactapp" />
   </component>
 <<<<<<< HEAD
   <component name="editorHistoryManager">
