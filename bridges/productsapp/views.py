@@ -2,4 +2,7 @@ from django.shortcuts import render
 
 
 def products(request):
-    return render(request, 'productsapp/products.html')
+    context = {
+        'page_title': 'технологии',
+    }
+    return render(request, 'productsapp/products.html', context)

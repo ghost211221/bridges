@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mainapp',
     'productsapp',
+    'contactapp',
 ]
 
 MIDDLEWARE = [
@@ -123,3 +124,13 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = ('static',)
 
+DOMAIN_NAME = 'http://localhost:8000'
+
+EMAIL_HOST = 'localhost'          # Сервер для отправки сообщений
+EMAIL_PORT = '25'                        # порт для подключения
+EMAIL_HOST_USER = 'bridges@bridges.local'     # имя пользователя
+EMAIL_HOST_PASSWORD = 'bridges'      # пароль от ящика
+EMAIL_USE_SSL = False                     # использование протокола шифрования
+# DEFAULT_FROM_EMAIL = 'info@example.com'  # email, с которого будет отправлено письмо
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = 'tmp/email-messages/'

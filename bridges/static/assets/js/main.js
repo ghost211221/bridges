@@ -880,7 +880,7 @@
                                         result = 'Your message has been sent. Thank you!';
                                         cls = 'success';
                                     } else {
-                                        result = 'Error sending email.';
+                                        result = 'Ваше сообщение отправлено';
                                         cls = 'error';
                                     }
 
