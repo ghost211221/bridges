@@ -2,7 +2,7 @@ from django.db import models
 
 
 class MaterialCategory(models.Model):
-    name = models.CharField(verbose_name='категория материалов', max_length=64, unique=True)
+    name = models.CharField(verbose_name='категория материала', max_length=64, unique=True)
     description = models.TextField(verbose_name='описание', blank=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
@@ -41,10 +41,11 @@ class MeasureTypes(models.Model):
 
 class Material(models.Model):
     name = models.CharField(verbose_name='название материала', max_length=128)
-    category = models.ForeignKey(MaterialCategory, on_delete=models.CASCADE)
-    measure = models.ForeignKey(MeasureTypes, on_delete=models.CASCADE)
+    category = models.ForeignKey(MaterialCategory,verbose_name='категория материала', on_delete=models.CASCADE)
+    measure = models.ForeignKey(MeasureTypes, verbose_name='Единица измерения', on_delete=models.CASCADE)
     # characteristics = models.ManyToManyField(Characteristic)
     image = models.ImageField(upload_to='products_images', blank=True)
+    alt_desc = models.CharField(verbose_name='alt фотографии', max_length=128, blank=True)
     short_desc = models.CharField(verbose_name='краткое описание материала', max_length=60, blank=True)
     description = models.TextField(verbose_name='описание материала', blank=True)
     price = models.DecimalField(verbose_name='цена', max_digits=8, decimal_places=2, default=0)
@@ -64,7 +65,7 @@ class MaterialImage(models.Model):
     material = models.ForeignKey(Material, blank=True, null=True, default=None, on_delete=models.CASCADE)
     alt_desc = models.CharField(verbose_name='alt фотографии', max_length=128, blank=True)
     image = models.ImageField(verbose_name='Фотография', upload_to='products_images', blank=True)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(verbose_name='Показывать', default=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
@@ -80,6 +81,7 @@ class TechnicalSolutions(models.Model):
     name = models.CharField(verbose_name='название материала', max_length=128)
     material_content = models.ManyToManyField(Material)
     image = models.ImageField(upload_to='products_images', blank=True)
+    alt_desc = models.CharField(verbose_name='alt фотографии', max_length=128, blank=True)
     short_desc = models.CharField(verbose_name='краткое описание материала', max_length=60, blank=True)
     description = models.TextField(verbose_name='описание материала', blank=True)
     price = models.DecimalField(verbose_name='цена', max_digits=8, decimal_places=2, default=0)
@@ -92,3 +94,19 @@ class TechnicalSolutions(models.Model):
     class Meta:
         verbose_name = 'Техническое решение'
         verbose_name_plural = 'Технические решения'
+
+
+class TechnicalSolutionsImage(models.Model):
+    material = models.ForeignKey(TechnicalSolutions, blank=True, null=True, default=None, on_delete=models.CASCADE)
+    alt_desc = models.CharField(verbose_name='alt фотографии', max_length=128, blank=True)
+    image = models.ImageField(verbose_name='Фотография', upload_to='products_images', blank=True)
+    is_active = models.BooleanField(verbose_name='Показывать', default=True)
+    created = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    def __str__(self):
+        return self.alt_desc
+
+    class Meta:
+        verbose_name = 'Фотография технического решения'
+        verbose_name_plural = 'Фотографии технических решений'
