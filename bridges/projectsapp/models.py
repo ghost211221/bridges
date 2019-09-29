@@ -1,4 +1,5 @@
 from django.db import models
+from productsapp import TechnicalSolutions
 
 
 
@@ -8,7 +9,7 @@ class Project(models.Model):
     description = models.TextField(verbose_name='описание', blank=True)
     image = models.ImageField(upload_to='projects_images', blank=True)
     finishDate = models.DateTimeField(verbose_name=_('Дата сдачи'), blank=False)
-    techDes = models.ForeignKey(techDes, on_delete=models.CASCADE)
+    techDes = models.ForeignKey(TechnicalSolutions.name, on_delete=models.CASCADE)
     address = models.CharField(max_length=512, blank=True, null=True)
     executor = models.CharField(max_length=512, blank=True, null=True)
     orderer = models.CharField(max_length=512, blank=True, null=True)
