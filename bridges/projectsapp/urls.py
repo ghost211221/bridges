@@ -20,5 +20,5 @@ from projectsapp import views as projectsapp
 app_name = 'projectsapp'
 
 urlpatterns = [
-    path('', projectsapp.projects_asgrid, name='projects'),
+    path('', projectsapp.projects, name='projects'),
 ]

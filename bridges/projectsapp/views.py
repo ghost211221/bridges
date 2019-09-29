@@ -2,5 +2,5 @@ from django.shortcuts import render
 
 # Create your views here.
 
-def projects_asgrid(request):
+def projects(request):
     return render(request, 'projectsapp/grid.html')
