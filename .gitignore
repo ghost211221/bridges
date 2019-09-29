@@ -1,3 +1,5 @@
 # Specify filepatterns you want git to ignore.
 .idea
+./.idea
 */__pycahe__
+*/*/__pycahe__
