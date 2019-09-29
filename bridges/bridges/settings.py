@@ -125,7 +125,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = ('static',)
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 DOMAIN_NAME = 'http://localhost:8000'
 

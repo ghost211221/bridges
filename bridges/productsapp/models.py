@@ -4,6 +4,8 @@ from django.db import models
 class MaterialCategory(models.Model):
     name = models.CharField(verbose_name='категория материалов', max_length=64, unique=True)
     description = models.TextField(verbose_name='описание', blank=True)
+    created = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     def __str__(self):
         return self.name
@@ -17,6 +19,8 @@ class MeasureTypes(models.Model):
     name = models.CharField(verbose_name='единица измерения', max_length=28, unique=True)
     shortcut = models.CharField(verbose_name='ед.изм.', max_length=10, unique=True)
     description = models.TextField(verbose_name='описание', blank=True)
+    created = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     def __str__(self):
         return self.shortcut
@@ -45,6 +49,8 @@ class Material(models.Model):
     description = models.TextField(verbose_name='описание материала', blank=True)
     price = models.DecimalField(verbose_name='цена', max_digits=8, decimal_places=2, default=0)
     quantity = models.PositiveIntegerField(verbose_name='количество на складе', default=0)
+    created = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     def __str__(self):
         return f"{self.name} ({self.category.name})"
@@ -54,6 +60,22 @@ class Material(models.Model):
         verbose_name_plural = 'Материалы'
 
 
+class MaterialImage(models.Model):
+    material = models.ForeignKey(Material, blank=True, null=True, default=None, on_delete=models.CASCADE)
+    alt_desc = models.CharField(verbose_name='alt фотографии', max_length=128, blank=True)
+    image = models.ImageField(verbose_name='Фотография', upload_to='products_images', blank=True)
+    is_active = models.BooleanField(default=True)
+    created = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    def __str__(self):
+        return self.alt_desc
+
+    class Meta:
+        verbose_name = 'Фотография материаллов'
+        verbose_name_plural = 'Фотографии материаллов'
+
+
 class TechnicalSolutions(models.Model):
     name = models.CharField(verbose_name='название материала', max_length=128)
     material_content = models.ManyToManyField(Material)
@@ -61,6 +83,8 @@ class TechnicalSolutions(models.Model):
     short_desc = models.CharField(verbose_name='краткое описание материала', max_length=60, blank=True)
     description = models.TextField(verbose_name='описание материала', blank=True)
     price = models.DecimalField(verbose_name='цена', max_digits=8, decimal_places=2, default=0)
+    created = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     def __str__(self):
         return self.name
