@@ -4,7 +4,7 @@
 
 /* Google Map
 -------------------------------------------------------------- */
-.wprt-gmap { height: 400px; }
+.wprt-gmap { height: 400px; margin-bottom: 40px;}
 
 /* Section
 -------------------------------------------------------------- */
@@ -1882,7 +1882,7 @@
 }
 
 .wprt-contact-form-1 .wpcf7-form-control.wpcf7-submit {
-    width: 200px;
+    width: auto;
 }
 
 .wprt-contact-form-1 .wpcf7-form-control.wpcf7-submit:hover {
