@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mainapp',
     'productsapp',
+<<<<<<< HEAD
     'projectsapp',
+=======
+>>>>>>> upstream/sprint_1
     'contactapp',
 ]
 
@@ -126,7 +129,11 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = ('static',)
 
 MEDIA_URL = '/media/'
+<<<<<<< HEAD
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+=======
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+>>>>>>> upstream/sprint_1
 
 DOMAIN_NAME = 'http://localhost:8000'
 
