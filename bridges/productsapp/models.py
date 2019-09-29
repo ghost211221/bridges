@@ -49,3 +49,6 @@ class TechnicalSolutions(models.Model):
     short_desc = models.CharField(verbose_name='краткое описание материала', max_length=60, blank=True)
     description = models.TextField(verbose_name='описание материала', blank=True)
     price = models.DecimalField(verbose_name='цена', max_digits=8, decimal_places=2, default=0)
+
+    def __str__(self):
+        return self.name
