@@ -8,6 +8,10 @@ class MaterialCategory(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Категория материала'
+        verbose_name_plural = 'Категории материалов'
+
 
 class MeasureTypes(models.Model):
     name = models.CharField(verbose_name='единица измерения', max_length=28, unique=True)
@@ -16,6 +20,10 @@ class MeasureTypes(models.Model):
 
     def __str__(self):
         return self.shortcut
+
+    class Meta:
+        verbose_name = 'Единица измерения'
+        verbose_name_plural = 'Единицы измерения'
 
 
 # class Characteristic(models.Model):
@@ -41,6 +49,10 @@ class Material(models.Model):
     def __str__(self):
         return f"{self.name} ({self.category.name})"
 
+    class Meta:
+        verbose_name = 'Материал'
+        verbose_name_plural = 'Материалы'
+
 
 class TechnicalSolutions(models.Model):
     name = models.CharField(verbose_name='название материала', max_length=128)
@@ -49,3 +61,10 @@ class TechnicalSolutions(models.Model):
     short_desc = models.CharField(verbose_name='краткое описание материала', max_length=60, blank=True)
     description = models.TextField(verbose_name='описание материала', blank=True)
     price = models.DecimalField(verbose_name='цена', max_digits=8, decimal_places=2, default=0)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Техническое решение'
+        verbose_name_plural = 'Технические решения'

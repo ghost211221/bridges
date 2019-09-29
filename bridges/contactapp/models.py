@@ -11,3 +11,7 @@ class ContactApplication(models.Model):
 
     def __str__(self):
         return "{} ({})".format(self.name, self.subject)
+
+    class Meta:
+        verbose_name = 'Форма обратной связи'
+        verbose_name_plural = 'Формы обратной связи'

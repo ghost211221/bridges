@@ -3,6 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="20b77c26-32b6-43e9-ac41-bb57606db489" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/mainapp/templates/mainapp/includes/inc__top_bar.html" beforeDir="false" afterPath="$PROJECT_DIR$/mainapp/templates/mainapp/includes/inc__top_bar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/productsapp/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/productsapp/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/productsapp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/productsapp/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/productsapp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/productsapp/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/text.txt" beforeDir="false" />
+>>>>>>> 11b44cabf24d271f3f6944b30c7a3e0c491f5f68
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -10,37 +18,12 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/productsapp/templates/productsapp/base.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="232" column="11" selection-start-line="232" selection-end-line="306" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mainapp/templates/mainapp/base.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="799">
-              <caret line="98" column="111" selection-start-line="98" selection-start-column="111" selection-end-line="98" selection-end-column="111" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/productsapp/templates/productsapp/products.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="26" lean-forward="true" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
+=======
+>>>>>>> 11b44cabf24d271f3f6944b30c7a3e0c491f5f68
   <component name="FindInProjectRecents">
     <findStrings>
       <find>Our</find>
@@ -52,20 +35,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/bridges/settings.py" />
-        <option value="$PROJECT_DIR$/bridges/urls.py" />
-        <option value="$PROJECT_DIR$/productsapp/urls.py" />
-        <option value="$PROJECT_DIR$/mainapp/views.py" />
-        <option value="$PROJECT_DIR$/productsapp/views.py" />
-        <option value="$PROJECT_DIR$/productsapp/templates/productsapp/base.html" />
-        <option value="$PROJECT_DIR$/mainapp/templates/mainapp/base.html" />
-        <option value="$PROJECT_DIR$/productsapp/templates/productsapp/products.html" />
-      </list>
-    </option>
-  </component>
   <component name="ProjectConfigurationFiles">
     <option name="files">
       <list>
@@ -76,11 +45,12 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1912" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="-10" />
+    <option name="y" value="-10" />
+    <option name="width" value="1940" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -95,73 +65,6 @@
               <item name="bridges" type="b2602c69:ProjectViewProjectNode" />
               <item name="bridges" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="bridges" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bridges" type="462c0819:PsiDirectoryNode" />
-              <item name="bridges" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bridges" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bridges" type="462c0819:PsiDirectoryNode" />
-              <item name="mainapp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bridges" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bridges" type="462c0819:PsiDirectoryNode" />
-              <item name="mainapp" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bridges" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bridges" type="462c0819:PsiDirectoryNode" />
-              <item name="mainapp" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="mainapp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bridges" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bridges" type="462c0819:PsiDirectoryNode" />
-              <item name="productsapp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bridges" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bridges" type="462c0819:PsiDirectoryNode" />
-              <item name="productsapp" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bridges" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bridges" type="462c0819:PsiDirectoryNode" />
-              <item name="productsapp" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="productsapp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bridges" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bridges" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bridges" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bridges" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bridges" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bridges" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bridges" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bridges" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -171,7 +74,15 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/mainapp/templates/mainapp" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+=======
+  <component name="ProjectId" id="1RVtX1STZsHO6NEb5H1fhpo6Bdx" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../bridges" />
+>>>>>>> 11b44cabf24d271f3f6944b30c7a3e0c491f5f68
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -202,6 +113,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1569592160523</updated>
+      <workItem from="1569764127775" duration="118000" />
+      <workItem from="1569765322542" duration="2000" />
+      <workItem from="1569765987637" duration="267000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1569597910938</created>
@@ -234,10 +148,11 @@
     <option name="localTasksCounter" value="5" />
     <servers />
   </component>
+<<<<<<< HEAD
   <component name="ToolWindowManager">
-    <frame x="1912" y="-841" width="1096" height="1896" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21266541" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14861295" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -248,7 +163,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.30856496" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.3069307" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.3295519" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -274,6 +189,23 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout-to-restore>
+=======
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+>>>>>>> 11b44cabf24d271f3f6944b30c7a3e0c491f5f68
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
@@ -281,6 +213,7 @@
     <MESSAGE value="base template is done" />
     <option name="LAST_COMMIT_MESSAGE" value="base template is done" />
   </component>
+<<<<<<< HEAD
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/bridges/urls.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -296,23 +229,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/productsapp/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="55" lean-forward="true" selection-start-line="4" selection-start-column="55" selection-end-line="4" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/productsapp/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
-          <folding>
-            <element signature="e#631#663#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -337,10 +253,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/productsapp/templates/productsapp/product.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="9" column="70" selection-start-line="9" selection-start-column="70" selection-end-line="9" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/productsapp/templates/productsapp/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/productsapp/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mainapp/templates/mainapp/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4182">
-          <caret line="246" column="88" selection-start-line="246" selection-start-column="85" selection-end-line="246" selection-end-column="88" />
+        <state relative-caret-position="408">
+          <caret line="48" column="41" selection-start-line="48" selection-start-column="41" selection-end-line="48" selection-end-column="41" />
         </state>
       </provider>
     </entry>
@@ -354,26 +291,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/productsapp/templates/productsapp/base.html">
+    <entry file="file://$PROJECT_DIR$/productsapp/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="232" column="11" selection-start-line="232" selection-end-line="306" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mainapp/templates/mainapp/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
-          <caret line="98" column="111" selection-start-line="98" selection-start-column="111" selection-end-line="98" selection-end-column="111" />
+        <state relative-caret-position="408">
+          <caret line="54" selection-start-line="54" selection-end-line="54" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/productsapp/templates/productsapp/products.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="26" lean-forward="true" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
+        <state relative-caret-position="136">
+          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/Desktop/bridges-master/bridges/projectsapp/models.py" />
+    <entry file="file://$USER_HOME$/Desktop/bridges-master/bridges/projectsapp/views.py" />
+    <entry file="file://$USER_HOME$/Downloads/bridges-sprint_1/bridges/productsapp/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/productsapp/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/productsapp/admin.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
   </component>
+=======
+>>>>>>> 11b44cabf24d271f3f6944b30c7a3e0c491f5f68
 </project>
