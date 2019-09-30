@@ -33,6 +33,7 @@
                                 <div class="col-md-12">
                                     <div class="wprt-spacer" data-desktop="80" data-mobi="60" data-smobi="60"></div>
                                 </div><!-- /.col-md-12 -->
+                                {% if products %}
                                 {% for item in products %}
                                 <div class="col-md-4">
                                     <div class="service-item clearfix">
@@ -49,7 +50,9 @@
                                     <div class="wprt-spacer" data-desktop="55" data-mobi="40" data-smobi="40"></div>
                                 </div><!-- /.col-md-4 -->
                                 {% endfor %}
-
+                                {% else %}
+                                <h3>На данный момент нет ни одного проекта</h3>
+                                {% endif %}
                                 <div class="col-md-12">
                                     <div class="wprt-spacer" data-desktop="80" data-mobi="60" data-smobi="60"></div>
                                 </div><!-- /.col-md-12 -->
