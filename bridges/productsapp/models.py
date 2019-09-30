@@ -109,5 +109,3 @@ class TechnicalSolutionsImage(models.Model):
     class Meta:
         verbose_name = 'Фотография технического решения'
         verbose_name_plural = 'Фотографии технических решений'
->>>>>>> upstream/sprint_1
-        verbose_name_plural = 'Фотографии технических решений'
