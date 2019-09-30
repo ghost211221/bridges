@@ -32,6 +32,7 @@ class MaterialImageInline(admin.TabularInline):
 
 
 class MaterialAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('name',)}
     list_display = ('name', 'category', 'measure',)
     list_display_links = ('name',)
     search_fields = ('name',)

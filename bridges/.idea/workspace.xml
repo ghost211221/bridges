@@ -4,25 +4,6 @@
     <list default="true" id="30d609f1-1d3d-4dcc-b9d2-115d16bb8de8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/productsapp/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/productsapp/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productsapp/migrations/0002_auto_20190929_1754.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productsapp/migrations/0002_auto_20190930_0907.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productsapp/migrations/0003_auto_20190929_1923.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productsapp/migrations/0004_auto_20190929_1934.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productsapp/migrations/0005_material_image.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productsapp/migrations/0006_auto_20190929_1937.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productsapp/migrations/0007_auto_20190929_1949.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productsapp/migrations/0008_remove_materialimage_material.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productsapp/migrations/0009_material_image.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productsapp/migrations/0010_auto_20190929_2010.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productsapp/migrations/0011_auto_20190929_2017.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productsapp/migrations/0012_materialimage_alt_desc.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productsapp/migrations/0013_remove_materialimage_alt_desc.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productsapp/migrations/0014_materialimage_alt_desc.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productsapp/migrations/0015_auto_20190929_2036.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productsapp/migrations/0016_material_image.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productsapp/migrations/0017_material_alt_desc.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productsapp/migrations/0018_auto_20190929_2047.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productsapp/migrations/0019_technicalsolutions_alt_desc.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/productsapp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/productsapp/models.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,8 +17,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/productsapp/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="472">
-              <caret line="98" lean-forward="true" selection-start-line="98" selection-end-line="98" />
+            <state relative-caret-position="161">
+              <caret line="43" column="76" selection-start-line="43" selection-start-column="76" selection-end-line="43" selection-end-column="76" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/productsapp/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -45,8 +38,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/productsapp/admin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="75" selection-start-line="75" selection-end-line="75" />
+            <state relative-caret-position="251">
+              <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -57,8 +50,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/productsapp/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
+            <state relative-caret-position="323">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
               <folding>
                 <element signature="e#0#54#0" expanded="true" />
               </folding>
@@ -71,6 +64,18 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="663">
               <caret line="51" column="13" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/productsapp/templates/productsapp/products.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="557">
+              <caret line="64" column="14" lean-forward="true" selection-start-line="64" selection-start-column="14" selection-end-line="64" selection-end-column="14" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#section#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -93,10 +98,10 @@
         <option value="$PROJECT_DIR$/productsapp/templates/productsapp/includes/inc__header.html" />
         <option value="$PROJECT_DIR$/bridges/settings.py" />
         <option value="$PROJECT_DIR$/bridges/urls.py" />
-        <option value="$PROJECT_DIR$/productsapp/urls.py" />
-        <option value="$PROJECT_DIR$/productsapp/templates/productsapp/products.html" />
-        <option value="$PROJECT_DIR$/productsapp/views.py" />
         <option value="$PROJECT_DIR$/productsapp/templates/productsapp/product.html" />
+        <option value="$PROJECT_DIR$/productsapp/views.py" />
+        <option value="$PROJECT_DIR$/productsapp/templates/productsapp/products.html" />
+        <option value="$PROJECT_DIR$/productsapp/urls.py" />
         <option value="$PROJECT_DIR$/productsapp/admin.py" />
         <option value="$PROJECT_DIR$/productsapp/models.py" />
       </list>
@@ -196,15 +201,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1354029" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Python Console" />
-      <window_info anchor="bottom" id="Terminal" weight="0.5346535" />
+      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.5346535" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -308,30 +312,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/productsapp/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="44" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/productsapp/templates/productsapp/products.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="22" lean-forward="true" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#section#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/productsapp/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
+        <state relative-caret-position="323">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
           <folding>
             <element signature="e#0#54#0" expanded="true" />
           </folding>
@@ -345,10 +329,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/productsapp/templates/productsapp/products.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="557">
+          <caret line="64" column="14" lean-forward="true" selection-start-line="64" selection-start-column="14" selection-end-line="64" selection-end-column="14" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#section#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/productsapp/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/productsapp/migrations/0006_remove_material_slug.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/productsapp/migrations/0005_auto_20190930_1558.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="22" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/productsapp/migrations/0004_auto_20190930_1557.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="16" column="46" lean-forward="true" selection-start-line="16" selection-start-column="46" selection-end-line="16" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/productsapp/migrations/0003_auto_20190930_1540.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/productsapp/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="75" selection-start-line="75" selection-end-line="75" />
+        <state relative-caret-position="251">
+          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
@@ -357,8 +385,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/productsapp/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="98" lean-forward="true" selection-start-line="98" selection-end-line="98" />
+        <state relative-caret-position="161">
+          <caret line="43" column="76" selection-start-line="43" selection-start-column="76" selection-end-line="43" selection-end-column="76" />
         </state>
       </provider>
     </entry>

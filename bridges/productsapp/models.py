@@ -40,7 +40,8 @@ class MeasureTypes(models.Model):
 
 
 class Material(models.Model):
-    name = models.CharField(verbose_name='название материала', max_length=128)
+    name = models.CharField(verbose_name='название материала', max_length=128, unique=True)
+    slug = models.SlugField(verbose_name='слаг', max_length=128, unique=True)
     category = models.ForeignKey(MaterialCategory,verbose_name='категория материала', on_delete=models.CASCADE)
     measure = models.ForeignKey(MeasureTypes, verbose_name='Единица измерения', on_delete=models.CASCADE)
     # characteristics = models.ManyToManyField(Characteristic)
