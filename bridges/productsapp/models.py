@@ -2,15 +2,10 @@ from django.db import models
 
 
 class MaterialCategory(models.Model):
-<<<<<<< HEAD
-    name = models.CharField(verbose_name='категория материалов', max_length=64, unique=True)
-    description = models.TextField(verbose_name='описание', blank=True)
-=======
     name = models.CharField(verbose_name='категория материала', max_length=64, unique=True)
     description = models.TextField(verbose_name='описание', blank=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
->>>>>>> upstream/sprint_1
 
     def __str__(self):
         return self.name
@@ -24,11 +19,8 @@ class MeasureTypes(models.Model):
     name = models.CharField(verbose_name='единица измерения', max_length=28, unique=True)
     shortcut = models.CharField(verbose_name='ед.изм.', max_length=10, unique=True)
     description = models.TextField(verbose_name='описание', blank=True)
-<<<<<<< HEAD
-=======
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
->>>>>>> upstream/sprint_1
 
     def __str__(self):
         return self.shortcut
@@ -48,28 +40,19 @@ class MeasureTypes(models.Model):
 
 
 class Material(models.Model):
-    name = models.CharField(verbose_name='название материала', max_length=128)
-<<<<<<< HEAD
-    category = models.ForeignKey(MaterialCategory, on_delete=models.CASCADE)
-    measure = models.ForeignKey(MeasureTypes, on_delete=models.CASCADE)
-    # characteristics = models.ManyToManyField(Characteristic)
-    image = models.ImageField(upload_to='products_images', blank=True)
-=======
+    name = models.CharField(verbose_name='название материала', max_length=128, unique=True)
+    slug = models.SlugField(verbose_name='слаг', max_length=128, unique=True)
     category = models.ForeignKey(MaterialCategory,verbose_name='категория материала', on_delete=models.CASCADE)
     measure = models.ForeignKey(MeasureTypes, verbose_name='Единица измерения', on_delete=models.CASCADE)
     # characteristics = models.ManyToManyField(Characteristic)
     image = models.ImageField(upload_to='products_images', blank=True)
     alt_desc = models.CharField(verbose_name='alt фотографии', max_length=128, blank=True)
->>>>>>> upstream/sprint_1
-    short_desc = models.CharField(verbose_name='краткое описание материала', max_length=60, blank=True)
+    short_desc = models.CharField(verbose_name='краткое описание материала', max_length=500, blank=True)
     description = models.TextField(verbose_name='описание материала', blank=True)
     price = models.DecimalField(verbose_name='цена', max_digits=8, decimal_places=2, default=0)
     quantity = models.PositiveIntegerField(verbose_name='количество на складе', default=0)
-<<<<<<< HEAD
-=======
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
->>>>>>> upstream/sprint_1
 
     def __str__(self):
         return f"{self.name} ({self.category.name})"
@@ -79,8 +62,6 @@ class Material(models.Model):
         verbose_name_plural = 'Материалы'
 
 
-<<<<<<< HEAD
-=======
 class MaterialImage(models.Model):
     material = models.ForeignKey(Material, blank=True, null=True, default=None, on_delete=models.CASCADE)
     alt_desc = models.CharField(verbose_name='alt фотографии', max_length=128, blank=True)
@@ -97,23 +78,14 @@ class MaterialImage(models.Model):
         verbose_name_plural = 'Фотографии материаллов'
 
 
->>>>>>> upstream/sprint_1
 class TechnicalSolutions(models.Model):
-    name = models.CharField(verbose_name='название материала', max_length=128)
     material_content = models.ManyToManyField(Material)
     image = models.ImageField(upload_to='products_images', blank=True)
-<<<<<<< HEAD
-    short_desc = models.CharField(verbose_name='краткое описание материала', max_length=60, blank=True)
-    description = models.TextField(verbose_name='описание материала', blank=True)
-    price = models.DecimalField(verbose_name='цена', max_digits=8, decimal_places=2, default=0)
-=======
     alt_desc = models.CharField(verbose_name='alt фотографии', max_length=128, blank=True)
-    short_desc = models.CharField(verbose_name='краткое описание материала', max_length=60, blank=True)
     description = models.TextField(verbose_name='описание материала', blank=True)
     price = models.DecimalField(verbose_name='цена', max_digits=8, decimal_places=2, default=0)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
->>>>>>> upstream/sprint_1
 
     def __str__(self):
         return self.name
@@ -121,8 +93,6 @@ class TechnicalSolutions(models.Model):
     class Meta:
         verbose_name = 'Техническое решение'
         verbose_name_plural = 'Технические решения'
-<<<<<<< HEAD
-=======
 
 
 class TechnicalSolutionsImage(models.Model):
@@ -140,3 +110,4 @@ class TechnicalSolutionsImage(models.Model):
         verbose_name = 'Фотография технического решения'
         verbose_name_plural = 'Фотографии технических решений'
 >>>>>>> upstream/sprint_1
+        verbose_name_plural = 'Фотографии технических решений'

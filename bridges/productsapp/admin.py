@@ -42,6 +42,7 @@ class MaterialImageInline(admin.TabularInline):
 
 >>>>>>> upstream/sprint_1
 class MaterialAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('name',)}
     list_display = ('name', 'category', 'measure',)
     list_display_links = ('name',)
     search_fields = ('name',)
@@ -77,6 +78,7 @@ class TechnicalSolutionsImageInline(admin.TabularInline):
 
 >>>>>>> upstream/sprint_1
 class TechnicalSolutionsAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('name',)}
     list_display = ('name', )
     list_display_links = ('name',)
     search_fields = ('name',)

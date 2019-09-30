@@ -7,14 +7,14 @@
     <div id="featured-title-inner" class="container clearfix">
         <div class="featured-title-inner-wrap">
             <div class="featured-title-heading-wrap">
-                <h1 class="featured-title-heading">Service Detail</h1>
+                <h1 class="featured-title-heading">{{ product.name }}</h1>
             </div>
             <div id="breadcrumbs">
                 <div class="breadcrumbs-inner">
                     <div class="breadcrumb-trail">
                         <a href="#" title="Construction" rel="home" class="trail-begin">Home</a>
                         <span class="sep">/</span>
-                        <span class="trail-end">Service Detail</span>
+                        <span class="trail-end">Подробно о технологии</span>
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                         <div class="col-md-12">
                             <div class="wprt-spacer" data-desktop="80" data-mobi="60" data-smobi="60"></div>
 
-                            <h2 class="line-height-normal margin-bottom-10">MANY YEARS OF EXPERIENCE</h2>
+                            <h2 class="line-height-normal margin-bottom-10">Краткое описание</h2>
                             <div class="wprt-lines style-1 custom-3">
                                 <div class="line-1"></div>
                                 <div class="line-2"></div>
@@ -40,12 +40,12 @@
 
                             <div class="wprt-spacer" data-desktop="25" data-mobi="25" data-smobi="25"></div>
 
-                            <p class="margin-bottom-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec erat erat. Integer blandit nulla quis fermentum hendrerit. Vestibulum eu libero volutpat, portas quam acc, tempus sem. Donec sodales quam id lorem lobortis, vitae interdum nisl vehicula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam suscipit, elit quis facilisis dictum, diam justo volutpat dui. Cras id justo eget sapien scelerisque lacinia non a eros.</p>
+                            <p class="margin-bottom-0">{{ product.description }}</p>
                             <div class="wprt-spacer" data-desktop="40" data-mobi="40" data-smobi="40"></div>
                         </div><!-- /.col-md-12 -->
 
                         <div class="col-md-6">
-                            <h3 class="line-height-normal margin-bottom-10">GALLERY PROJECT</h3>
+                            <h3 class="line-height-normal margin-bottom-10">Выполненные объекты</h3>
                             <div class="wprt-lines style-1 custom-3">
                                 <div class="line-1"></div>
                                 <div class="line-2"></div>
@@ -64,33 +64,33 @@
                                         </div>
                                     </div><!--/.cbp-item -->
 
-                                    <div class="cbp-item">
-                                        <div class="item-wrap">
-                                            <a class="zoom" href="assets/img/projects/2-full.jpg"><i class="fa fa-arrows-alt"></i></a>
-                                            <img src="assets/img/projects/2.jpg" alt="image" />
-                                        </div>
-                                    </div><!--/.cbp-item -->
+<!--                                    <div class="cbp-item">-->
+<!--                                        <div class="item-wrap">-->
+<!--                                            <a class="zoom" href="assets/img/projects/2-full.jpg"><i class="fa fa-arrows-alt"></i></a>-->
+<!--                                            <img src="assets/img/projects/2.jpg" alt="image" />-->
+<!--                                        </div>-->
+<!--                                    </div>&lt;!&ndash;/.cbp-item &ndash;&gt;-->
 
-                                    <div class="cbp-item">
-                                        <div class="item-wrap">
-                                            <a class="zoom" href="assets/img/projects/3-full.jpg"><i class="fa fa-arrows-alt"></i></a>
-                                            <img src="assets/img/projects/3.jpg" alt="image" />
-                                        </div>
-                                    </div><!--/.cbp-item -->
+<!--                                    <div class="cbp-item">-->
+<!--                                        <div class="item-wrap">-->
+<!--                                            <a class="zoom" href="assets/img/projects/3-full.jpg"><i class="fa fa-arrows-alt"></i></a>-->
+<!--                                            <img src="assets/img/projects/3.jpg" alt="image" />-->
+<!--                                        </div>-->
+<!--                                    </div>&lt;!&ndash;/.cbp-item &ndash;&gt;-->
 
-                                    <div class="cbp-item">
-                                        <div class="item-wrap">
-                                            <a class="zoom" href="assets/img/projects/4-full.jpg"><i class="fa fa-arrows-alt"></i></a>
-                                            <img src="assets/img/projects/4.jpg" alt="image" />
-                                        </div>
-                                    </div><!--/.cbp-item -->
+<!--                                    <div class="cbp-item">-->
+<!--                                        <div class="item-wrap">-->
+<!--                                            <a class="zoom" href="assets/img/projects/4-full.jpg"><i class="fa fa-arrows-alt"></i></a>-->
+<!--                                            <img src="assets/img/projects/4.jpg" alt="image" />-->
+<!--                                        </div>-->
+<!--                                    </div>&lt;!&ndash;/.cbp-item &ndash;&gt;-->
 
-                                    <div class="cbp-item">
-                                        <div class="item-wrap">
-                                            <a class="zoom" href="assets/img/projects/5-full.jpg"><i class="fa fa-arrows-alt"></i></a>
-                                            <img src="assets/img/projects/5.jpg" alt="image" />
-                                        </div>
-                                    </div><!--/.cbp-item -->
+<!--                                    <div class="cbp-item">-->
+<!--                                        <div class="item-wrap">-->
+<!--                                            <a class="zoom" href="assets/img/projects/5-full.jpg"><i class="fa fa-arrows-alt"></i></a>-->
+<!--                                            <img src="assets/img/projects/5.jpg" alt="image" />-->
+<!--                                        </div>-->
+<!--                                    </div>&lt;!&ndash;/.cbp-item &ndash;&gt;-->
                                 </div><!-- /#images-wrap -->
                             </div>
                         </div><!-- /.col-md-6 -->
@@ -98,7 +98,7 @@
                         <div class="col-md-6">
                         <div class="wprt-spacer" data-desktop="0" data-mobi="40" data-smobi="40"></div>
 
-                            <h3 class="line-height-normal margin-bottom-10">QUALITY CONSTRUCTION</h3>
+                            <h3 class="line-height-normal margin-bottom-10">Конкурентные преимущества</h3>
                             <div class="wprt-lines style-1 custom-3">
                                 <div class="line-1"></div>
                                 <div class="line-2"></div>
@@ -119,7 +119,7 @@
                         <div class="col-md-12">
                             <div class="wprt-spacer" data-desktop="40" data-mobi="40" data-smobi="40"></div>
 
-                            <h2 class="line-height-normal margin-bottom-10">DO THE JOB QUICKLY</h2>
+                            <h2 class="line-height-normal margin-bottom-10">Техническая поддержка и обучение</h2>
                             <div class="wprt-lines style-1 custom-3">
                                 <div class="line-1"></div>
                                 <div class="line-2"></div>
@@ -136,24 +136,24 @@
             </div><!-- /.inner-content-wrap -->
         </div><!-- /#site-content -->
 
-        <div id="sidebar">
-            <div class="wprt-spacer" data-desktop="80" data-mobi="40" data-smobi="40"></div>
+<!--        <div id="sidebar">-->
+<!--            <div class="wprt-spacer" data-desktop="80" data-mobi="40" data-smobi="40"></div>-->
 
-            <div id="inner-sidebar" class="inner-content-wrap">
-                <div class="widget widget_nav_menu">
-                    <div class="menu-service-menu-container">
-                        <ul id="menu-service-menu" class="menu">
-                            <li class="menu-item current_page_item"><a href="#">CONSTRUCTION CONSULTANT</a></li>
-                            <li class="menu-item"><a href="#">ARCHITECTURAL DESIGN</a></li>
-                            <li class="menu-item"><a href="#">ELECTRICAL SYSTEM</a></li>
-                            <li class="menu-item"><a href="#">GENERAL CONTRACTING</a></li>
-                            <li class="menu-item"><a href="#">RESCONSTRUCTION SERVICES</a></li>
-                            <li class="menu-item"><a href="#">PLUMBILG SERVICES</a></li>
-                        </ul>
-                    </div>
-                </div><!-- /.widget_nav_menu -->
-            </div><!-- /#inner-sidebar -->
-        </div><!-- /#sidebar -->
+<!--            <div id="inner-sidebar" class="inner-content-wrap">-->
+<!--                <div class="widget widget_nav_menu">-->
+<!--                    <div class="menu-service-menu-container">-->
+<!--                        <ul id="menu-service-menu" class="menu">-->
+<!--                            <li class="menu-item current_page_item"><a href="#">CONSTRUCTION CONSULTANT</a></li>-->
+<!--                            <li class="menu-item"><a href="#">ARCHITECTURAL DESIGN</a></li>-->
+<!--                            <li class="menu-item"><a href="#">ELECTRICAL SYSTEM</a></li>-->
+<!--                            <li class="menu-item"><a href="#">GENERAL CONTRACTING</a></li>-->
+<!--                            <li class="menu-item"><a href="#">RESCONSTRUCTION SERVICES</a></li>-->
+<!--                            <li class="menu-item"><a href="#">PLUMBILG SERVICES</a></li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                </div>&lt;!&ndash; /.widget_nav_menu &ndash;&gt;-->
+<!--            </div>&lt;!&ndash; /#inner-sidebar &ndash;&gt;-->
+<!--        </div>&lt;!&ndash; /#sidebar &ndash;&gt;-->
     </div><!-- /#content-wrap -->
 </div><!-- /#main-content -->
 
