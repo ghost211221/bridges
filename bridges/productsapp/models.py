@@ -78,7 +78,8 @@ class MaterialImage(models.Model):
 
 
 class TechnicalSolutions(models.Model):
-    name = models.CharField(verbose_name='название материала', max_length=128)
+    name = models.CharField(verbose_name='название материала', max_length=128, unique=True)
+    slug = models.SlugField(verbose_name='слаг новости', max_length=128, unique=True)
     material_content = models.ManyToManyField(Material)
     image = models.ImageField(upload_to='products_images', blank=True)
     alt_desc = models.CharField(verbose_name='alt фотографии', max_length=128, blank=True)
