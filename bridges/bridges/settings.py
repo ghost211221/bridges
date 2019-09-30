@@ -37,10 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mainapp',
     'productsapp',
-<<<<<<< HEAD
     'projectsapp',
-=======
->>>>>>> upstream/sprint_1
     'contactapp',
 ]
 

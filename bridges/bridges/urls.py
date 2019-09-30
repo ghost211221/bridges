@@ -22,12 +22,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', include('mainapp.urls', namespace='main')),
     path('contact/', include('contactapp.urls', namespace='contact')),
-<<<<<<< HEAD
     path('products/', include('productsapp.urls', namespace='products')),
     path('projects/', include('projectsapp.urls', namespace='projects')),
-=======
-    path('products', include('productsapp.urls', namespace='products')),
->>>>>>> upstream/sprint_1
     path('admin/', admin.site.urls),
 ]
 
