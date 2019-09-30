@@ -107,12 +107,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="670" />
-    <option name="y" value="-18" />
-    <option name="width" value="492" />
-    <option name="height" value="840" />
-  </component>
+  <component name="ProjectId" id="1RYgXHyoKch5crLwvidCec6UDLp" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -164,6 +159,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="C:/PythonProjects/geekshop/geekshop" />
   </component>
   <component name="RunDashboard">
