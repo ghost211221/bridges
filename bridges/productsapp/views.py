@@ -14,25 +14,12 @@ def products(request):
     return render(request, 'productsapp/products.html', content)
 
 
-def product(request, pk):
+def product(request, slug):
     title = "Технические решения"
-    item = get_object_or_404(TechnicalSolutions, pk=pk)
-    # all_products = Product.objects.filter(category__slug=slug).exclude(is_active=False)
+    item = get_object_or_404(TechnicalSolutions, slug=slug)
 
     content = {
         'page_title': title,
         'product': item
     }
     return render(request, 'productsapp/product.html', content)
-
-
-# def product(request, pk):
-#     product = get_object_or_404(Product, pk=pk)
-#
-#     context = {
-#         'page_title': 'страница продукта',
-#         'products_menu': get_products_menu(),
-#         'category': product.category,
-#         'object': product,
-#     }
-#     return render(request, 'mainapp/product_page.html', context)
