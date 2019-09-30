@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from productsapp.models import TechnicalSolutions
+from productsapp.models import TechnicalSolutions, Material
 
 
 def products(request):
@@ -20,6 +20,7 @@ def product(request, slug):
 
     content = {
         'page_title': title,
-        'product': item
+        'product': item,
     }
     return render(request, 'productsapp/product.html', content)
+
