@@ -17,10 +17,12 @@ def products(request):
 def product(request, slug):
     title = "Технические решения"
     item = get_object_or_404(TechnicalSolutions, slug=slug)
+    material_list = item.material_content.all()
 
     content = {
         'page_title': title,
         'product': item,
+        'material_list': material_list
     }
     return render(request, 'productsapp/product.html', content)
 

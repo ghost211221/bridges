@@ -118,10 +118,9 @@
                                 sapien scelerisque lacinia non a eros.</p>
 
                             <ul class="wprt-list style-1 accent-color">
-                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </li>
-                                <li>Vestibulum eu libero volutpat, portas quam acc.</li>
-                                <li>Donec sodales quam id lorem lobortis nisl vehicula.</li>
-                                <li>Cras id justo eget sapien scelerisque lacinia non a eros.</li>
+                                {% for item in material_list %}
+                                    <li>{{ item.name }}</li>
+                                {% endfor %}
                             </ul>
                         </div><!-- /.col-md-6 -->
 
