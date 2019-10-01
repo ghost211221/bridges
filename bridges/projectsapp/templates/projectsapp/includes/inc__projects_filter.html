@@ -2,7 +2,7 @@
     <span>Все</span>
 </div>
 {% for item in products %}
-<div data-filter=".{{ item.name }}" class="cbp-filter-item">
+<div data-filter=".{{ item.pk }}" class="cbp-filter-item">
     <span>{{ item.name }}</span>
 </div>
 {% endfor %}

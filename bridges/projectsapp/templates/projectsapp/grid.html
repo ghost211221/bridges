@@ -36,7 +36,10 @@
                                         </div><!-- /#project-filter -->
                                         <div id="projects" class="cbp">
                                             {% for item in projects %}
-                                                <div class="cbp-item architecture interior workspace">
+                                                <div class="cbp-item
+                                                {% for i in item.technical_solutions.all %}
+                                                {{i.pk}}
+                                                {% endfor %}">
                                                     <div class="project-item">
                                                         <div class="inner">
                                                             <div class="grid">
