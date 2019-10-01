@@ -52,7 +52,7 @@
     <!--                                                            <img src="/media/{{ item.image }}" alt="image" />-->
                                                                 <figcaption>
                                                                     <div>
-                                                                        <h2><a target="_blank" href="page-project-detail.html">{{ item.name }}</a></h2>
+                                                                        <h2><a href="{% url 'projects:project' item.pk %}">{{ item.name }}</a></h2>
 <!--                                                                        <p>Construction</p>-->
                                                                     </div>
                                                                 </figcaption>

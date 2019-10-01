@@ -21,4 +21,6 @@ app_name = 'projectsapp'
 
 urlpatterns = [
     path('', projectsapp.projects, name='projects'),
+    path('<int:pk>', projectsapp.project, name='project'),
+    # path('product/<int:pk>', productsapp.product, name='product'),
 ]
