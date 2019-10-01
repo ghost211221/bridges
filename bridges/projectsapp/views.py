@@ -1,6 +1,15 @@
 from django.shortcuts import render
 
-# Create your views here.
+from productsapp.models import TechnicalSolutions
+from projectsapp.models import Project
+
 
 def projects(request):
-    return render(request, 'projectsapp/grid.html')
+    all_projects = Project.objects.all()
+    products = TechnicalSolutions.objects.all()
+
+    content = {
+        'all_projects': all_projects,
+        'products': products
+    }
+    return render(request, 'projectsapp/grid.html', content)

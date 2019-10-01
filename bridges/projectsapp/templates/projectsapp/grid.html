@@ -30,28 +30,9 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="wprt-project" data-layout="grid" data-column="3" data-column2="3" data-column3="2" data-column4="1" data-gaph="30" data-gapv="30">
+
                                         <div id="project-filter">
-                                            <div data-filter="*" class="cbp-filter-item">
-                                                <span>All</span>
-                                            </div>
-                                            <div data-filter=".architecture" class="cbp-filter-item">
-                                                <span>Architecture</span>
-                                            </div>
-                                            <div data-filter=".building" class="cbp-filter-item">
-                                                <span>Building</span>
-                                            </div>
-                                            <div data-filter=".garden" class="cbp-filter-item">
-                                                <span>Garden</span>
-                                            </div>
-                                            <div data-filter=".interior" class="cbp-filter-item">
-                                                <span>Interior</span>
-                                            </div>
-                                            <div data-filter=".office" class="cbp-filter-item">
-                                                <span>Office</span>
-                                            </div>
-                                            <div data-filter=".workspace" class="cbp-filter-item">
-                                                <span>Workspace</span>
-                                            </div>
+                                            {% include 'projectsapp/includes/inc__projects_filter.html' %}
                                         </div><!-- /#project-filter -->
 
                                         <div id="projects" class="cbp">
