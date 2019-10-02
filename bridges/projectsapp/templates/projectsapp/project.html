@@ -40,8 +40,8 @@
                                         <div id="wprt-slider" class="flexslider">
                                             <ul class="slides">
                                                 <li class="flex-active-slide">
-                                                    <a class="zoom" href="assets/img/gallery/p-1.jpg"><i class="fa fa-arrows-alt"></i></a>
-                                                    <img src="assets/img/gallery/p-1.jpg" alt="image" />
+                                                    <a class="zoom" href="#"><i class="fa fa-arrows-alt"></i></a>
+                                                    <img src="/media/{{ project.image }}" alt="image" />
                                                 </li>
 
                                                 <li class="flex-active-slide">
@@ -67,7 +67,7 @@
 
                                         <div id="wprt-carousel" class="flexslider">
                                             <ul class="slides">
-                                                <li><img src="assets/img/gallery/p-1-s.jpg" alt="image"></li>
+                                                <li><img src="/media/{{ project.image }}" alt="image"></li>
                                                 <li><img src="assets/img/gallery/p-2-s.jpg" alt="image"></li>
                                                 <li><img src="assets/img/gallery/p-3-s.jpg" alt="image"></li>
                                                 <li><img src="assets/img/gallery/p-1-s.jpg" alt="image"></li>
@@ -87,22 +87,25 @@
                                     </div>
 
                                     <div class="wprt-spacer" data-desktop="25" data-mobi="25" data-smobi="25"></div>
-
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec erat erat. Integer blandit nulla quis fermentum hendrerit. Vestibulum eu libero volutpat, portas quam acc, tempus sem. Donec sodales quam id lorem lobortis, vitae. </p>
+                                    <p>Регион: {{ project.city }}</p>
+                                    <p>Адрес объекта: {{ project.address }}. Посмотреть на <a href="#">карте</a></p>
+                                    <p>Краткие характеристики объекта: {{ project.description }} lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec erat erat. Integer blandit nulla quis fermentum hendrerit. Vestibulum eu libero volutpat, portas quam acc, tempus sem. Donec sodales quam id lorem lobortis, vitae. </p>
                                     <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque nec erat erat. Integer blandit nulla quis fermentum hendrerit.</p>
+
 
                                     <div class="wprt-lines style-1 custom-4">
                                         <div class="line-1"></div>
                                     </div>
 
                                     <ul class="wprt-list style-2 accent-color margin-top-30 margin-bottom-25">
-                                        <li><strong>Client:</strong> ThemeForest Builder</li>
-                                        <li><strong>Architect:</strong> Richardson and Sandra</li>
-                                        <li><strong>Builder:</strong> GraphicRiver Builder Corporate</li>
-                                        <li><strong>Budget:</strong> $1 250 000,00</li>
+                                        <li><strong>Заказчик:</strong> {{ project.customer }}</li>
+                                        <li><strong>Проектировщик:</strong> {{ project.designer }}</li>
+                                        <li><strong>Подрядчик:</strong> {{ project.contractor }}</li>
+                                        <li><strong>Год сдачи:</strong> {{ project.finishDate }}</li>
+                                        <li><strong>Бюджет:</strong> $1 250 000,00</li>
                                     </ul>
 
-                                    <a href="#" class="wprt-button small rounded-3px">LIVE PREVIEW</a>
+<!--                                    <a href="#" class="wprt-button small rounded-3px">LIVE PREVIEW</a>-->
                                 </div><!-- /.col-md-4 -->
 
                                 <div class="col-md-12">
