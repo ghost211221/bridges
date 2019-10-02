@@ -64,12 +64,13 @@ class ProjectImage(models.Model):
 
 class ProjectHasTechnicalSolutions(models.Model):
     """ Модель связи технических решений применяемых на объекте с указанием их объема  """
+    project = models.ForeignKey(Project, blank=True, null=True, default=None, on_delete=models.CASCADE)
     tech_sol = models.ManyToManyField(TechnicalSolutions)
-    project = models.ManyToManyField(Project)
     value = models.FloatField(verbose_name='значение', null=True)
     is_active = models.BooleanField(verbose_name='Показывать', default=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
-    def __str__(self):
-        return self.tech_sol
+    class Meta:
+        verbose_name = 'Тех решение проекта'
+        verbose_name_plural = 'Тех решения проекта'

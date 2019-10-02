@@ -18,8 +18,16 @@ class ProjectAdmin(admin.ModelAdmin):
     list_display = ('name', 'city',)
     list_display_links = ('name', 'city',)
     search_fields = ('name',)
-    inlines = [ProjectHasTechnicalSolutionsInline]
-    inlines = [ProjectImageInline]
+    inlines = [
+        ProjectHasTechnicalSolutionsInline,
+        ProjectImageInline,
+    ]
+
+
+@admin.register(ProjectHasTechnicalSolutions)
+class ProjectHasTechnicalSolutionsAdmin(admin.ModelAdmin):
+    list_display = ('id', 'value', 'created', 'updated',)
+    list_display_links = ('id', 'value',)
 
 
 @admin.register(ProjectImage)
@@ -28,7 +36,4 @@ class ProjectImageAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'image',)
 
 
-@admin.register(ProjectHasTechnicalSolutions)
-class ProjectHasTechnicalSolutionsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'value', 'created', 'updated',)
-    list_display_links = ('id', 'value',)
+
