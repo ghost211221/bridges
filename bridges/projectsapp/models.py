@@ -39,7 +39,7 @@ class Project(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.city})"
-    #
+
     # def get_pictures(self):
     #     return self.images.all
 
