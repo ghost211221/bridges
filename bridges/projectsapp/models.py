@@ -40,6 +40,9 @@ class Project(models.Model):
     def __str__(self):
         return f"{self.name} ({self.city})"
 
+    def get_pictures(self):
+        return self.images.all
+
     class Meta:
         verbose_name = 'Проект'
         verbose_name_plural = 'Проекты'
@@ -47,7 +50,8 @@ class Project(models.Model):
 
 class ProjectImage(models.Model):
     """ Галерея фотографий для проекта строительства """
-    project = models.ForeignKey(Project, blank=True, null=True, default=None, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, blank=True, null=True, default=None, on_delete=models.CASCADE,
+                                related_name="images")
     alt_desc = models.CharField(verbose_name='alt фотографии', max_length=128, blank=True)
     image = models.ImageField(verbose_name='Фотография', upload_to='products_images', blank=True)
     is_active = models.BooleanField(verbose_name='Показывать', default=True)

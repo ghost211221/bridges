@@ -39,39 +39,38 @@
                                     <div class="wprt-galleries galleries w-770px" data-width="142" data-margin="15">
                                         <div id="wprt-slider" class="flexslider">
                                             <ul class="slides">
+                                                {% for image in gallery %}
                                                 <li class="flex-active-slide">
                                                     <a class="zoom" href="#"><i class="fa fa-arrows-alt"></i></a>
-                                                    <img src="/media/{{ project.image }}" alt="image" />
+                                                    <img src="/media/{{ image.image }}" alt="pic" />
                                                 </li>
+                                                {% endfor %}
+<!--                                                <li class="flex-active-slide">-->
+<!--                                                    <a class="zoom" href="assets/img/gallery/p-2.jpg"><i class="fa fa-arrows-alt"></i></a>-->
+<!--                                                    <img src="assets/img/gallery/p-2.jpg" alt="image" />-->
+<!--                                                </li>-->
 
-                                                <li class="flex-active-slide">
-                                                    <a class="zoom" href="assets/img/gallery/p-2.jpg"><i class="fa fa-arrows-alt"></i></a>
-                                                    <img src="assets/img/gallery/p-2.jpg" alt="image" />
-                                                </li>
+<!--                                                <li class="flex-active-slide">-->
+<!--                                                    <a class="zoom" href="assets/img/gallery/p-3.jpg"><i class="fa fa-arrows-alt"></i></a>-->
+<!--                                                    <img src="assets/img/gallery/p-3.jpg" alt="image" />-->
+<!--                                                </li>-->
 
-                                                <li class="flex-active-slide">
-                                                    <a class="zoom" href="assets/img/gallery/p-3.jpg"><i class="fa fa-arrows-alt"></i></a>
-                                                    <img src="assets/img/gallery/p-3.jpg" alt="image" />
-                                                </li>
-
-                                                <li class="flex-active-slide">
-                                                    <a class="zoom" href="assets/img/gallery/p-1.jpg"><i class="fa fa-arrows-alt"></i></a>
-                                                    <img src="assets/img/gallery/p-1.jpg" alt="image" />
-                                                </li>
-                                                <li class="flex-active-slide">
-                                                    <a class="zoom" href="assets/img/gallery/p-2.jpg"><i class="fa fa-arrows-alt"></i></a>
-                                                    <img src="assets/img/gallery/p-2.jpg" alt="image" />
-                                                </li>
+<!--                                                <li class="flex-active-slide">-->
+<!--                                                    <a class="zoom" href="assets/img/gallery/p-1.jpg"><i class="fa fa-arrows-alt"></i></a>-->
+<!--                                                    <img src="assets/img/gallery/p-1.jpg" alt="image" />-->
+<!--                                                </li>-->
+<!--                                                <li class="flex-active-slide">-->
+<!--                                                    <a class="zoom" href="assets/img/gallery/p-2.jpg"><i class="fa fa-arrows-alt"></i></a>-->
+<!--                                                    <img src="assets/img/gallery/p-2.jpg" alt="image" />-->
+<!--                                                </li>-->
                                             </ul>
                                         </div>
 
                                         <div id="wprt-carousel" class="flexslider">
                                             <ul class="slides">
-                                                <li><img src="/media/{{ project.image }}" alt="image"></li>
-                                                <li><img src="assets/img/gallery/p-2-s.jpg" alt="image"></li>
-                                                <li><img src="assets/img/gallery/p-3-s.jpg" alt="image"></li>
-                                                <li><img src="assets/img/gallery/p-1-s.jpg" alt="image"></li>
-                                                <li><img src="assets/img/gallery/p-2-s.jpg" alt="image"></li>
+                                                {% for image in gallery %}
+                                                <li><img src="/media/{{ image.image }}" alt="pic"></li>
+                                                {% endfor %}
                                             </ul>
                                         </div>
                                     </div>
