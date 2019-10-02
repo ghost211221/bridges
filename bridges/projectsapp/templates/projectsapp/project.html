@@ -103,9 +103,39 @@
                                         <li><strong>Год сдачи:</strong> {{ project.finishDate }}</li>
                                         <li><strong>Бюджет:</strong> $1 250 000,00</li>
                                     </ul>
-
+                                    <ul class="wprt-list style-2 accent-color margin-top-30 margin-bottom-25">
+                                        {% for solution in solutions %}
+                                            {% for item in solution.tech_sol.all  %}
+                                                <li><strong>Название</strong> {{ item.name }} {{ solution.value }}</li>
+                                            {% endfor %}
+                                        {% endfor %}
+                                    </ul>
 <!--                                    <a href="#" class="wprt-button small rounded-3px">LIVE PREVIEW</a>-->
                                 </div><!-- /.col-md-4 -->
+
+<!--                                TOGGLES-->
+                                <div class="col-md-6">
+                                    <div class="wprt-toggle style-2">
+                                        <h3 class="toggle-title">Employees have many years of experience</h3>
+                                        <div class="toggle-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a metus pellentesque, scelerisque ex sed, volutpat nisi. Curabitur tortor mi, eleifend ornare lobortis non. Nulla porta purus quis iaculis ultrices. Proin aliquam sem at nibh hendrerit sagittis. Nullam ornare odio eu lacus tincidunt malesuada. Sed eu vestibulum elit. Curabitur tortor mi, eleifend ornare.</div>
+                                    </div>
+
+                                    <div class="wprt-toggle style-1">
+                                        <h3 class="toggle-title">Quality construction continues after the project</h3>
+                                        <div class="toggle-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a metus pellentesque, scelerisque ex sed, volutpat nisi. Curabitur tortor mi, eleifend ornare lobortis non. Nulla porta purus quis iaculis ultrices. Proin aliquam sem at nibh hendrerit sagittis. Nullam ornare odio eu lacus tincidunt malesuada. Sed eu vestibulum elit. Curabitur tortor mi, eleifend ornare.</div>
+                                    </div>
+
+                                    <div class="wprt-toggle style-1">
+                                        <h3 class="toggle-title">They use technology to do the job more quickly</h3>
+                                        <div class="toggle-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a metus pellentesque, scelerisque ex sed, volutpat nisi. Curabitur tortor mi, eleifend ornare lobortis non. Nulla porta purus quis iaculis ultrices. Proin aliquam sem at nibh hendrerit sagittis. Nullam ornare odio eu lacus tincidunt malesuada. Sed eu vestibulum elit. Curabitur tortor mi, eleifend ornare.</div>
+                                    </div>
+
+                                    <div class="wprt-toggle style-1">
+                                        <h3 class="toggle-title">Employees are continually trained on safety issues</h3>
+                                        <div class="toggle-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a metus pellentesque, scelerisque ex sed, volutpat nisi. Curabitur tortor mi, eleifend ornare lobortis non. Nulla porta purus quis iaculis ultrices. Proin aliquam sem at nibh hendrerit sagittis. Nullam ornare odio eu lacus tincidunt malesuada. Sed eu vestibulum elit. Curabitur tortor mi, eleifend ornare.</div>
+                                    </div>
+                                </div><!-- /.col-md-6 -->
+<!--                                END OF TOGGLES-->
 
                                 <div class="col-md-12">
                                     <div class="wprt-spacer" data-desktop="80" data-mobi="60" data-smobi="60"></div>
