@@ -58,10 +58,10 @@
                                 <div id="images-wrap" class="cbp">
                                     {% for item in projects %}
                                             <div class="cbp-item">
-                                                <p class="margin-bottom-5" style="text-align: right;"><i><b>{{ item.name }}, {{ project.name }}</b></i></p>
+                                                <p class="margin-bottom-5" style="text-align: right;"><i><b>{{ item.project.name }}, {{ item.project.city }}</b></i></p>
                                                 <div class="item-wrap" style="height: 370px;">
                                                     <a class="zoom" href="assets/img/projects/1-full.jpg"><i class="fa fa-arrows-alt"></i></a>
-                                                    <img src="/media/{{ item.product.image }}" alt="image"/>
+                                                    <img src="/media/{{ item.project.image }}" alt="image"/>
                                                 </div>
                                             </div><!--/.cbp-item -->
                                     {% endfor %}
