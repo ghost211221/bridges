@@ -1,6 +1,27 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
-# Create your views here.
+from productsapp.models import TechnicalSolutions
+from projectsapp.models import Project
+
 
 def projects(request):
-    return render(request, 'projectsapp/grid.html')
+    projects = Project.objects.all()
+    products = TechnicalSolutions.objects.all()
+
+    content = {
+        'projects': projects,
+        'products': products
+    }
+    return render(request, 'projectsapp/grid.html', content)
+
+
+def project(request, pk):
+    title = 'Проекты компании'
+    item = get_object_or_404(Project, pk=pk)
+
+    content = {
+        'page_title': title,
+        'project': item
+    }
+
+    return render(request, 'projectsapp/project.html', content)
