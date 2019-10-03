@@ -104,10 +104,10 @@
                                         <li><strong>Бюджет:</strong> $1 250 000,00</li>
                                     </ul>
                                     <ul class="wprt-list style-2 accent-color margin-top-30 margin-bottom-25">
-                                        {% for solution in solutions %}
-                                            {% for item in solution.tech_sol.all  %}
-                                                <li><strong>Название</strong> {{ item.name }} {{ solution.value }}</li>
-                                            {% endfor %}
+                                        {{ values }}
+                                        {% for item in values %}
+                                                <li><strong>Название</strong>
+                                                    {{ item.techsol.name }}, {{ item.value }}</li>
                                         {% endfor %}
                                     </ul>
 <!--                                    <a href="#" class="wprt-button small rounded-3px">LIVE PREVIEW</a>-->

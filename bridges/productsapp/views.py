@@ -20,7 +20,7 @@ def product(request, slug):
     title = "Технические решения"
     item = get_object_or_404(TechnicalSolutions, slug=slug)
     material_list = item.material_content.all()
-    project_list = item.project_has_technical_solutions_set.all()
+    project_list = ProjectHasTechnicalSolutions.objects.all()
 
     content = {
         'page_title': title,
