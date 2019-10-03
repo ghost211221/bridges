@@ -7,10 +7,12 @@ from projectsapp.models import Project, ProjectImage, ProjectHasTechnicalSolutio
 def projects(request):
     projects = Project.objects.all()
     products = TechnicalSolutions.objects.all()
+    values = ProjectHasTechnicalSolutions.objects.all()
 
     content = {
         'projects': projects,
-        'products': products
+        'products': products,
+        'values': values
     }
     return render(request, 'projectsapp/grid.html', content)
 
@@ -18,16 +20,13 @@ def projects(request):
 def project(request, pk):
     title = 'Проекты компании'
     item = get_object_or_404(Project, pk=pk)
-    gallery = ProjectImage.objects.all()
-    solutions = ProjectHasTechnicalSolutions.objects.all()
-    all_values = ProjectHasTechnicalSolutions.objects.filter(project__pk=pk)
+    gallery = ProjectImage.objects.filter(project__pk=pk)
+    values = ProjectHasTechnicalSolutions.objects.filter(project__pk=pk)
 
     content = {
         'page_title': title,
         'project': item,
         'gallery': gallery,
-        'solutions': solutions,
-        'values': all_values
+        'values': values
     }
     return render(request, 'projectsapp/project.html', content)
-
