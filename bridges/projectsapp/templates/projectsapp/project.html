@@ -107,10 +107,7 @@
                                         {{ values }}
                                         {% for item in values %}
                                                 <li><strong>Название</strong>
-                                                    {% for i in item.tech_sol.all %}
-                                                        {{ i.name }}
-                                                    {% endfor %}
-                                                {{ item.project.name }}, {{ item.value }}</li>
+                                                    {{ item.techsol.name }}, {{ item.value }}</li>
                                         {% endfor %}
                                     </ul>
 <!--                                    <a href="#" class="wprt-button small rounded-3px">LIVE PREVIEW</a>-->
