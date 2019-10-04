@@ -23,3 +23,21 @@ class Users(AbstractUser):
 
     class Meta(AbstractUser.Meta):
         ordering = ['-date_joined']
+
+
+class Company(models.Model):
+    """
+    полное название*, сокращенное название*, форма организации (ООО, ПАО, ОА, ИП и др.), город, категория*, ИНН*,
+    категория организации (внешний ключ на CategoryCompany), email, phone, address
+    """
+    pass
+
+
+class CategoryCompany(models.Model):
+    """
+    название категории,  комментарий model.
+    примеры категорий: designer (проектный институт), contractor (подрядная организация), customer (заказчик),
+    dealer (дилер), reseller (перекупщик), partner (партнер), agent (агент), supplier (поставщик), competitor (
+    конкурент), researcher (исследовательская организация), expertise (экспертиза)
+    """
+    pass

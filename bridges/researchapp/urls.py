@@ -1,12 +1,10 @@
 from django.contrib import admin
 from django.urls import path
-from productsapp import views as productsapp
+from researchapp import views as researchapp
 
 
-app_name = 'productsapp'
+app_name = 'researchapp'
 
 urlpatterns = [
-    path('', productsapp.products, name='products'),
-    # path('product/<int:pk>', productsapp.product, name='product'),
-    path('<slug:slug>', productsapp.product, name='product'),
+    path('', researchapp.research, name='research'),
 ]
