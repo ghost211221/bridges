@@ -18,8 +18,8 @@ def projects(request):
 def project(request, pk):
     title = 'Проекты компании'
     item = get_object_or_404(Project, pk=pk)
-    gallery = ProjectImage.objects.all()
-    solutions = ProjectHasTechnicalSolutions.objects.all()
+    gallery = ProjectImage.objects.filter(project__pk=pk)
+    solutions = ProjectHasTechnicalSolutions.objects.filter(project__pk=pk)
     all_values = ProjectHasTechnicalSolutions.objects.filter(project__pk=pk)
 
     content = {

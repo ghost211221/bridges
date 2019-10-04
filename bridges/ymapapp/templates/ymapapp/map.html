@@ -1,0 +1,116 @@
+{% extends 'productsapp/base.html' %}
+{% load static %}
+{% block content-container %}
+    <!-- YMapScript -->
+    <!--
+        Укажите свой API-ключ. Тестовый ключ НЕ БУДЕТ работать на других сайтах.
+        Получить ключ можно в Кабинете разработчика: https://developer.tech.yandex.ru/keys/
+    -->
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=AEn2lV0BAAAA1m79MAIATuxrbLClouzusA1TTSSAGywdrdoAAAAAAAAAAAB59JqmHy2xqqSwC-QVOrN_1q7Wlw=="
+            type="text/javascript"></script>
+    <script>
+        ymaps.ready(function () {
+            var myMap = new ymaps.Map('map', {
+                    center: [55.751574, 37.573856],
+                    zoom: 7,
+                    controls: ['zoomControl', 'fullscreenControl',]
+                }, {
+                    searchControlProvider: 'yandex#search'
+                }),
+
+                // Создаём макет содержимого.
+                MyIconContentLayout = ymaps.templateLayoutFactory.createClass(
+                    '<div style="color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>'
+                ),
+                myPlacemark = new ymaps.Placemark([-83.795352, -171.237534], {}, {
+                iconLayout: 'default#imageWithContent',iconImageHref: 'none',})
+
+                {%  for item in projects %}
+                    {% if item.coordinate %}
+                        {{ item.map_mark }} = new ymaps.Placemark([{{ item.coordinate }}], {
+                        balloonContent: '<b>{{item.name}}</b><p>{{item.text_for_map}}</p><p><a href="{% url 'projects:project' item.pk %}">Ссылка на проект</a></p>'
+                    }, {
+                        // Опции.
+                        // Необходимо указать данный тип макета.
+                        iconLayout: 'default#image',
+                        // Своё изображение иконки метки.
+                        iconImageHref: '{% static 'images/airport.png' %}',
+                        // Размеры метки.
+                        iconImageSize: [30, 42],
+                        // Смещение левого верхнего угла иконки относительно
+                        // её "ножки" (точки привязки).
+                        iconImageOffset: [-5, -38]
+                    })
+                    {% endif %}
+                {% endfor %}
+            ;
+
+
+            myMap.geoObjects
+                .add(myPlacemark)
+        {%  for item in projects %}
+            {% if item.coordinate %}
+                .add({{ item.map_mark }})
+            {% endif %}
+        {% endfor %}
+            {#    .add(myPlacemarkWithContent);#}
+        });
+    </script>
+
+
+
+    <!-- Featured Title -->
+    <div id="featured-title" class="clearfix featured-title-left">
+        <div id="featured-title-inner" class="container clearfix">
+            <div class="featured-title-inner-wrap">
+                <div class="featured-title-heading-wrap">
+                    <h1 class="featured-title-heading">Карта проектов</h1>
+                </div>
+
+                <div id="breadcrumbs">
+                    <div class="breadcrumbs-inner">
+                        <div class="breadcrumb-trail">
+                            <a href="#" title="Construction" rel="home" class="trail-begin">Главная</a>
+                            <span class="sep">/</span>
+                            <span class="trail-end">Карта проектов</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content" class="site-main clearfix">
+        <div id="content-wrap">
+            <div id="site-content" class="site-content clearfix">
+                <div id="inner-content" class="inner-content-wrap">
+                    <div class="page-content">
+                        <section class="wprt-section">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="wprt-spacer" data-desktop="80" data-mobi="60"
+                                             data-smobi="60"></div>
+                                        <div id="map" style="margin: 0 auto; height:500px; background-color: #f8f8f8;"></div>
+                                        <div class="wprt-spacer" data-desktop="50" data-mobi="40"
+                                             data-smobi="40"></div>
+                                    </div><!-- /.col-md-12 -->
+
+
+                                    <div class="col-md-12">
+                                        <div class="wprt-spacer" data-desktop="80" data-mobi="60"
+                                             data-smobi="60"></div>
+                                    </div><!-- /.col-md-12 -->
+                                </div><!-- /.row -->
+                            </div><!-- /.container -->
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

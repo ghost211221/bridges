@@ -1,4 +1,7 @@
 from django.db import models
+from django.db.models.signals import pre_save
+from django.utils.text import slugify
+from transliterate import translit
 from productsapp.models import TechnicalSolutions
 
 
@@ -29,10 +32,11 @@ class Project(models.Model):
     creation_date = models.DateTimeField(auto_now_add=True, auto_now=False)
     city = models.CharField(verbose_name='город', max_length=512, blank=True, null=True)
     address = models.CharField(verbose_name='адрес', max_length=512, blank=True, null=True)
-    latitude = models.FloatField(verbose_name='широта', null=True)
     """ для привязки координат на карте """
-    longitude = models.FloatField(verbose_name='долгота', null=True)
+    coordinate = models.CharField(verbose_name='координаты', max_length=34, null=True, blank=True)
     """ для привязки координат на карте """
+    map_mark = models.SlugField(verbose_name='id метки на карте', max_length=128, blank=True)
+    text_for_map = models.TextField(verbose_name='текст для метки', max_length=240, null=True, blank=True)
     contractor = models.CharField(verbose_name='подрядчик', max_length=512, blank=True, null=True)
     customer = models.CharField(verbose_name='заказчик', max_length=512, blank=True, null=True)
     designer = models.CharField(verbose_name='проектировщик', max_length=512, blank=True, null=True)
@@ -50,6 +54,12 @@ class Project(models.Model):
         verbose_name = 'Проект'
         verbose_name_plural = 'Проекты'
 
+def pre_save_map_mark(sender, instance, *args, **kwargs):
+    if not instance.map_mark:
+        map_mark = slugify(translit(instance.name, reversed=True)).replace('-', '_')
+        instance.map_mark = map_mark
+
+pre_save.connect(pre_save_map_mark, sender=Project)
 
 class ProjectImage(models.Model):
     """ Галерея фотографий для проекта строительства """
