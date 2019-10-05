@@ -56,6 +56,7 @@ class Document(models.Model):
     Прочие документы не имеющие отношения к научным работам (отзывы, регламенты, отчеты, заключения
     """
     name = models.CharField(verbose_name='название документа', max_length=128, unique=True)
+    description = models.TextField(verbose_name='описание', blank=True)
     type = models.ForeignKey(DocumentCategory, verbose_name='категория документа', blank=True, null=True, default=None,
                              on_delete=models.CASCADE)
     subject = models.ManyToManyField(SubjectOfStudy, verbose_name='предмет исседования', blank=True)

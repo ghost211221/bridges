@@ -45,21 +45,13 @@
                                 <div class="col-md-6 row">
                                     {% for item in documents %}
                                     <div class="wprt-toggle style-1">
-                                        <h3 class="toggle-title">{{ item.name }}, {{ item.date }}</h3>
+                                        <h3 class="toggle-title">{{ item.name }}</h3>
                                         <div class="toggle-content">
                                             <p>
                                                 {% for i in item.file.all %}
-                                                    <iframe src="/media/{{ i.file }}"></iframe>
-                                                {% endfor %}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="wprt-toggle style-1">
-                                        <h3 class="toggle-title">{{ item.name }}, {{ item.date }}</h3>
-                                        <div class="toggle-content">
-                                            <p>
-                                                {% for i in item.file.all %}
-                                                    <iframe src="/media/{{ i.file }}"></iframe>
+                                                {{ item.description }}
+                                                    <div class="wprt-spacer" data-desktop="10" data-mobi="10" data-smobi="10"></div>
+                                                    <a class="wprt-button small rounded-30px" href="/media/{{ i.file }}" target="_blank">СКАЧАТЬ PDF</a>
                                                 {% endfor %}
                                             </p>
                                         </div>
