@@ -17,11 +17,12 @@
                         <div class="project-item">
                             <div class="inner">
                                 <div class="grid">
-                                <figure class="effect-zoe" style="height: 250px;
-                                background-image: url(/media/{{ item.image }});
-                                background-position: 50%; background-size: cover;
-                                background-repeat: no-repeat">
+                                    <figure class="effect-zoe" style="height: 250px;">
+                                        <a href="{% url 'projects:project' item.pk %}">
+                                            <img src="{{ item.image.url}}" alt="">
+                                        </a>
                                     <figcaption>
+
                                         <div>
                                             <h2><a href="{% url 'projects:project' item.pk %}">{{ item.name }}</a></h2>
                                         </div>
