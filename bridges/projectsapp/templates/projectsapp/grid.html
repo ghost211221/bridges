@@ -36,16 +36,5 @@
             </div><!-- /#projects -->
         </div><!--/.wprt-project -->
     </div><!-- /.col-md-12 -->
-
-    <div class="col-md-12">
-        <div class="wprt-pagination clearfix">
-            <ul class="page-numbers">
-                <li><span class="page-numbers current">1</span></li>
-                <li><a class="page-numbers" href="#">2</a></li>
-                <li><a class="next page-numbers" href="#"><span class="fa fa-angle-right"></span></a></li>
-            </ul>
-        </div>
-
-        <div class="wprt-spacer" data-desktop="80" data-mobi="60" data-smobi="60"></div>
-    </div><!-- /.col-md-12 -->
+    {% include 'projectsapp/snippets/paginator.html' %}
 {% endblock %}
