@@ -9,7 +9,7 @@
                 {% include 'projectsapp/includes/inc__projects_filter.html' %}
             </div><!-- /#project-filter -->
             <div id="projects" class="cbp">
-                {% for item in projects %}
+                {% for item in object_list %}
                     <div class="cbp-item
                     {% for i in item.technical_solutions.all %}
                     {{i.pk}}
