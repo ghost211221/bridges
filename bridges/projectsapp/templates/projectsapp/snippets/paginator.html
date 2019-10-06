@@ -2,20 +2,16 @@
 {% if is_paginated %}
 <div class="col-md-12">
     <div class="wprt-pagination clearfix">
-        {% if page_obj.has_previous %}
-            <a href="?page={{ page_obj.previous_page_number }}&{{ request.GET }}">&lt;</a>
-        {% endif %}
-
-        <span class="current">{% trans "Cтраница" %}{{ page_obj.number }} {% trans "из" %} {{ paginator.num_pages }}
-        </span>
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}&{{ request.GET }}">&gt;</a>
-        {% endif %}
-        <!-- <ul class="page-numbers">
-            <li><span class="page-numbers current">1</span></li>
-            <li><a class="page-numbers" href="#">2</a></li>
-            <li><a class="next page-numbers" href="#"><span class="fa fa-angle-right"></span></a></li>
-        </ul> -->
+        <ul class="page-numbers">
+            {% if page_obj.has_previous %}
+                <li><a class="next page-numbers" href="?page={{ page_obj.previous_page_number }}"><span class="fa fa-angle-left"></span></a></li>
+            {% endif %}
+            <li><a class="page-numbers current" href="?page=1">1</a></li>
+            <li><a class="page-numbers" href="?page=2&{{ request.GET }}">2</a></li>
+            {% if page_obj.has_next %}
+                <li><a class="next page-numbers" href="?page={{ page_obj.next_page_number }}"><span class="fa fa-angle-right"></span></a></li>
+            {% endif %}
+        </ul>
     </div>
 
     <div class="wprt-spacer" data-desktop="80" data-mobi="60" data-smobi="60"></div>
