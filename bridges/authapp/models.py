@@ -31,6 +31,7 @@ class Companies(models.Model):
         ('NAO', 'НАО'),
         ('NKO', 'НКО'),
         ('ANO', 'АНО'),
+        ('GBU', 'ГБУ'),
     )
     name_company = models.CharField(verbose_name='Полное название компании*', max_length=70, null=True, blank=True)
     short_name = models.CharField(verbose_name='Короткое название', max_length=30, blank=True, null=True)
@@ -38,7 +39,7 @@ class Companies(models.Model):
     category_company = models.ManyToManyField(CategoriesCompanies, verbose_name='Категория компании*')
     inn = models.CharField(verbose_name='ИНН*', max_length=30, unique=True)
     city = models.CharField(verbose_name='Город', max_length=30, default='', null=True, blank=True)
-    address = models.CharField(verbose_name='Адрес', max_length=30, default='', null=True, blank=True)
+    address = models.CharField(verbose_name='Адрес', max_length=300, default='', null=True, blank=True)
     phone = models.CharField(verbose_name='Телефон', max_length=30, default='', null=True, blank=True)
     email = models.CharField(verbose_name='Эл. почта', max_length=30, default='', null=True, blank=True)
 
@@ -78,20 +79,3 @@ class Users(AbstractUser):
         verbose_name = "Пользователя"
         ordering = ['-date_joined']
 
-
-class Company(models.Model):
-    """
-    полное название*, сокращенное название*, форма организации (ООО, ПАО, ОА, ИП и др.), город, категория*, ИНН*,
-    категория организации (внешний ключ на CategoryCompany), email, phone, address
-    """
-    pass
-
-
-class CategoryCompany(models.Model):
-    """
-    название категории,  комментарий model.
-    примеры категорий: designer (проектный институт), contractor (подрядная организация), customer (заказчик),
-    dealer (дилер), reseller (перекупщик), partner (партнер), agent (агент), supplier (поставщик), competitor (
-    конкурент), researcher (исследовательская организация), expertise (экспертиза)
-    """
-    pass
