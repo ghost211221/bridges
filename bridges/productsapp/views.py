@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from productsapp.models import TechnicalSolutions, Material
+from projectsapp.models import ProjectHasTechnicalSolutions
 from projectsapp.models import Project
 
 
@@ -19,7 +20,7 @@ def product(request, slug):
     title = "Технические решения"
     item = get_object_or_404(TechnicalSolutions, slug=slug)
     material_list = item.material_content.all()
-    project_list = item.project_set.all()
+    project_list = ProjectHasTechnicalSolutions.objects.filter(techsol__pk=item.pk)
 
     content = {
         'page_title': title,
@@ -28,4 +29,3 @@ def product(request, slug):
         'projects': project_list
     }
     return render(request, 'productsapp/product.html', content)
-

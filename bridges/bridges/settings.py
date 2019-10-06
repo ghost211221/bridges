@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'productsapp',
     'projectsapp',
     'contactapp',
+    'researchapp',
+    'authapp',
 ]
 
 MIDDLEWARE = [
@@ -130,11 +132,18 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DOMAIN_NAME = 'http://localhost:8000'
 
-EMAIL_HOST = 'localhost'          # Сервер для отправки сообщений
-EMAIL_PORT = '25'                        # порт для подключения
-EMAIL_HOST_USER = 'bridges@bridges.local'     # имя пользователя
-EMAIL_HOST_PASSWORD = 'bridges'      # пароль от ящика
-EMAIL_USE_SSL = False                     # использование протокола шифрования
+EMAIL_HOST = 'localhost'  # Сервер для отправки сообщений
+EMAIL_PORT = '25'  # порт для подключения
+EMAIL_HOST_USER = 'bridges@bridges.local'  # имя пользователя
+EMAIL_HOST_PASSWORD = 'bridges'  # пароль от ящика
+EMAIL_USE_SSL = False  # использование протокола шифрования
 # DEFAULT_FROM_EMAIL = 'info@example.com'  # email, с которого будет отправлено письмо
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = 'tmp/email-messages/'
+
+# Authapp start =================================================
+
+# укажем модель пользователя, используемую подсистемой разграничения доступа Django
+AUTH_USER_MODEL = 'authapp.Users'
+
+# Authapp end ===================================================
