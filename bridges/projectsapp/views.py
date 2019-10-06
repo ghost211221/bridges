@@ -55,5 +55,3 @@ def project(request, pk):
         'values': values
     }
     return render(request, 'projectsapp/project.html', content)
-
-
