@@ -5,6 +5,7 @@ from django.views.generic import ListView
 from productsapp.models import TechnicalSolutions
 from projectsapp.models import Project, ProjectImage, ProjectHasTechnicalSolutions
 
+
 # Create your views here.
 class ProjectsList(ListView):
     """docstring for ProductList"""
@@ -26,15 +27,18 @@ class ProjectsList(ListView):
     def get_queryset(self):
         return  super().get_queryset().order_by(*self.order_by)
 
+
 # Create your views here.
 class TechnicalSolutionsList(ListView):
     """docstring for ProductList"""
     model = TechnicalSolutions
 
+
 # Create your views here.
 class ProjectImageList(ListView):
     """docstring for ProductList"""
     model = ProjectImage
+
 
 # Create your views here.
 class ProjectHasTechnicalSolutionsList(ListView):
@@ -55,5 +59,3 @@ def project(request, pk):
         'values': values
     }
     return render(request, 'projectsapp/project.html', content)
-
-
