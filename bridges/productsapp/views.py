@@ -25,7 +25,6 @@ def product(request, slug):
     researches = Document.objects.filter(techsol__pk=item.pk).exclude(type__id=1)
     documents = Document.objects.filter(techsol__pk=item.pk).exclude(type__in=[2, 3])
 
-
     content = {
         'page_title': title,
         'product': item,

@@ -2,89 +2,81 @@
 {% load static %}
 {% block content-container %}
 
-<!-- Featured Title -->
-<div id="featured-title" class="clearfix featured-title-left">
-    <div id="featured-title-inner" class="container clearfix">
-        <div class="featured-title-inner-wrap">
-            <div class="featured-title-heading-wrap">
-                <h1 class="featured-title-heading">Научно-исследовательские работы</h1>
-            </div>
-            <div id="breadcrumbs">
-                <div class="breadcrumbs-inner">
-                    <div class="breadcrumb-trail">
-                        <a href="#" title="Construction" rel="home" class="trail-begin">Home</a>
-                        <span class="sep">/</span>
-                        <span class="trail-end">Toggles</span>
+    <!-- Featured Title -->
+    <div id="featured-title" class="clearfix featured-title-left">
+        <div id="featured-title-inner" class="container clearfix">
+            <div class="featured-title-inner-wrap">
+                <div class="featured-title-heading-wrap">
+                    <h1 class="featured-title-heading">Научно-исследовательские работы</h1>
+                </div>
+                <div id="breadcrumbs">
+                    <div class="breadcrumbs-inner">
+                        <div class="breadcrumb-trail">
+                            <a href="#" title="Construction" rel="home" class="trail-begin">Home</a>
+                            <span class="sep">/</span>
+                            <span class="trail-end">Toggles</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Main Content -->
-<div id="main-content" class="site-main clearfix">
-    <div id="content-wrap">
-        <div id="site-content" class="site-content clearfix">
-            <div id="inner-content" class="inner-content-wrap">
-                <div class="page-content">
-                    <section class="wprt-section">
-                        <div class="container">
-                            <div class='row'>
-                                <div class="col-md-12">
-                                    <div class="wprt-spacer" data-desktop="70" data-mobi="60" data-smobi="60"></div>
+    <!-- Main Content -->
+    <div id="main-content" class="site-main clearfix">
+        <div id="content-wrap">
+            <div id="site-content" class="site-content clearfix">
+                <div id="inner-content" class="inner-content-wrap">
+                    <div class="page-content">
+                        <section class="wprt-section">
+                            <div class="container">
+                                <div class='row'>
+                                    {#                            ВЫВОД ВСЕЙ ДОКУМЕНТАЦИИ ПО КОМПАНИЯМ#}
+                                    {% for item in companies %}
+                                        <div class="col-md-12">
+                                            <div class="wprt-spacer" data-desktop="70" data-mobi="60"
+                                                 data-smobi="60"></div>
 
-                                    <h2 class="text-center margin-bottom-10">TOGGLES</h2>
-                                    <div class="wprt-lines style-2 custom-1">
-                                        <div class="line-1"></div>
-                                    </div>
-                                    <div class="wprt-spacer" data-desktop="50" data-mobi="40" data-smobi="40"></div>
+                                            <h2 class="text-center margin-bottom-10">{{ item.company__name_company }}</h2>
+                                            <div class="wprt-lines style-2 custom-1">
+                                                <div class="line-1"></div>
+                                            </div>
+                                            <div class="wprt-spacer" data-desktop="50" data-mobi="40"
+                                                 data-smobi="40"></div>
+                                        </div><!-- /.col-md-12 -->
 
-                                </div>
-
-                                <div class="col-md-6 row">
-                                    {% for item in researches %}
-                                    <div class="wprt-toggle style-1">
-                                        <h3 class="toggle-title">{{ item.name }}</h3>
-                                        <div class="toggle-content">
-                                                {% for i in item.file.all %}
-                                                {{ item.description }}
-                                                    <div class="wprt-spacer" data-desktop="10" data-mobi="10" data-smobi="10"></div>
-                                                    <a class="wprt-button small rounded-30px" href="/media/{{ i.file }}" target="_blank">СКАЧАТЬ PDF</a>
-                                                {% endfor %}
-                                        </div>
-                                    </div>
+                                        <div class="col-md-6 row">
+                                            {% for i in documents %}
+                                                {% if i.company__name_company == item.company__name_company %}
+                                                    <div class="wprt-toggle {% if i.type_id == 1 %} style-1 {% else %} style-2 {% endif %}">
+                                                        <h3 class="toggle-title">{{ i.name }}</h3>
+                                                        <div class="toggle-content">
+                                                            {{ i.description }}
+                                                            <div class="wprt-spacer" data-desktop="10" data-mobi="10"
+                                                                 data-smobi="10"></div>
+                                                            <a class="wprt-button small rounded-30px"
+                                                               href="/media/{{ i.file__file }}" target="_blank">СКАЧАТЬ
+                                                                PDF</a>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div><!-- /.col-md-12 -->
                                     {% endfor %}
-                                </div><!-- /.col-md-6 -->
+                                    {#                            ВЫВОД ВСЕЙ ДОКУМЕНТАЦИИ ПО КОМПАНИЯМ#}
 
-                                <div class="col-md-6 row">
-                                    {% for item in documents %}
-                                    <div class="wprt-toggle style-2">
-                                        <h3 class="toggle-title">{{ item.name }}</h3>
-                                        <div class="toggle-content">
-                                                {% for i in item.file.all %}
-                                                {{ item.description }}
-                                                    <div class="wprt-spacer" data-desktop="10" data-mobi="10" data-smobi="10"></div>
-                                                    <a class="wprt-button small rounded-30px" href="/media/{{ i.file }}" target="_blank">СКАЧАТЬ PDF</a>
-                                                {% endfor %}
-                                        </div>
+                                    <div class="col-md-12">
+                                        <div class="wprt-spacer" data-desktop="70" data-mobi="60" data-smobi="60"></div>
                                     </div>
-                                    {% endfor %}
-                                </div><!-- /.col-md-6 -->
 
+                                </div><!-- /.row -->
+                            </div><!-- /.container -->
+                        </section>
 
-                                <div class="col-md-12">
-                                    <div class="wprt-spacer" data-desktop="70" data-mobi="60" data-smobi="60"></div>
-                                </div>
-
-                            </div><!-- /.row -->
-                        </div><!-- /.container -->
-                    </section>
-
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 {% endblock %}
