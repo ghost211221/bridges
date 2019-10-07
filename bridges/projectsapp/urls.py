@@ -20,8 +20,6 @@ from .views import ProjectsList, project
 app_name = 'projectsapp'
 
 urlpatterns = [
-    # path('', projectsapp.projects, name='projects'),
-    path('', ProjectsList.as_view(), name='all'),
-    path('<int:pk>', project, name='project'),
-    # path('product/<int:pk>', productsapp.product, name='product'),
+    path('', ProjectsList.as_view(), name='projects'),
+    path('<int:pk>', project, name='project')
 ]

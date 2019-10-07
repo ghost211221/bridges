@@ -40,7 +40,7 @@
                         <!--                            </ul>-->
                     </li>
                     <li class="menu-item">
-                        <a href="{% url 'projects:all' %}" class="active">
+                        <a href="{% url 'projects:projects' %}" class="active">
                             <span class="{% if request.resolver_match.url_name == 'projects' %}active{% endif %}">Проекты</span>
                         </a>
                     </li>
@@ -61,8 +61,10 @@
                 <a class="header-search-icon" href="#"><span class="fa fa-search"></span></a>
 
                 <form role="search" method="get" class="header-search-form" action="#">
-                    <input type="text" value="" name="s" class="header-search-field"
-                           placeholder="Type and hit enter...">
+                    <label>
+                        <input type="text" value="" name="s" class="header-search-field"
+                               placeholder="Type and hit enter...">
+                    </label>
                     <button type="submit" class="header-search-submit" title="Search">Search</button>
                     <input type="hidden" name="post_type" value="post">
                 </form>
@@ -81,7 +83,7 @@
                             <li class="mini_cart_item">
                                 <a href="#" class="remove" title="Remove this item">×</a>
                                 <a href="#">
-                                    <img width="160" height="160" src="assets/img/shop-item.png" alt="image">
+                                    <img width="160" height="160" src="{% static 'assets/img/shop-item.png"' %} alt="image">
                                     Shop Item 01
                                 </a>
 
@@ -130,4 +132,3 @@
         </div>
     </div><!-- /#site-header-inner -->
 </header><!-- /#site-header -->
-</div>

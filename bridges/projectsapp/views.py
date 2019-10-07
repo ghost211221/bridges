@@ -21,11 +21,11 @@ class ProjectsList(ListView):
         values = ProjectHasTechnicalSolutions.objects.all()
         context.update({'products': products,
                         'values': values
-            })        
+                        })
         return context
 
     def get_queryset(self):
-        return  super().get_queryset().order_by(*self.order_by)
+        return super().get_queryset().order_by(*self.order_by)
 
 
 # Create your views here.

@@ -78,4 +78,3 @@ class Users(AbstractUser):
     class Meta(AbstractUser.Meta):
         verbose_name = "Пользователя"
         ordering = ['-date_joined']
-
