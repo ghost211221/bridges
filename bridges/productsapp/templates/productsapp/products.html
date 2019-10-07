@@ -17,14 +17,11 @@
                                         {% for item in products %}
                                             <div class="col-md-4">
                                                 <div class="service-item clearfix">
-                                                    <div class="thumb"
-                                                         style="height: 250px; background-image: url(/media/{{ item.image }}); background-position: 50%;
-                                                                 background-size: cover; background-repeat: no-repeat">
-                                                    </div>
+                                                    <div class="thumb" style="width: 370px; height: 220px;"><img src="/media/{{ item.image }}" alt="image" /></div>
                                                     <div class="service-item-wrap">
                                                         <h3 class="title font-size-18"><a href="#">{{ item.name }}</a>
                                                         </h3>
-                                                        <p class="desc">{{ item.short_desc | truncatewords:6 }}</p>
+                                                        <p class="desc"></p>
                                                         <a href="{% url 'products:product' item.slug %}"
                                                            class="wprt-button small rounded-3px">ПОДРОБНО</a>
                                                     </div>
