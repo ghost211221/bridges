@@ -21,16 +21,18 @@ def product(request, slug):
     title = "Технические решения"
     item = get_object_or_404(TechnicalSolutions, slug=slug)
     material_list = item.material_content.all()
-    project_list = ProjectHasTechnicalSolutions.objects.filter(techsol__pk=item.pk)
-    researches = Document.objects.filter(techsol__pk=item.pk).exclude(type__id=1)
-    documents = Document.objects.filter(techsol__pk=item.pk).exclude(type__in=[2, 3])
+    projects = item.project_set.all()
+    researches = Document.objects.filter(techsol__pk=item.pk, type__in=[2, 3])
+    documents = Document.objects.filter(techsol__pk=item.pk, type__id=1)
+    feedback = Document.objects.filter(techsol__pk=item.pk, type__id=4)
 
     content = {
         'page_title': title,
         'product': item,
         'material_list': material_list,
-        'projects': project_list,
+        'projects': projects,
         'researches': researches,
-        'documents': documents
+        'documents': documents,
+        'feedback': feedback
     }
     return render(request, 'productsapp/product.html', content)
