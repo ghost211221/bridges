@@ -14,7 +14,7 @@
                                 {#                            ВЫВОД ВСЕЙ ДОКУМЕНТАЦИИ ПО КОМПАНИЯМ#}
                                 {% for item in companies %}
                                     <div class='row'>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="wprt-spacer" data-desktop="5" data-mobi="60"
                                                  data-smobi="60"></div>
 
@@ -26,7 +26,7 @@
                                                  data-smobi="40"></div>
                                         </div><!-- /.col-md-12 -->
 
-                                        <div class="col-md-6 row">
+                                        <div class="col-md-8 row">
                                             {% for i in documents %}
                                                 {% if i.company__name_company == item.company__name_company %}
                                                     <div class="wprt-toggle {% if i.type_id == 1 %} style-1 {% else %} style-2 {% endif %}">

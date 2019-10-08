@@ -7,7 +7,7 @@ from researchapp.models import Document
 
 def products(request):
     title = "Технические решения"
-    technical_solutions = TechnicalSolutions.objects.all()
+    technical_solutions = TechnicalSolutions.objects.all().order_by('pk')
     # all_products = Product.objects.filter(category__slug=slug).exclude(is_active=False)
 
     content = {

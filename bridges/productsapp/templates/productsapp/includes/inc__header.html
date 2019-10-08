@@ -29,16 +29,7 @@
 {#                                                        {% endfor %}#}
 {#                                                    </ul>#}
                     </li>
-                    <li class="menu-item"><a href="#">Услуги</a>
-                        <!--                            <ul class="sub-menu">-->
-                        <!--                                <li class="menu-item"><a href="icons.html">Construction Icons</a></li>-->
-                        <!--                                <li class="menu-item"><a href="buttons.html">Buttons</a></li>-->
-                        <!--                                <li class="menu-item"><a href="toggles.html">Toggles</a></li>-->
-                        <!--                                <li class="menu-item"><a href="typography.html">Typography</a></li>-->
-                        <!--                                <li class="menu-item"><a href="galleries.html">Galleries</a></li>-->
-                        <!--                                <li class="menu-item"><a href="iconboxs.html">IconBoxs</a></li>-->
-                        <!--                            </ul>-->
-                    </li>
+{#                    <li class="menu-item"><a href="#">Услуги</a></li>#}
                     <li class="menu-item">
                         <a href="{% url 'projects:projects' %}" class="active">
                             <span class="{% if request.resolver_match.url_name == 'projects' %}active{% endif %}">Проекты</span>
@@ -50,8 +41,8 @@
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="{% url 'contact:index' %}">
-                            <span class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}">Контакты</span>
+                        <a href="#">
+                            <span class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}">Блог</span>
                         </a>
                     </li>
                 </ul>
