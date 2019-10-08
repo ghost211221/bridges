@@ -4,8 +4,10 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
-# модель содержит информацию о категории компании, например: проектный институт, подрядная организация, заказчик и др.
 class CategoryCompany(models.Model):
+    ''' модель содержит информацию о категории компании,
+    например: проектный институт, подрядная организация, заказчик и др. '''
+
     name = models.CharField(verbose_name='Категория компании*', max_length=50, unique=True)
     description = models.CharField(verbose_name='Описание категории', max_length=300, default='', null=True, blank=True)
 
@@ -18,8 +20,10 @@ class CategoryCompany(models.Model):
         return self.name.title()
 
 
-# модель содержит организационно-правовые формы предприятия, например, ООО, ИП, ОАО, ЗАО и др.
 class FormCompany(models.Model):
+    ''' модель содержит организационно-правовые формы предприятия,
+    например, ООО, ИП, ОАО, ЗАО и др. '''
+
     name = models.CharField(verbose_name='Форма компании*', max_length=30, unique=True)
     description = models.CharField(verbose_name='Описание формы', max_length=300, default='', null=True, blank=True)
 
@@ -32,12 +36,13 @@ class FormCompany(models.Model):
         return self.name.upper()
 
 
-# модель содержит подробную информацию о компании
 class Company(models.Model):
+    ''' модель содержит подробную информацию о компании '''
+
     name = models.CharField(verbose_name='Полное название*', max_length=70)
     short = models.CharField(verbose_name='Короткое название', max_length=30, blank=True, null=True)
     form = models.ForeignKey(FormCompany, on_delete=models.PROTECT, verbose_name='Форма', blank=True, null=True)
-    category = models.ForeignKey(CategoryCompany, on_delete=models.PROTECT, verbose_name='Категория компании*',
+    category = models.ForeignKey(CategoryCompany, on_delete=models.PROTECT, verbose_name='Категория компании',
                                  blank=True, null=True)
     inn = models.BigIntegerField(verbose_name='ИНН*', unique=True)
     city = models.CharField(verbose_name='Город', max_length=30, default='', null=True, blank=True)
@@ -52,17 +57,19 @@ class Company(models.Model):
 
     def __str__(self):
         return self.name.title()
-    
 
-# модель содержит информацию о всех пользователях, включая superuser, сотрудников компании и простых пользователей
+
 class Users(AbstractUser):
+    ''' модель содержит информацию о всех пользователях, включая superuser, сотрудников компании
+    и простых пользователей.
+    У AbstractUser есть поля: password, last_login, first_name, last_name, email, is_superuser, is_staff,
+    # is_active и date_joined.
+    Создадим дополнительные поля. '''
     GENDER_CHOICES = (
         (None, 'не указан'),
         ('male', 'мужчина'),
         ('female', 'женщина'),
     )
-    # у AbstractUser есть поля: password, last_login, first_name, last_name, email, is_superuser, is_staff,
-    # is_active и date_joined. Создадим дополнительные поля:
     username = models.CharField(verbose_name='Логин*', max_length=50, unique=True)  # переопределили из-за verbose_name
     patronymic = models.CharField(verbose_name='Отчество', max_length=50, default='', null=True, blank=True)
     gender = models.CharField(verbose_name='Пол', max_length=6, choices=GENDER_CHOICES, blank=True, null=True)
