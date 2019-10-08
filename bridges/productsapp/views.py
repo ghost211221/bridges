@@ -22,9 +22,10 @@ def product(request, slug):
     item = get_object_or_404(TechnicalSolutions, slug=slug)
     material_list = item.material_content.all()
     projects = item.project_set.all()
-    researches = Document.objects.filter(techsol__pk=item.pk, type__in=[2, 3])
-    documents = Document.objects.filter(techsol__pk=item.pk, type__id=1)
-    feedback = Document.objects.filter(techsol__pk=item.pk, type__id=4)
+    docs = Document.objects.filter(techsol__pk=item.pk)
+    researches = docs.filter(type__in=(2, 3,))
+    documents = docs.filter(type__id=1)
+    feedback = docs.filter(type__id=4)
 
     content = {
         'page_title': title,

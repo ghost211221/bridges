@@ -95,6 +95,7 @@
                                     </div>
                                 </div><!-- /.col-md-8 -->
 <!--ВЫПОЛНЕННЫЕ ПРОЕКТЫ-->
+                            {% if projects %}
                                 <div class="col-md-12">
                                     <div class="wprt-spacer" data-desktop="30" data-mobi="60" data-smobi="60"></div>
                                     <div>
@@ -135,13 +136,12 @@
                                         </div><!-- /#projects -->
                                     </div><!--/.wprt-project -->
                                 </div><!-- /.col-md-12 -->
+                            {% endif %}
 
-                                <div class="col-md-12">
-                                    <div class="wprt-spacer" data-desktop="80" data-mobi="60" data-smobi="60"></div>
-                                </div><!-- /.col-md-12 -->
 <!--ОТЗЫВЫ-->
+                            {% if feedback %}
                                 <div class="col-md-12">
-                                    <div class="wprt-spacer" data-desktop="30" data-mobi="60" data-smobi="60"></div>
+                                    <div class="wprt-spacer" data-desktop="30" data-mobi="30" data-smobi="60"></div>
                                     <div>
                                         <h3 class="line-height-normal margin-bottom-10">ОТЗЫВЫ ЗАКАЗЧИКОВ И ПОДРЯДЧИКОВ</h3>
                                         <div class="wprt-lines style-1 custom-3">
@@ -170,9 +170,6 @@
                                                             </figcaption>
                                                         </figure>
                                                         </div>
-{#                                                        <a class="project-zoom cbp-lightbox" href="#" data-title="LUXURY BUILDINGS">#}
-{#                                                            <i class="fa fa-arrows-alt"></i>#}
-{#                                                        </a>#}
                                                     </div>
                                                 </div>
                                             </div><!--/.cbp-item -->
@@ -180,11 +177,10 @@
                                         </div><!-- /#projects -->
                                     </div><!--/.wprt-project -->
                                 </div><!-- /.col-md-12 -->
+                            {% endif %}
 
-                                <div class="col-md-12">
-                                    <div class="wprt-spacer" data-desktop="80" data-mobi="60" data-smobi="60"></div>
-                                </div><!-- /.col-md-12 -->
 <!--ДОКУМЕНТАЦИЯ О ПРОДУКТЕ-->
+                            {% if documents or researches %}
                                 <div class="col-md-12">
                                     <div class="wprt-spacer" data-desktop="30" data-mobi="60" data-smobi="60"></div>
                                     <h2 class="line-height-normal margin-bottom-10">Документация</h2>
@@ -228,6 +224,7 @@
                                         </div>
                                     {% endfor %}
                                 </div><!-- /.col-md-6 -->
+                            {% endif %}
 <!--/ ДОКУМЕНТАЦИЯ О ПРОДУКТЕ-->
                                 <div class="col-md-12">
                                     <div class="wprt-spacer" data-desktop="80" data-mobi="60" data-smobi="60"></div>
