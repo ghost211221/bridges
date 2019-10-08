@@ -1,8 +1,37 @@
 from django.contrib import admin
-from .models import Users, CategoriesCompanies, Companies
+from .models import CategoryCompany, FormCompany, Company, Users
 
 
 # Register your models here.
+
+
+@admin.register(CategoryCompany)
+class CategoryCompanyAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description')
+    search_fields = ('name', 'description',)
+
+
+@admin.register(FormCompany)
+class FormCompanyAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description')
+    search_fields = ('name', 'description',)
+
+
+@admin.register(Company)
+class CompanyAdmin(admin.ModelAdmin):
+    list_display = ('name', 'inn', 'category', 'city')
+    search_fields = ('name',
+                     'short_name',
+                     'form_company',
+                     'category',
+                     'inn',
+                     'city',
+                     'address',
+                     'phone',
+                     'email',)
+    # укажем быстрые фильтры для фильтрации записей
+    list_filter = ('category', 'city')
+
 
 @admin.register(Users)
 class UsersAdmin(admin.ModelAdmin):
@@ -34,25 +63,3 @@ class UsersAdmin(admin.ModelAdmin):
         ('Данные сотрудника',
          {'fields': ('is_staff', 'is_active', 'company', 'groups', 'position', 'project',)}),
     )
-
-
-@admin.register(CategoriesCompanies)
-class CategoriesCompaniesAdmin(admin.ModelAdmin):
-    list_display = ('name_category', 'description')
-    search_fields = ('name_category', 'description',)
-
-
-@admin.register(Companies)
-class CompaniesAdmin(admin.ModelAdmin):
-    list_display = ('name_company', 'inn', 'get_category_company', 'city')
-    search_fields = ('name_company',
-                     'short_name',
-                     'form_company',
-                     'category_company',
-                     'inn',
-                     'city',
-                     'address',
-                     'phone',
-                     'email',)
-    # укажем быстрые фильтры для фильтрации записей
-    list_filter = ('category_company', 'city')
