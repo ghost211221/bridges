@@ -20,7 +20,8 @@ def index(request):
         form = ContactForm()
 
     context = {
-        'page_title': 'контакты',
+        'page_title': 'Контакты',
+        'bred_title': 'Контакты',
         'form': form,
     }
     return render(request, 'contactapp/contact.html', context)

@@ -13,7 +13,6 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
 from django.urls import path
 from .views import ProjectsList, project
 
@@ -21,5 +20,6 @@ app_name = 'projectsapp'
 
 urlpatterns = [
     path('', ProjectsList.as_view(), name='projects'),
-    path('<int:pk>', project, name='project')
+    path('<int:pk>', project, name='project'),
+    path('objects/page<int:page>/', PaginatedView.as_view())
 ]

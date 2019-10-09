@@ -1,6 +1,6 @@
 from django.db import models
 
-from authapp.models import Companies
+from authapp.models import Company
 from productsapp.models import TechnicalSolutions
 
 
@@ -36,7 +36,7 @@ class Project(models.Model):
     longitude = models.FloatField(verbose_name='долгота', null=True)
     """ для привязки координат на карте """
     techsol = models.ManyToManyField(TechnicalSolutions, through='ProjectHasTechnicalSolutions')
-    participant = models.ManyToManyField(Companies, blank=True)
+    participant = models.ManyToManyField(Company, blank=True)
 
     def __str__(self):
         return f"{self.name} ({self.city})"

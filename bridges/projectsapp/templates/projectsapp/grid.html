@@ -1,48 +1,63 @@
-{% extends 'projectsapp/project_base.html' %}
+{% extends 'productsapp/base.html' %}
 {% load static %}
-{% block content-container2 %}
+{% block content-container %}
+
     <!-- Main Content -->
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="wprt-project" data-layout="grid" data-column="3" data-column2="3" data-column3="2"
-                     data-column4="1" data-gaph="30" data-gapv="30">
+    <div id="main-content" class="site-main clearfix">
+        <div id="content-wrap">
+            <div id="site-content" class="site-content clearfix">
+                <div id="inner-content" class="inner-content-wrap">
+                    <div class="page-content">
+                        <section class="wprt-section">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="wprt-project" data-layout="grid" data-column="3"
+                                             data-column2="3" data-column3="2"
+                                             data-column4="1" data-gaph="30" data-gapv="30">
 
-                    <div id="project-filter">
-                        {% include 'projectsapp/includes/inc__projects_filter.html' %}
-                    </div><!-- /#project-filter -->
-                    <div id="projects" class="cbp">
-                        {% for item in object_list %}
-                            <div class="cbp-item
-                    {% for i in item.techsol.all %}
-                    {{ i.pk }}
-                    {% endfor %}">
-                                <div class="project-item">
-                                    <div class="inner">
-                                        <div class="grid">
-                                            <figure class="effect-zoe" style="height: 250px;">
-                                                <a href="{% url 'projects:project' item.pk %}">
-                                                    <img src="{{ item.image.url }}" alt="">
-                                                </a>
-                                                <figcaption>
+                                            <div id="project-filter">
+                                                {% include 'projectsapp/includes/inc__projects_filter.html' %}
+                                            </div><!-- /#project-filter -->
+                                            <div id="projects" class="cbp">
+                                                {% for item in object_list %}
+                                                    <div class="cbp-item
+                            {% for i in item.techsol.all %}
+                            {{ i.pk }}
+                            {% endfor %}">
+                                                        <div class="project-item">
+                                                            <div class="inner">
+                                                                <div class="grid">
+                                                                    <figure class="effect-zoe"
+                                                                            style="height: 250px;">
+                                                                        <a href="{% url 'projects:project' item.pk %}">
+                                                                            <img src="{{ item.image.url }}" alt="">
+                                                                        </a>
+                                                                        <figcaption>
 
-                                                    <div>
-                                                        <h2>
-                                                            <a href="{% url 'projects:project' item.pk %}">{{ item.name }}</a>
-                                                        </h2>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
+                                                                            <div>
+                                                                                <h2>
+                                                                                    <a href="{% url 'projects:project' item.pk %}">{{ item.name }}</a>
+                                                                                </h2>
+                                                                            </div>
+                                                                        </figcaption>
+                                                                    </figure>
+                                                                </div>
 
-                                    </div>
+                                                            </div>
+                                                        </div>
+                                                    </div><!--/.cbp-item -->
+                                                {% endfor %}
+                                            </div><!-- /#projects -->
+                                        </div><!--/.wprt-project -->
+                                    </div><!-- /.col-md-12 -->
                                 </div>
-                            </div><!--/.cbp-item -->
-                        {% endfor %}
-                    </div><!-- /#projects -->
-                </div><!--/.wprt-project -->
-            </div><!-- /.col-md-12 -->
+                            </div>
+                            {% include 'projectsapp/snippets/paginator.html' %}
+                        </section>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    {% include 'projectsapp/snippets/paginator.html' %}
 {% endblock %}

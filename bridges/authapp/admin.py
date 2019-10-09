@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Users, CategoriesCompanies, Companies
+from .models import Users, CategoryCompany, Company, FormCompany
 
 
 # Register your models here.
@@ -36,23 +36,30 @@ class UsersAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(CategoriesCompanies)
-class CategoriesCompaniesAdmin(admin.ModelAdmin):
-    list_display = ('name_category', 'description')
-    search_fields = ('name_category', 'description',)
+@admin.register(FormCompany)
+class CategoryCompanyAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description')
+    search_fields = ('name', 'description',)
 
 
-@admin.register(Companies)
-class CompaniesAdmin(admin.ModelAdmin):
-    list_display = ('name_company', 'inn', 'get_category_company', 'city')
+@admin.register(CategoryCompany)
+class CategoryCompanyAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description')
+    search_fields = ('name', 'description',)
+
+
+@admin.register(Company)
+class CompanyAdmin(admin.ModelAdmin):
+    list_display = ('name', 'inn', 'city', 'logo')
     search_fields = ('name_company',
                      'short_name',
                      'form_company',
-                     'category_company',
+                     'logo',
+                     'category',
                      'inn',
                      'city',
                      'address',
                      'phone',
                      'email',)
     # укажем быстрые фильтры для фильтрации записей
-    list_filter = ('category_company', 'city')
+    list_filter = ('category', 'city')

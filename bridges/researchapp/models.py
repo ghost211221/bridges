@@ -1,5 +1,5 @@
 from django.db import models
-from authapp.models import Companies, Users
+from authapp.models import Company, Users
 from productsapp.models import TechnicalSolutions
 
 
@@ -60,7 +60,7 @@ class Document(models.Model):
     type = models.ForeignKey(DocumentCategory, verbose_name='категория документа', blank=True, null=True, default=None,
                              on_delete=models.CASCADE)
     subject = models.ManyToManyField(SubjectOfStudy, verbose_name='предмет исседования', blank=True)
-    company = models.ManyToManyField(Companies, verbose_name='компания выпустившая документ', blank=True)
+    company = models.ManyToManyField(Company, verbose_name='компания выпустившая документ', blank=True)
     author = models.ManyToManyField(Users, verbose_name='автор документа', blank=True)
     techsol = models.ManyToManyField(TechnicalSolutions, verbose_name='техническое решение')
     file = models.ManyToManyField(FileStorage, blank=True)

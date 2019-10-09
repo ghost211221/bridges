@@ -1,5 +1,7 @@
 {% extends 'productsapp/base.html' %}
 {% load static %}
+{% block page_title %}{{ page_title }}{% endblock %}
+{% block bred_title %}{{ bred_title }}{% endblock %}
 {% block content-container %}
 
     <!-- Main Content -->
@@ -18,7 +20,7 @@
                                             <div class="wprt-spacer" data-desktop="5" data-mobi="60"
                                                  data-smobi="60"></div>
 
-                                            <h2 class="text-center margin-bottom-10">{{ item.company__name_company }}</h2>
+                                            <h2 class="text-center margin-bottom-10">{{ item.company__name }}</h2>
                                             <div class="wprt-lines style-2 custom-1">
                                                 <div class="line-1"></div>
                                             </div>
@@ -28,7 +30,7 @@
 
                                         <div class="col-md-8 row">
                                             {% for i in documents %}
-                                                {% if i.company__name_company == item.company__name_company %}
+                                                {% if i.company__name == item.company__name %}
                                                     <div class="wprt-toggle {% if i.type_id == 1 %} style-1 {% else %} style-2 {% endif %}">
                                                         <h3 class="toggle-title">{{ i.name }}</h3>
                                                         <div class="toggle-content" style="color: black;">

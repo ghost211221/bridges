@@ -20,7 +20,9 @@ class ProjectsList(ListView):
         products = TechnicalSolutions.objects.all()
         values = ProjectHasTechnicalSolutions.objects.all()
         context.update({'products': products,
-                        'values': values
+                        'values': values,
+                        'page_title': 'Проекты компании',
+                        'bred_title': 'Проекты компании'
                         })
         return context
 
@@ -54,6 +56,7 @@ def project(request, pk):
 
     content = {
         'page_title': title,
+        'bred_title': title,
         'project': item,
         'gallery': gallery,
         'values': values
