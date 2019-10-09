@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'contactapp',
     'researchapp',
     'authapp',
-    'gameapp',
+    # 'gameapp',
 ]
 
 MIDDLEWARE = [
