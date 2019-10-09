@@ -21,5 +21,4 @@ app_name = 'projectsapp'
 urlpatterns = [
     path('', ProjectsList.as_view(), name='projects'),
     path('<int:pk>', project, name='project'),
-    path('objects/page<int:page>/', PaginatedView.as_view())
 ]
