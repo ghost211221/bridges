@@ -1,0 +1,11 @@
+{% block content %}
+    {% if user.is_authenticated %}
+        <h4 class="margin-bottom-15" style="text-align: center;">Ваш профиль пользователя на сайте</h4>
+        <p></p>
+    {% else %}
+        <h4 class="margin-bottom-15" style="text-align: center;">Вы не авторизованы</h4>
+        <br>
+        <p>Если вы хотите посмотреть информацию вашего профиля,<br>
+            необходимо <a href="{% url 'auth:login' %}">авторизоваться на сайте</a>.</p>
+    {% endif %}
+{% endblock %}
