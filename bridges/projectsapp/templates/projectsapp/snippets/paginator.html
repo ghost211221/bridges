@@ -5,11 +5,12 @@
         <ul class="page-numbers">
             {% if page_obj.has_previous %}
                 <li><a class="next page-numbers" href="?page={{ page_obj.previous_page_number }}"><span class="fa fa-angle-left"></span></a></li>
+                <li><a class="page-numbers" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
             {% endif %}
-            <li><a class="page-numbers current" href="?page=1">1</a></li>
-            <li><a class="page-numbers" href="?page=2&{{ request.GET }}">2</a></li>
+                <li><a class="page-numbers current" href="?page={{ page_obj.number }}">{{ page_obj.number }}</a></li>
             {% if page_obj.has_next %}
-                <li><a class="next page-numbers" href="?page={{ page_obj.next_page_number }}"><span class="fa fa-angle-right"></span></a></li>
+                <li><a class="page-numbers" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
+                <li><a class="next page-numbers" href="?page={{ page_obj.next_page_number }}"{{ page_obj.number }}><span class="fa fa-angle-right"></span></a></li>
             {% endif %}
         </ul>
     </div>
