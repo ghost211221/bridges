@@ -53,14 +53,14 @@
                 <div id="featured-title-inner" class="container clearfix">
                     <div class="featured-title-inner-wrap">
                         <div class="featured-title-heading-wrap">
-                            <h1 class="featured-title-heading">Технические решения</h1>
+                            <h1 class="featured-title-heading" style="font-size: large">{% block page_title %}{{ page_title }}{% endblock %}</h1>
                         </div>
                         <div id="breadcrumbs">
                             <div class="breadcrumbs-inner">
                                 <div class="breadcrumb-trail">
-                                    <a href="#" title="Construction" rel="home" class="trail-begin">Главная</a>
+                                    <a href="#">Главная</a>
                                     <span class="sep">/</span>
-                                    <span class="trail-end">Технические решения</span>
+                                    <span class="trail-end">{% block bred_title %}{{ bred_title }}{% endblock %}</span>
                                 </div>
                             </div>
                         </div>

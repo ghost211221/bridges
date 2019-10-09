@@ -28,22 +28,22 @@ class ProjectsList(ListView):
         return super().get_queryset().order_by(*self.order_by)
 
 
-# Create your views here.
-class TechnicalSolutionsList(ListView):
-    """docstring for ProductList"""
-    model = TechnicalSolutions
-
-
-# Create your views here.
-class ProjectImageList(ListView):
-    """docstring for ProductList"""
-    model = ProjectImage
-
-
-# Create your views here.
-class ProjectHasTechnicalSolutionsList(ListView):
-    """docstring for ProductList"""
-    model = ProjectHasTechnicalSolutions
+# # Create your views here.
+# class TechnicalSolutionsList(ListView):
+#     """docstring for ProductList"""
+#     model = TechnicalSolutions
+#
+#
+# # Create your views here.
+# class ProjectImageList(ListView):
+#     """docstring for ProductList"""
+#     model = ProjectImage
+#
+#
+# # Create your views here.
+# class ProjectHasTechnicalSolutionsList(ListView):
+#     """docstring for ProductList"""
+#     model = ProjectHasTechnicalSolutions
 
 
 def project(request, pk):

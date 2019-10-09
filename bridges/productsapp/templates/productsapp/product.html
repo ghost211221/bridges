@@ -1,5 +1,7 @@
 {% extends 'productsapp/base.html' %}
 {% load static %}
+{% block page_title %}{{ page_title }}{% endblock %}
+{% block bred_title %}{{ page_title }}{% endblock %}
 {% block content-container %}
 
 <!-- Main Content -->
@@ -46,10 +48,10 @@
                                     <div class="wprt-spacer" data-desktop="30" data-mobi="25" data-smobi="25"></div>
 
                                     <ul class="wprt-list style-2 accent-color margin-bottom-25">
-                                        <li><strong>Client:</strong> ThemeForest Builder</li>
-                                        <li><strong>Architect:</strong> Richardson and Sandra</li>
-                                        <li><strong>Builder:</strong> GraphicRiver Builder Corporate</li>
-                                        <li><strong>Budget:</strong> $1 250 000,00</li>
+                                        <li><strong>Заказчик:</strong> ThemeForest Builder</li>
+                                        <li><strong>Проектировщик:</strong> Richardson and Sandra</li>
+                                        <li><strong>подрядчик:</strong> GraphicRiver Builder Corporate</li>
+                                        <li><strong>Бюджет:</strong> $1 250 000,00</li>
                                     </ul>
 
                                     <a href="#" class="wprt-button small rounded-3px">LIVE PREVIEW</a>
@@ -66,7 +68,7 @@
 
                                         <div class="wprt-spacer" data-desktop="30" data-mobi="25" data-smobi="25"></div>
 
-                                        <p>{{ product.description }}</p>
+                                        <p>{{ materials }}</p>
 
                                         <p>Vestibulum eu libero volutpat, portas quam acc, tempus sem. Donec sodales
                                             quam id lorem lobortis, vitae. Pellentesque habitant morbi tristique
