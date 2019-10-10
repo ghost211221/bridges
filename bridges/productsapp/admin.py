@@ -2,6 +2,9 @@ from django.contrib import admin
 from .models import *
 
 
+# -----------------------    МОДЕЛИ МАТЕРИАЛОВ   -------------------------------------
+
+
 class MaterialCategoryAdmin(admin.ModelAdmin):
     list_display = ('name',)
     list_display_links = ('name',)
@@ -54,6 +57,54 @@ class MaterialImageAdmin(admin.ModelAdmin):
 
 
 admin.site.register(MaterialImage, MaterialImageAdmin)
+
+
+# -----------------------    МОДЕЛИ РАБОТ   -------------------------------------
+
+
+class WorkCategoryAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'name',)
+    list_display_links = ('name',)
+    search_fields = ('name', )
+
+    class Meta:
+        model = WorkCategory
+
+
+admin.site.register(WorkCategory, WorkCategoryAdmin)
+
+
+class WorkImageInline(admin.TabularInline):
+    model = WorkImage
+    extra = 0
+
+
+class WorkAdmin(admin.ModelAdmin):
+    # prepopulated_fields = {'slug': ('name',)}
+    list_display = ('name', 'category', 'measure',)
+    list_display_links = ('name',)
+    search_fields = ('name',)
+    inlines = [WorkImageInline]
+
+    class Meta:
+        model = Material
+
+
+admin.site.register(Work, WorkAdmin)
+
+
+class WorkImageAdmin(admin.ModelAdmin):
+    list_display = ('id', 'image', 'is_active', 'created', 'updated',)
+    list_display_links = ('id', 'image',)
+
+    class Meta:
+        model = WorkImage
+
+
+admin.site.register(WorkImage, WorkImageAdmin)
+
+
+# -----------------------    МОДЕЛИ ПРОДУКТОВ (ТЕХНИЧЕСКИХ РЕШЕНИЙ)   -------------------------------------
 
 
 class TechnicalSolutionsImageInline(admin.TabularInline):

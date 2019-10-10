@@ -32,6 +32,9 @@ def product(request, slug):
     item = get_object_or_404(TechnicalSolutions, slug=slug)
     title = item.name
     materials = item.material_content.all()
+    allworks = item.work_content.all().order_by('pk')
+    mainworks = allworks.filter(category__pk=2)
+    works = allworks.exclude(category__pk=2)
     projects = item.project_set.all()
     docs = Document.objects.filter(techsol__pk=item.pk)
     researches = docs.filter(type__in=(2, 3,))
@@ -42,6 +45,8 @@ def product(request, slug):
         'page_title': title,
         'bred_title': title,
         'product': item,
+        'works': works,
+        'mainworks': mainworks,
         'materials': materials,
         'projects': projects,
         'researches': researches,
