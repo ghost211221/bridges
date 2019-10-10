@@ -8,6 +8,10 @@ from .models import Users
 
 class UserLoginView(LoginView):
     template_name = 'authapp/login.html'
+    extra_context = {
+        'page_title': 'Авторизация на сайте',
+        'bred_title': 'Авторизация на сайте'
+    }
 
 
 class UserProfileView(DetailView):
