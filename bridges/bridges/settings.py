@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'productsapp',
     'projectsapp',
     'contactapp',
+    'researchapp',
     'authapp',
 ]
 

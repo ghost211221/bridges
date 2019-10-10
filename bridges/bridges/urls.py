@@ -23,8 +23,9 @@ urlpatterns = [
     path('contact/', include('contactapp.urls', namespace='contact')),
     path('products/', include('productsapp.urls', namespace='products')),
     path('projects/', include('projectsapp.urls', namespace='projects')),
+    path('research/', include('researchapp.urls', namespace='research')),
     path('auth/', include('authapp.urls', namespace='auth')),
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls)
 ]
 
 if settings.DEBUG:

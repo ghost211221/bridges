@@ -1,20 +1,29 @@
 from django.shortcuts import render, get_object_or_404
 
+from django.views.generic import ListView
+
 from productsapp.models import TechnicalSolutions
 from projectsapp.models import Project, ProjectImage, ProjectHasTechnicalSolutions
 
 
-def projects(request):
-    projects = Project.objects.all()
-    products = TechnicalSolutions.objects.all()
-    values = ProjectHasTechnicalSolutions.objects.all()
+# Create your views here.
+class ProjectsList(ListView):
+    """docstring for ProductList"""
+    paginate_by = 6
+    model = Project
+    template_name = 'projectsapp/grid.html'
+    extra_content = {}
 
-    content = {
-        'projects': projects,
-        'products': products,
-        'values': values
-    }
-    return render(request, 'projectsapp/grid.html', content)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        products = TechnicalSolutions.objects.all()
+        values = ProjectHasTechnicalSolutions.objects.all()
+        context.update({'products': products,
+                        'values': values,
+                        'page_title': 'Проекты компании',
+                        'bred_title': 'Проекты компании'
+                        })
+        return context
 
 
 def project(request, pk):
@@ -25,6 +34,7 @@ def project(request, pk):
 
     content = {
         'page_title': title,
+        'bred_title': title,
         'project': item,
         'gallery': gallery,
         'values': values
