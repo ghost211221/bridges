@@ -5,6 +5,8 @@
         <h4 class="margin-bottom-15" style="text-align: center;">Вы авторизованы на сайте</h4>
         <br>
         <p>Можете посещать закрытые разделы сайта,<br>доступные зарегистрированным пользователям.</p>
+        <br>
+        <p>Можете посмотреть <a href="{% url 'auth:profile' user.pk %}">ваш профиль</a>.</p>
         <p>Либо можете <a href="{% url 'auth:logout' %}">выйти</a>.</p>
     {% else %}
         <h4 class="margin-bottom-15">Войти на сайт</h4>

@@ -1,7 +1,30 @@
+{% extends 'authapp/base_auth.html' %}
+
 {% block content %}
     {% if user.is_authenticated %}
-        <h4 class="margin-bottom-15" style="text-align: center;">Ваш профиль пользователя на сайте</h4>
-        <p></p>
+        <h4 class="margin-bottom-15" style="text-align: center;">Профиль пользователя {{ user.username|title }}</h4>
+        <br>
+        <p>Ваше имя: {{ user.first_name|title }}<br>
+            Фамилия: {{ user.last_name|title }}<br>
+            Отчество: {{ user.patronymic|title }}<br>
+            Пол: {{ user.get_gender_display }}<br>
+            День рождения: {{ user.birthday|date:"d.m.Y" }}<br>
+            Телефон: {{ user.phone|title }}<br>
+            Эл. почта: {{ user.email }}<br>
+            Город: {{ user.city|title }}<br>
+            Компания: не выводится<br>
+            Должность: {{ user.position|title }}<br>
+            Проект: {{ user.project|title }}
+        </p>
+        <p style="font-style: italic;">
+            {% if user.is_active %}
+                Данные подтверждены менеджером компании.
+            {% else %}
+                Аккаунт не активирован - скоро с вами свяжется менеджер.
+            {% endif %}
+        </p>
+        <br>
+        <p>Можете <a href="{% url 'auth:logout' %}">выйти с сайта</a>.</p>
     {% else %}
         <h4 class="margin-bottom-15" style="text-align: center;">Вы не авторизованы</h4>
         <br>

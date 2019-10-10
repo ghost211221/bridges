@@ -39,8 +39,7 @@ class Company(models.Model):
     name = models.CharField(verbose_name='Полное название*', max_length=70)
     short = models.CharField(verbose_name='Короткое название', max_length=30, blank=True, null=True)
     form = models.ForeignKey(FormCompany, on_delete=models.PROTECT, verbose_name='Форма', blank=True, null=True)
-    category = models.ForeignKey(CategoryCompany, on_delete=models.PROTECT, verbose_name='Категория компании',
-                                 blank=True, null=True)
+    category = models.ForeignKey(CategoryCompany, on_delete=models.PROTECT, verbose_name='Категория компании*')
     inn = models.BigIntegerField(verbose_name='ИНН*', unique=True)
     city = models.CharField(verbose_name='Город', max_length=30, default='', null=True, blank=True)
     address = models.CharField(verbose_name='Адрес', max_length=30, default='', null=True, blank=True)

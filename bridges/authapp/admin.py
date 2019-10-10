@@ -61,5 +61,5 @@ class UsersAdmin(admin.ModelAdmin):
          {'fields': ('username', 'password', 'first_name', 'last_name', 'patronymic', 'gender', 'birthday')}),
         ('Контактные данные', {'fields': ('phone', 'email')}),
         ('Данные сотрудника',
-         {'fields': ('is_staff', 'is_active', 'company', 'groups', 'position', 'project',)}),
+         {'fields': ('is_staff', 'is_active', 'city', 'company', 'groups', 'position', 'project',)}),
     )
