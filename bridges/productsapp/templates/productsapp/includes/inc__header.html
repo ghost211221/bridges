@@ -22,12 +22,6 @@
                         <a href="{% url 'products:products' %}">
                             <span class="{% if request.resolver_match.url_name == 'products' %}active{% endif %}">Технологии</span>
                         </a>
-
-{#                                                    <ul class="sub-menu">#}
-{#                                                        {% for i in products %}#}
-{#                                                        <li class="menu-item" style="width: 350px;"><a href="{% url 'products:product' i.slug %}">{{ i.name }}</a></li>#}
-{#                                                        {% endfor %}#}
-{#                                                    </ul>#}
                     </li>
 {#                    <li class="menu-item"><a href="#">Услуги</a></li>#}
                     <li class="menu-item">
