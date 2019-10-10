@@ -9,7 +9,7 @@ from projectsapp.models import Project, ProjectImage, ProjectHasTechnicalSolutio
 # Create your views here.
 class ProjectsList(ListView):
     """docstring for ProductList"""
-    paginate_by = 6
+    paginate_by = 12
     model = Project
     template_name = 'projectsapp/grid.html'
     extra_content = {}
