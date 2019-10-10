@@ -89,7 +89,7 @@ class WorkCategory(models.Model):
     """
     Категории работ: типа подготовительные работы, основные работы, испытания, проверка качества.
     """
-    name = models.CharField(verbose_name='категория материала', max_length=64, unique=True)
+    name = models.CharField(verbose_name='категория работ', max_length=64, unique=True)
     description = models.TextField(verbose_name='описание', blank=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
@@ -107,8 +107,8 @@ class Work(models.Model):
     Конкретные работы по техническому решению, например: продувка сжатым воздухом, грунтование,
     нанесение мастики и т.д.
     """
-    name = models.CharField(verbose_name='название материала', max_length=128, unique=True)
-    category = models.ForeignKey(WorkCategory, verbose_name='категория материала', on_delete=models.CASCADE)
+    name = models.CharField(verbose_name='название работ', max_length=128, unique=True)
+    category = models.ForeignKey(WorkCategory, verbose_name='категория работ', on_delete=models.CASCADE)
     measure = models.ForeignKey(MeasureTypes, verbose_name='Единица измерения', on_delete=models.CASCADE)
     materials = models.ManyToManyField(Material, blank=True)
     image = models.ImageField(upload_to='products_images', blank=True)

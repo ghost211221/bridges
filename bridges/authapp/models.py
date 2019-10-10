@@ -44,7 +44,7 @@ class Company(models.Model):
     form = models.ForeignKey(FormCompany, on_delete=models.PROTECT, verbose_name='Форма', blank=True, null=True)
     category = models.ForeignKey(CategoryCompany, on_delete=models.PROTECT, verbose_name='Категория компании',
                                  blank=True, null=True)
-    logo = models.ImageField(verbose_name='логотип', blank=True, null=True)
+    logo = models.ImageField(verbose_name='логотип', upload_to='logo_company', blank=True, null=True)
     inn = models.BigIntegerField(verbose_name='ИНН*', unique=True)
     city = models.CharField(verbose_name='Город', max_length=30, default='', null=True, blank=True)
     address = models.CharField(verbose_name='Адрес', max_length=300, default='', null=True, blank=True)
