@@ -40,6 +40,7 @@ def product(request, slug):
 
     content = {
         'page_title': title,
+        'bred_title': title,
         'product': item,
         'materials': materials,
         'projects': projects,

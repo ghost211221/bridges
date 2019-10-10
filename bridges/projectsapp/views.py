@@ -13,7 +13,6 @@ class ProjectsList(ListView):
     model = Project
     template_name = 'projectsapp/grid.html'
     extra_content = {}
-    order_by = ()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -25,9 +24,6 @@ class ProjectsList(ListView):
                         'bred_title': 'Проекты компании'
                         })
         return context
-
-    def get_queryset(self):
-        return super().get_queryset().order_by(*self.order_by)
 
 
 def project(request, pk):
