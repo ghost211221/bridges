@@ -23,16 +23,13 @@
 {#                                            </div><!-- /#project-filter -->#}
                                             <div id="projects" class="cbp">
                                                 {% for item in object_list %}
-                                                    <div class="cbp-item
-                                                        {% for i in item.techsol.all %}
-                                                        {{ i.pk }}
-                                                        {% endfor %}">
+                                                    <div class="cbp-item">
                                                         <div class="project-item">
                                                             <div class="inner">
                                                                 <div class="grid">
                                                                     <figure class="effect-honey">
                                                                         <a href="{% url 'projects:project' item.pk %}">
-                                                                            <img src="{{ item.image.url }}" alt="">
+                                                                            <img src="{{ item.image.url }}" alt="{{ item.name }}">
                                                                         </a>
                                                                         <figcaption>
                                                                             <div>

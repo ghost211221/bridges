@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView, DeleteView
 
 from productsapp.models import TechnicalSolutions
 from projectsapp.models import Project, ProjectImage, ProjectHasTechnicalSolutions
@@ -16,10 +16,8 @@ class ProjectsList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        products = TechnicalSolutions.objects.all()
         values = ProjectHasTechnicalSolutions.objects.all()
-        context.update({'products': products,
-                        'values': values,
+        context.update({'values': values,
                         'page_title': 'Проекты компании',
                         'bred_title': 'Проекты компании'
                         })
@@ -40,3 +38,11 @@ def project(request, pk):
         'values': values
     }
     return render(request, 'projectsapp/project.html', content)
+
+
+class ProjectCreate(CreateView):
+    pass
+
+
+class ProjectDelete(DeleteView):
+    pass

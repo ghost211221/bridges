@@ -43,11 +43,11 @@ class Project(models.Model):
     def __str__(self):
         return f"{self.name} ({self.city})"
 
-    # def get_pictures(self):
-    #     return self.images.all
+    def get_pictures(self):
+        return self.images.select_related()
 
-    # def get_data(self):
-    #     return self.solutions.all
+    def get_data(self):
+        return self.solutions.select_related()
 
     class Meta:
         verbose_name = 'Проект'
@@ -84,7 +84,7 @@ class ProjectImage(models.Model):
 class ProjectHasTechnicalSolutions(models.Model):
     """ Модель связи технических решений применяемых на объекте с указанием их объема  """
     name = models.CharField(verbose_name='название', max_length=256, unique=False, blank=True)
-    project = models.ForeignKey(Project, blank=True, null=True, default=None, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, blank=True, null=True, default=None, on_delete=models.CASCADE, related_name="solutions")
     techsol = models.ForeignKey(TechnicalSolutions, blank=True, null=True, default=None, on_delete=models.CASCADE)
     value = models.DecimalField(verbose_name='значение', max_digits=18, decimal_places=2, null=True)
     is_active = models.BooleanField(verbose_name='Показывать', default=True)
