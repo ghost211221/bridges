@@ -66,7 +66,7 @@
 <!--                                TOGGLES-->
                                     <div class="wprt-toggle style-1">
                                         <h3 class="toggle-title">Детальная информация</h3>
-                                        <div class="toggle-content">
+                                        <div class="toggle-content" style="color: black;">
                                             <ul class="wprt-list style-2 accent-color margin-top-3 margin-bottom-3">
                                                 <li><strong>Статус проекта:</strong> {{ project.status }}</li>
                                                 <li><strong>Адрес объекта:</strong> {{ project.address }} Посмотреть на <a href="#">карте</a></li>
@@ -75,32 +75,27 @@
                                     </div>
                                     <div class="wprt-toggle style-1">
                                         <h3 class="toggle-title">Ключевые участники проекта</h3>
-                                        <div class="toggle-content">
+                                        <div class="toggle-content" style="color: black;">
                                             <ul class="wprt-list style-2 accent-color margin-top-3 margin-bottom-3">
                                                 {% if request.user.is_authenticated %}
-                                                    <li><strong>Заказчик:</strong> {{ project.customer }} Гормост</li>
-                                                    <li><strong>Проектировщик:</strong> {{ project.designer }}</li>
-                                                    <li><strong>Подрядчик:</strong> {{ project.contractor }}</li>
+                                                    {% for company in project.participant.all %}
+                                                    <li> {{ company.name }}</li>
+                                                    {% endfor %}
                                                 {% else %}
-                                                    <li><strong>Заказчик:</strong> <i>доступно после авторизации </i></li>
-                                                    <li><strong>Проектировщик:</strong> <i>доступно после авторизации </i></li>
-                                                    <li><strong>Подрядчик:</strong> <i>доступно после авторизации </i></li>
+                                                    <li><i>доступно после авторизации </i></li>
                                                 {% endif %}
-                                                    <li><strong>Статус:</strong> {{ project.status }}</li>
-                                                    <li><strong>Адрес объекта:</strong> {{ project.address }} Посмотреть на <a href="#">карте</a></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="wprt-toggle style-1">
                                         <h3 class="toggle-title">Технические решения</h3>
-                                        <div class="toggle-content">
+                                        <div class="toggle-content" style="color: black;">
                                             <ul class="wprt-list style-2 accent-color margin-top-30 margin-bottom-25">
                                                 {% for item in values %}
                                                 <li><strong></strong>
-                                                    {{ item.techsol.name }}, {{ item.value }}
+                                                    {{ item.techsol.name }}: {{ item.value }} {{ item.techsol.measure }}
                                                 </li>
                                                 {% endfor %}
-                                                <li><strong>Бюджет:</strong> $1 250 000,00</li>
                                             </ul>
                                         </div>
                                     </div>

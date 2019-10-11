@@ -158,6 +158,7 @@ class TechnicalSolutions(models.Model):
     name = models.CharField(verbose_name='название материала', max_length=128, unique=True)
     slug = models.SlugField(verbose_name='слаг', max_length=128, unique=True)
     material_content = models.ManyToManyField(Material)
+    measure = models.ForeignKey(MeasureTypes, verbose_name='Единица измерения', on_delete=models.CASCADE, default=1)
     work_content = models.ManyToManyField(Work, blank=True)
     image = models.ImageField(upload_to='products_images', blank=True)
     alt_desc = models.CharField(verbose_name='alt фотографии', max_length=500, blank=True)

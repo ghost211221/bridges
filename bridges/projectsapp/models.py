@@ -75,7 +75,7 @@ class ProjectHasTechnicalSolutions(models.Model):
     name = models.CharField(verbose_name='название', max_length=256, unique=False, blank=True)
     project = models.ForeignKey(Project, blank=True, null=True, default=None, on_delete=models.CASCADE)
     techsol = models.ForeignKey(TechnicalSolutions, blank=True, null=True, default=None, on_delete=models.CASCADE)
-    value = models.FloatField(verbose_name='значение', null=True)
+    value = models.DecimalField(verbose_name='значение', max_digits=18, decimal_places=2, null=True)
     is_active = models.BooleanField(verbose_name='Показывать', default=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
