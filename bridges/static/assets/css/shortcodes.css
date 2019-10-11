@@ -15,7 +15,7 @@
 
 .wprt-section.promotion {
     padding: 32px 0;
-    background-color: #ffbc13;
+    background-color: #337ab7;
 }
 
 .wprt-section.works {
@@ -326,9 +326,9 @@
 }
 
 /* Accent background Effect 2 */
-.wprt-icon-box.accent-background.icon-effect-2 .dd-icon { background-color: #ffbc13; -webkit-transition: background 0.3s, color 0.3s, box-shadow 0.3s; -moz-transition: background 0.3s, color 0.3s, box-shadow 0.3s; transition: background 0.3s, color 0.3s, box-shadow 0.3s; }
+.wprt-icon-box.accent-background.icon-effect-2 .dd-icon { background-color: #337ab7; -webkit-transition: background 0.3s, color 0.3s, box-shadow 0.3s; -moz-transition: background 0.3s, color 0.3s, box-shadow 0.3s; transition: background 0.3s, color 0.3s, box-shadow 0.3s; }
 .wprt-icon-box.accent-background.icon-effect-2 .dd-icon:after { display: none; }
-.wprt-icon-box.accent-background.icon-effect-2:hover .dd-icon { color: #ffbc13; background-color: #fff; }
+.wprt-icon-box.accent-background.icon-effect-2:hover .dd-icon { color: #337ab7; background-color: #fff; }
 .wprt-icon-box.accent-background.icon-effect-2:hover .dd-icon:before { -webkit-animation: toRightFromLeft 0.3s forwards; -moz-animation: toRightFromLeft 0.3s forwards; animation: toRightFromLeft 0.3s forwards; }
 
 /* Accent background Effect 1 */
@@ -462,7 +462,7 @@
 
 /* Outline */
 .wprt-icon-box.icon-left.outline .dd-icon {
-    box-shadow: inset 0 0 0 2px #ffbc13;
+    box-shadow: inset 0 0 0 2px #337ab7;
     display: inline-block;
     width: 70px;
     height: 70px;
@@ -476,10 +476,10 @@
 
 /* Accent background */
 .wprt-icon-box.icon-left.accent-background .dd-icon {  color: #fff; }
-.wprt-icon-box.icon-left.accent-background:hover .dd-icon { color: #ffbc13; }
+.wprt-icon-box.icon-left.accent-background:hover .dd-icon { color: #337ab7; }
 
 .wprt-icon-box.icon-left.accent-background .dd-icon {
-    box-shadow: inset 0 0 0 2px #ffbc13;
+    box-shadow: inset 0 0 0 2px #337ab7;
     display: inline-block;
     width: 70px;
     height: 70px;
@@ -493,8 +493,8 @@
 
 
 /* Grey background */
-.wprt-icon-box.icon-left.grey-background .dd-icon { background-color: #f8f8f8; color: #ffbc13; }
-.wprt-icon-box.icon-left.grey-background:hover .dd-icon { background-color: #ffbc13; color: #fff; border-color: #ffbc13; }
+.wprt-icon-box.icon-left.grey-background .dd-icon { background-color: #f8f8f8; color: #337ab7; }
+.wprt-icon-box.icon-left.grey-background:hover .dd-icon { background-color: #337ab7; color: #fff; border-color: #337ab7; }
 
 .wprt-icon-box.icon-left.grey-background .dd-icon {
     display: inline-block;
@@ -544,10 +544,10 @@
 
 /* Accent background */
 .wprt-icon-box.icon-right.accent-background .dd-icon {  color: #fff; }
-.wprt-icon-box.icon-right.accent-background:hover .dd-icon { color: #ffbc13; }
+.wprt-icon-box.icon-right.accent-background:hover .dd-icon { color: #337ab7; }
 
 .wprt-icon-box.icon-right.accent-background .dd-icon {
-    box-shadow: inset 0 0 0 2px #ffbc13;
+    box-shadow: inset 0 0 0 2px #337ab7;
     display: inline-block;
     width: 70px;
     height: 70px;
@@ -560,8 +560,8 @@
 .wprt-icon-box.icon-right.accent-background .content-wrap { padding-right: 100px; }
 
 /* Grey background */
-.wprt-icon-box.icon-right.grey-background .dd-icon { background-color: #f8f8f8; color: #ffbc13; }
-.wprt-icon-box.icon-right.grey-background:hover .dd-icon { background-color: #ffbc13; color: #fff; border-color: #ffbc13; }
+.wprt-icon-box.icon-right.grey-background .dd-icon { background-color: #337ab7; color: #337ab7; }
+.wprt-icon-box.icon-right.grey-background:hover .dd-icon { background-color: #337ab7; color: #fff; border-color: #337ab7; }
 
 .wprt-icon-box.icon-right.grey-background .dd-icon {
     display: inline-block;
@@ -626,8 +626,8 @@
     font-weight: 500;
     display: inline-block;
     padding: 0.65em 2.5em;
-    background-color: #ffbc13;
-    border: 2px solid #ffbc13;
+    background-color: #337ab7;
+    border: 2px solid #337ab7;
     color: #fff;
     -webkit-transition: all ease .238s;
        -moz-transition: all ease .238s;
@@ -893,8 +893,8 @@
 }
 
 .wprt-toggle.active .toggle-title {
-    background-color: #ffbc13;
-    border-color: #ffbc13;
+    background-color: #337ab7;
+    border-color: #337ab7;
 }
 
 .wprt-toggle.active .toggle-title,
