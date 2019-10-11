@@ -10,13 +10,17 @@ class UserLoginView(LoginView):
     template_name = 'authapp/login.html'
     extra_context = {
         'page_title': 'Авторизация на сайте',
-        'bred_title': 'Авторизация на сайте'
+        'bred_title': 'Авторизация'
     }
 
 
 class UserProfileView(DetailView):
     model = Users
     template_name = 'authapp/profile.html'
+    extra_context = {
+        'page_title': 'Профиль пользователя',
+        'bred_title': 'Профиль пользователя'
+    }
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -25,3 +29,7 @@ class UserProfileView(DetailView):
 
 class UserLogoutView(LogoutView):
     template_name = 'authapp/logout.html'
+    extra_context = {
+        'page_title': 'Выход с сайта',
+        'bred_title': 'Выход с сайта'
+    }
