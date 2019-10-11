@@ -1,1 +1,1 @@
-For setup instructions, please check the 'Documentation' folder.
+pip install transliterate
