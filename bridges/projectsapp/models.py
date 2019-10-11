@@ -34,10 +34,6 @@ class Project(models.Model):
     creation_date = models.DateTimeField(auto_now_add=True, auto_now=False)
     city = models.CharField(verbose_name='город', max_length=512, blank=True, null=True)
     address = models.CharField(verbose_name='адрес', max_length=512, blank=True, null=True)
-    latitude = models.FloatField(verbose_name='широта', null=True)
-    """ для привязки координат на карте """
-    longitude = models.FloatField(verbose_name='долгота', null=True)
-    """ для привязки координат на карте """
     techsol = models.ManyToManyField(TechnicalSolutions, through='ProjectHasTechnicalSolutions')
     participant = models.ManyToManyField(Company, blank=True)
     coordinate = models.CharField(verbose_name='координаты', max_length=34, null=True, blank=True)
