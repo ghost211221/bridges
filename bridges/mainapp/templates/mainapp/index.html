@@ -391,10 +391,9 @@
                                                             src="/media/{{ item.image }}"
                                                             alt="image"/></div>
                                                     <div class="service-item-wrap">
-                                                        <h3 class="title font-size-18"><a href="#">{{ item.name }}</a></h3>
+                                                        <h3 class="title font-size-18"><a href="{% url 'products:product' item.slug %}">{{ item.name }}</a></h3>
                                                         <p class="desc">{{ item.short_desc }} </p>
-                                                        <a href="#" class="wprt-button small rounded-3px">READ
-                                                            MORE</a>
+                                                        <a href="{% url 'products:product' item.slug %}" class="wprt-button small rounded-3px">ПОДРОБНО</a>
                                                     </div>
                                                 </div>
                                             </div><!-- /.cbp-item -->
