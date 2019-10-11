@@ -2,6 +2,9 @@ from django.shortcuts import render, get_object_or_404
 
 from django.views.generic import ListView
 
+from django.http import HttpResponseRedirect
+from django.db.models import Q
+
 from productsapp.models import TechnicalSolutions
 from projectsapp.models import Project, ProjectImage, ProjectHasTechnicalSolutions
 
@@ -9,11 +12,10 @@ from projectsapp.models import Project, ProjectImage, ProjectHasTechnicalSolutio
 # Create your views here.
 class ProjectsList(ListView):
     """docstring for ProductList"""
+    filterStat = None
     paginate_by = 6
     model = Project
     template_name = 'projectsapp/grid.html'
-    extra_content = {}
-    order_by = ()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -26,8 +28,6 @@ class ProjectsList(ListView):
                         })
         return context
 
-    def get_queryset(self):
-        return super().get_queryset().order_by(*self.order_by)
 
 
 def project(request, pk):
@@ -44,3 +44,18 @@ def project(request, pk):
         'values': values
     }
     return render(request, 'projectsapp/project.html', content)
+
+class ProjectsFilter(ProjectsList):
+    """ docstring for ProductList
+    CAT PK IN URL
+    
+    filters list of projects by techdesicion pk
+    """
+    pk_field = 'techsol'
+    model = Project
+    filtered = True
+    def get_queryset(self):
+        query = Q()
+        if 'pk' in self.kwargs:
+            query = Q((self.pk_field, self.kwargs['pk']))
+        return super().get_queryset().filter(query)
