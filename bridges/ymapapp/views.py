@@ -5,8 +5,9 @@ from projectsapp.models import Project
 def map(request):
     projects = Project.objects.all()
     context = {
-        'page_title': 'карта проектов',
+        'page_title': 'Карта проектов',
         'projects': projects,
+        'bred_title': 'Карта проектов'
     }
     return render(request, 'ymapapp/map.html', context)
 
