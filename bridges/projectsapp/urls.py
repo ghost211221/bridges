@@ -16,11 +16,12 @@ Including another URLconf
 from django.urls import path
 
 from projectsapp import views as projectsapp
-from .views import ProjectsList
+from .views import ProjectsList, ProjectRead
 
 app_name = 'projectsapp'
 
 urlpatterns = [
     path('', ProjectsList.as_view(), name='projects'),
-    path('<int:pk>', projectsapp.project, name='project'),
+    path('<int:pk>', ProjectRead.as_view(), name='project')
+    # path('<int:pk>', projectsapp.project, name='project'),
 ]
