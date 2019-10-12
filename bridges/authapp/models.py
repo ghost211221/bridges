@@ -80,5 +80,5 @@ class Users(AbstractUser):
     project = models.CharField(verbose_name='Проект', max_length=50, default='', null=True, blank=True)
 
     class Meta(AbstractUser.Meta):
-        verbose_name = "Пользователя"
+        verbose_name = "Пользователь"
         ordering = ['-date_joined']
