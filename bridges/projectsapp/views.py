@@ -11,11 +11,19 @@ from projectsapp.models import Project, ProjectImage, ProjectHasTechnicalSolutio
 
 # Create your views here.
 class ProjectsList(ListView):
-    """docstring for ProductList"""
-    filterStat = None
-    paginate_by = 6
+    """docstring for ProductList"""    
     model = Project
-    template_name = 'projectsapp/grid.html'
+    pk_field = 'techsol'
+    paginate_by = 6    
+    template_name = 'projectsapp/grid.html'   
+
+    def get_queryset(self, **kwargs):
+        query = Q()
+        if 'pk' in self.kwargs:
+            query = Q((self.pk_field, self.kwargs['pk']))
+            return super().get_queryset().filter(query)
+        else:
+            return super().get_queryset() 
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -45,17 +53,3 @@ def project(request, pk):
     }
     return render(request, 'projectsapp/project.html', content)
 
-class ProjectsFilter(ProjectsList):
-    """ docstring for ProductList
-    CAT PK IN URL
-    
-    filters list of projects by techdesicion pk
-    """
-    pk_field = 'techsol'
-    model = Project
-    filtered = True
-    def get_queryset(self):
-        query = Q()
-        if 'pk' in self.kwargs:
-            query = Q((self.pk_field, self.kwargs['pk']))
-        return super().get_queryset().filter(query)
