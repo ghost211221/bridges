@@ -1,8 +1,37 @@
 from django.contrib import admin
-from .models import Users, CategoryCompany, Company, FormCompany
+from .models import CategoryCompany, FormCompany, Company, Users
 
 
 # Register your models here.
+
+
+@admin.register(CategoryCompany)
+class CategoryCompanyAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description')
+    search_fields = ('name', 'description',)
+
+
+@admin.register(FormCompany)
+class FormCompanyAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description')
+    search_fields = ('name', 'description',)
+
+
+@admin.register(Company)
+class CompanyAdmin(admin.ModelAdmin):
+    list_display = ('name', 'inn', 'category', 'city')
+    search_fields = ('name',
+                     'short_name',
+                     'form_company',
+                     'category',
+                     'inn',
+                     'city',
+                     'address',
+                     'phone',
+                     'email',)
+    # укажем быстрые фильтры для фильтрации записей
+    list_filter = ('category', 'city')
+
 
 @admin.register(Users)
 class UsersAdmin(admin.ModelAdmin):
@@ -32,34 +61,5 @@ class UsersAdmin(admin.ModelAdmin):
          {'fields': ('username', 'password', 'first_name', 'last_name', 'patronymic', 'gender', 'birthday')}),
         ('Контактные данные', {'fields': ('phone', 'email')}),
         ('Данные сотрудника',
-         {'fields': ('is_staff', 'is_active', 'company', 'groups', 'position', 'project',)}),
+         {'fields': ('is_staff', 'is_active', 'city', 'company', 'groups', 'position', 'project',)}),
     )
-
-
-@admin.register(FormCompany)
-class CategoryCompanyAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description')
-    search_fields = ('name', 'description',)
-
-
-@admin.register(CategoryCompany)
-class CategoryCompanyAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description')
-    search_fields = ('name', 'description',)
-
-
-@admin.register(Company)
-class CompanyAdmin(admin.ModelAdmin):
-    list_display = ('name', 'inn', 'city', 'logo')
-    search_fields = ('name_company',
-                     'short_name',
-                     'form_company',
-                     'logo',
-                     'category',
-                     'inn',
-                     'city',
-                     'address',
-                     'phone',
-                     'email',)
-    # укажем быстрые фильтры для фильтрации записей
-    list_filter = ('category', 'city')

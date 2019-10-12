@@ -1,6 +1,5 @@
 from django.shortcuts import render, get_object_or_404
 
-from django.views.generic import ListView
 
 from django.http import HttpResponseRedirect
 from django.db.models import Q
@@ -29,13 +28,13 @@ class ProjectsList(ListView):
         context = super().get_context_data(**kwargs)
         products = TechnicalSolutions.objects.all()
         values = ProjectHasTechnicalSolutions.objects.all()
+        context.update({'values': values,
         context.update({'products': products,
                         'values': values,
                         'page_title': 'Проекты компании',
                         'bred_title': 'Проекты компании'
                         })
         return context
-
 
 
 def project(request, pk):
@@ -52,4 +51,3 @@ def project(request, pk):
         'values': values
     }
     return render(request, 'projectsapp/project.html', content)
-

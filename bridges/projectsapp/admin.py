@@ -18,6 +18,7 @@ class ProjectAdmin(admin.ModelAdmin):
     list_display = ('name', 'city',)
     list_display_links = ('name', 'city',)
     search_fields = ('name',)
+    exclude = ['map_mark']
     inlines = [
         ProjectHasTechnicalSolutionsInline,
         ProjectImageInline,

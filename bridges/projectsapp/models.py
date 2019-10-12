@@ -1,4 +1,7 @@
 from django.db import models
+from django.db.models.signals import pre_save
+from django.utils.text import slugify
+from transliterate import translit
 
 from authapp.models import Company
 from productsapp.models import TechnicalSolutions
@@ -31,25 +34,33 @@ class Project(models.Model):
     creation_date = models.DateTimeField(auto_now_add=True, auto_now=False)
     city = models.CharField(verbose_name='город', max_length=512, blank=True, null=True)
     address = models.CharField(verbose_name='адрес', max_length=512, blank=True, null=True)
-    latitude = models.FloatField(verbose_name='широта', null=True)
-    """ для привязки координат на карте """
-    longitude = models.FloatField(verbose_name='долгота', null=True)
-    """ для привязки координат на карте """
     techsol = models.ManyToManyField(TechnicalSolutions, through='ProjectHasTechnicalSolutions')
     participant = models.ManyToManyField(Company, blank=True)
+    coordinate = models.CharField(verbose_name='координаты', max_length=34, null=True, blank=True)
+    map_mark = models.SlugField(verbose_name='id метки на карте', max_length=128, blank=True)
+    text_for_map = models.TextField(verbose_name='текст для метки', max_length=240, null=True, blank=True)
 
     def __str__(self):
         return f"{self.name} ({self.city})"
 
-    # def get_pictures(self):
-    #     return self.images.all
+    def get_pictures(self):
+        return self.images.select_related()
 
-    # def get_data(self):
-    #     return self.solutions.all
+    def get_data(self):
+        return self.solutions.select_related()
 
     class Meta:
         verbose_name = 'Проект'
         verbose_name_plural = 'Проекты'
+
+
+def pre_save_map_mark(sender, instance, *args, **kwargs):
+    if not instance.map_mark:
+        map_mark = slugify(translit(instance.name, reversed=True)).replace('-', '_')
+        instance.map_mark = map_mark
+
+
+pre_save.connect(pre_save_map_mark, sender=Project)
 
 
 class ProjectImage(models.Model):
@@ -73,9 +84,9 @@ class ProjectImage(models.Model):
 class ProjectHasTechnicalSolutions(models.Model):
     """ Модель связи технических решений применяемых на объекте с указанием их объема  """
     name = models.CharField(verbose_name='название', max_length=256, unique=False, blank=True)
-    project = models.ForeignKey(Project, blank=True, null=True, default=None, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, blank=True, null=True, default=None, on_delete=models.CASCADE, related_name="solutions")
     techsol = models.ForeignKey(TechnicalSolutions, blank=True, null=True, default=None, on_delete=models.CASCADE)
-    value = models.FloatField(verbose_name='значение', null=True)
+    value = models.DecimalField(verbose_name='значение', max_digits=18, decimal_places=2, null=True)
     is_active = models.BooleanField(verbose_name='Показывать', default=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)

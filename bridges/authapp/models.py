@@ -5,9 +5,8 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 class CategoryCompany(models.Model):
-    """модель содержит информацию о категории компании,
-    например: проектный институт, подрядная организация, заказчик и др."""
-
+    """ модель содержит информацию о категории компании,
+    например: проектный институт, подрядная организация, заказчик и др. """
     name = models.CharField(verbose_name='Категория компании*', max_length=50, unique=True)
     description = models.CharField(verbose_name='Описание категории', max_length=300, default='', null=True, blank=True)
 
@@ -21,9 +20,8 @@ class CategoryCompany(models.Model):
 
 
 class FormCompany(models.Model):
-    """модель содержит организационно-правовые формы предприятия,
-    например, ООО, ИП, ОАО, ЗАО и др."""
-
+    """ модель содержит организационно-правовые формы предприятия,
+    например, ООО, ИП, ОАО, ЗАО и др. """
     name = models.CharField(verbose_name='Форма компании*', max_length=30, unique=True)
     description = models.CharField(verbose_name='Описание формы', max_length=300, default='', null=True, blank=True)
 
@@ -44,7 +42,7 @@ class Company(models.Model):
     form = models.ForeignKey(FormCompany, on_delete=models.PROTECT, verbose_name='Форма', blank=True, null=True)
     category = models.ForeignKey(CategoryCompany, on_delete=models.PROTECT, verbose_name='Категория компании',
                                  blank=True, null=True)
-    logo = models.ImageField(verbose_name='логотип', blank=True, null=True)
+    logo = models.ImageField(verbose_name='логотип', upload_to='logo_company', blank=True, null=True)
     inn = models.BigIntegerField(verbose_name='ИНН*', unique=True)
     city = models.CharField(verbose_name='Город', max_length=30, default='', null=True, blank=True)
     address = models.CharField(verbose_name='Адрес', max_length=300, default='', null=True, blank=True)
@@ -61,16 +59,18 @@ class Company(models.Model):
 
 
 class Users(AbstractUser):
-    """модель содержит информацию о всех пользователях, включая superuser, сотрудников компании
+    """ модель содержит информацию о всех пользователях, включая superuser, сотрудников компании
     и простых пользователей.
     У AbstractUser есть поля: password, last_login, first_name, last_name, email, is_superuser, is_staff,
     # is_active и date_joined.
-    Создадим дополнительные поля."""
+    Создадим дополнительные поля. """
     GENDER_CHOICES = (
         (None, 'не указан'),
         ('male', 'мужчина'),
         ('female', 'женщина'),
     )
+    # у AbstractUser есть поля: username, password, last_login, first_name, last_name, email, is_superuser, is_staff,
+    # is_active и date_joined. Создадим дополнительные поля:
     username = models.CharField(verbose_name='Логин*', max_length=50, unique=True)  # переопределили из-за verbose_name
     patronymic = models.CharField(verbose_name='Отчество', max_length=50, default='', null=True, blank=True)
     gender = models.CharField(verbose_name='Пол', max_length=6, choices=GENDER_CHOICES, blank=True, null=True)
@@ -83,5 +83,4 @@ class Users(AbstractUser):
 
     class Meta(AbstractUser.Meta):
         verbose_name = "Пользователя"
-        verbose_name_plural = "Пользователи"
         ordering = ['-date_joined']

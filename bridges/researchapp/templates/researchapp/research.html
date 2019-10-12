@@ -16,14 +16,14 @@
                                 {#                            ВЫВОД ВСЕЙ ДОКУМЕНТАЦИИ ПО КОМПАНИЯМ#}
                                 {% for item in companies %}
                                     <div class='row'>
-                                        <div class="col-md-4">
+                                        <div class="col-md-4" style="text-align: center;">
                                             <div class="wprt-spacer" data-desktop="5" data-mobi="60"
                                                  data-smobi="60"></div>
-
-                                            <h2 class="text-center margin-bottom-10">{{ item.company__name }}</h2>
-                                            <div class="wprt-lines style-2 custom-1">
-                                                <div class="line-1"></div>
-                                            </div>
+                                            <img src="/media/{{ item.company__logo }}">
+                                            <h2 class="text-center margin-bottom-10" style="font-size: 10px;">{{ item.company__form__name }} {{ item.company__name }}</h2>
+{#                                            <div class="wprt-lines style-2 custom-1">#}
+{#                                                <div class="line-1"></div>#}
+{#                                            </div>#}
                                             <div class="wprt-spacer" data-desktop="50" data-mobi="40"
                                                  data-smobi="40"></div>
                                         </div><!-- /.col-md-12 -->
