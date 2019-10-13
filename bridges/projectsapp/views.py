@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 
-from django.views.generic import ListView, CreateView, DeleteView
+from django.views.generic import ListView, CreateView, DeleteView, DetailView
 
 from productsapp.models import TechnicalSolutions
 from projectsapp.models import Project, ProjectImage, ProjectHasTechnicalSolutions
@@ -12,7 +12,7 @@ class ProjectsList(ListView):
     paginate_by = 12
     model = Project
     template_name = 'projectsapp/grid.html'
-    extra_content = {}
+    extra_context = {}
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -24,20 +24,16 @@ class ProjectsList(ListView):
         return context
 
 
-def project(request, pk):
-    title = 'Проекты компании'
-    item = get_object_or_404(Project, pk=pk)
-    gallery = ProjectImage.objects.filter(project__pk=pk)
-    values = ProjectHasTechnicalSolutions.objects.filter(project__pk=pk)
+class ProjectRead(DetailView):
+    model = Project
+    extra_context = {}
 
-    content = {
-        'page_title': title,
-        'bred_title': title,
-        'project': item,
-        'gallery': gallery,
-        'values': values
-    }
-    return render(request, 'projectsapp/project.html', content)
+    def get_context_data(self, **kwargs):
+        context = super(ProjectRead, self).get_context_data(**kwargs)
+        context.update({'page_title': 'Детальная информация о проекте',
+                        'bred_title': 'Информация о проекте'
+                        })
+        return context
 
 
 class ProjectCreate(CreateView):
