@@ -23,6 +23,6 @@ app_name = 'projectsapp'
 urlpatterns = [
     path('', ProjectsList.as_view(), name='projects'),
     path('<int:pk>', ProjectRead.as_view(), name='project'),
-    path('product_create', projectsapp.product_create, name='product_create'),
+    path('product/create', projectsapp.product_create, name='product_create'),
     # path('product_create', ProjectSolutionsCreate.as_view(), name='product_create'),
 ]

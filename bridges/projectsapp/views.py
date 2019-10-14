@@ -1,5 +1,6 @@
 from django.db import transaction
 from django.forms import inlineformset_factory
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 
@@ -77,7 +78,7 @@ def product_create(request):
     context = {
         'order_form': order_form,
     }
-    return render(request, 'projectsapp/project_form.html', context)
+    return render(request, 'projectsapp/product_update.html', context)
 
 
 class ProjectDelete(DeleteView):
