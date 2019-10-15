@@ -40,9 +40,9 @@ class Company(models.Model):
     name = models.CharField(verbose_name='Полное название*', max_length=70)
     short = models.CharField(verbose_name='Короткое название', max_length=30, blank=True, null=True)
     form = models.ForeignKey(FormCompany, on_delete=models.PROTECT, verbose_name='Форма', blank=True, null=True)
-    category = models.ForeignKey(CategoryCompany, on_delete=models.PROTECT, verbose_name='Категория компании',
-                                 blank=True, null=True)
-    logo = models.ImageField(verbose_name='логотип', upload_to='logo_company', blank=True, null=True)
+    category = models.ForeignKey(CategoryCompany, on_delete=models.PROTECT, verbose_name='Категория компании*')
+    logo = models.ImageField(verbose_name='Логотип', upload_to='logo_company', default='logo_company/no_logo.jpg',
+                             blank=True, null=True)
     inn = models.BigIntegerField(verbose_name='ИНН*', unique=True)
     city = models.CharField(verbose_name='Город', max_length=30, default='', null=True, blank=True)
     address = models.CharField(verbose_name='Адрес', max_length=300, default='', null=True, blank=True)
@@ -69,8 +69,6 @@ class Users(AbstractUser):
         ('male', 'мужчина'),
         ('female', 'женщина'),
     )
-    # у AbstractUser есть поля: username, password, last_login, first_name, last_name, email, is_superuser, is_staff,
-    # is_active и date_joined. Создадим дополнительные поля:
     username = models.CharField(verbose_name='Логин*', max_length=50, unique=True)  # переопределили из-за verbose_name
     first_name = models.CharField(verbose_name='Имя', max_length=50)
     last_name = models.CharField(verbose_name='Фамилия', max_length=50)
@@ -80,7 +78,7 @@ class Users(AbstractUser):
     phone = models.CharField(verbose_name='Телефон*', max_length=50, default='не указан')
 
     class Meta(AbstractUser.Meta):
-        verbose_name = "Пользователя"
+        verbose_name = "Пользователь"
         ordering = ['-date_joined']
 
     def get_company(self):

@@ -1,12 +1,14 @@
-from django.shortcuts import render, get_object_or_404
 
-from django.views.generic import ListView, CreateView, DeleteView, DetailView
+from django.views.generic import View
 
-from productsapp.models import TechnicalSolutions
-from projectsapp.models import Project, ProjectImage, ProjectHasTechnicalSolutions
+from django.views.generic import ListView, DetailView
+
+from projectsapp.forms import ProjectSolutionsForm, ProjectManagerForm, ProjectCompanyForm
+from projectsapp.models import Project, ProjectHasTechnicalSolutions, ProjectCompany, ProjectManagers
+
+from projectsapp.utils import ObjectCreateMixin, ObjectDeleteMixin
 
 
-# Create your views here.
 class ProjectsList(ListView):
     """docstring for ProductList"""
     paginate_by = 12
@@ -36,9 +38,45 @@ class ProjectRead(DetailView):
         return context
 
 
-class ProjectCreate(CreateView):
-    pass
+#  ------------------------------------ CRUD PROJECT'S SOLUTIONS ----------------------------------------------
 
 
-class ProjectDelete(DeleteView):
-    pass
+class ProjectSolutionsUpdate(ObjectCreateMixin, View):
+    form_model = ProjectSolutionsForm
+    template = 'projectsapp/product_update.html'
+
+
+class ProjectSolutionsDelete(ObjectDeleteMixin, View):
+    model = ProjectHasTechnicalSolutions
+    template = 'projectsapp/solution_delete_form.html'
+    context = 'solutions'
+
+
+#  ------------------------------------ CRUD PROJECT'S COMPANIES ----------------------------------------------
+
+
+class ProjectCompanyUpdate(ObjectCreateMixin, View):
+    form_model = ProjectCompanyForm
+    template = 'projectsapp/company_update.html'
+
+
+class ProjectCompanyDelete(ObjectDeleteMixin, View):
+    model = ProjectCompany
+    template = 'projectsapp/company_delete_form.html'
+    context = 'companies'
+
+
+#  ------------------------------------ CRUD PROJECT'S MANAGERS ----------------------------------------------
+
+
+class ProjectManagersUpdate(ObjectCreateMixin, View):
+    form_model = ProjectManagerForm
+    template = 'projectsapp/manager_update.html'
+
+
+class ProjectManagersDelete(ObjectDeleteMixin, View):
+    model = ProjectManagers
+    template = 'projectsapp/manager_delete_form.html'
+    context = 'managers'
+
+
