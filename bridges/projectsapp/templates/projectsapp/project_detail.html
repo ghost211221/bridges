@@ -97,10 +97,14 @@
                                                 </div>
                                         <div class="wprt-spacer" data-desktop="15" data-mobi="15" data-smobi="15"></div>
                                         <i>Участники проекта</i>
+                                        {% for item in object.get_managers %}
+                                            {{ item.pk }}
+                                        {% endfor %}
                                         {% if object.get_managers %}
                                                 {% for item in object.get_managers %}
                                                     <li><i>{{ item.role | title }}:
                                                         {{ item.manager.first_name }} {{ item.manager.last_name }}</i>
+                                                     <a href="{% url 'projects:manager_delete' item.pk %}">delete</a>
                                                         ({% for i in item.manager.get_company %}
                                                             <i>{{ i.company.form }} {{ i.company.name }}</i>
                                                         {% endfor %})

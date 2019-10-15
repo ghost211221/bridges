@@ -2,7 +2,7 @@ from django.db import transaction
 from django.forms import inlineformset_factory
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import View, UpdateView
 
 from django.views.generic import ListView, CreateView, DeleteView, DetailView
@@ -47,6 +47,17 @@ class ProjectRead(DetailView):
 class ProjectSolutionsUpdate(ObjectCreateMixin, View):
     form_model = ProjectSolutionsForm
     template = 'projectsapp/product_update.html'
+
+
+class ProjectManagersDelete(View):
+    def get(self, request, pk):
+        managers = ProjectManagers.objects.get(pk=pk)
+        return render(request, 'projectsapp/manager_delete_form.html', context={'managers': managers})
+
+    def post(self, request, pk):
+        managers = ProjectManagers.objects.get(pk=pk)
+        managers.delete()
+        return redirect(reverse('projectsapp:projects'))
 
 
 class ProjectManagersUpdate(ObjectCreateMixin, View):
