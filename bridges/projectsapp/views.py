@@ -3,7 +3,7 @@ from django.forms import inlineformset_factory
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
-from django.views.generic import View
+from django.views.generic import View, UpdateView
 
 from django.views.generic import ListView, CreateView, DeleteView, DetailView
 
@@ -61,3 +61,20 @@ class ProjectCompanyUpdate(ObjectCreateMixin, View):
 
 class ProjectDelete(DeleteView):
     pass
+
+
+# class ProjectManagersUpdate(UpdateView):
+#     model = Project
+#     fields = []
+#     success_url = reverse_lazy('projectsapp:projects')
+#
+#     def get_context_data(self, **kwargs):
+#         data = super(ProjectManagersUpdate, self).get_context_data(**kwargs)
+#         projectformset = inlineformset_factory(Project, ProjectManagers, form=ProjectManagerForm, extra=1)
+#         if self.request.POST:
+#             data['managers'] = projectformset(self.request.POST, instance=self.object)
+#         else:
+#             formset = projectformset(instance=self.object)
+#             data['managers'] = formset
+#             return data
+
