@@ -1,17 +1,11 @@
-from django.db import transaction
-from django.forms import inlineformset_factory
-from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse_lazy, reverse
-from django.views.generic import View, UpdateView
 
-from django.views.generic import ListView, CreateView, DeleteView, DetailView
+from django.views.generic import View
 
-from productsapp.models import TechnicalSolutions
+from django.views.generic import ListView, DetailView
+
 from projectsapp.forms import ProjectSolutionsForm, ProjectManagerForm, ProjectCompanyForm
-from projectsapp.models import Project, ProjectImage, ProjectHasTechnicalSolutions, ProjectCompany, ProjectManagers
+from projectsapp.models import Project, ProjectHasTechnicalSolutions, ProjectCompany, ProjectManagers
 
-# Create your views here.
 from projectsapp.utils import ObjectCreateMixin, ObjectDeleteMixin
 
 
