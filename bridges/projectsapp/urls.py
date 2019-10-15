@@ -21,8 +21,8 @@ app_name = 'projectsapp'
 
 urlpatterns = [
     path('', ProjectsList.as_view(), name='projects'),
-    path('manager_update', ProjectManagesUpdate.as_view(), name='manager_update'),
-    path('product/create/', ProjectSolutionsUpdate.as_view(), name='product_create'),
+    path('manager/update', ProjectManagesUpdate.as_view(), name='manager_update'),
+    path('product/update', ProjectSolutionsUpdate.as_view(), name='product_update'),
     path('<int:pk>/', ProjectRead.as_view(), name='project'),
 ]
 
