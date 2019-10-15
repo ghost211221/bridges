@@ -86,7 +86,9 @@
                                         <i>Контрагенты проекта:</i>
                                             {% if object.get_companies %}
                                                 {% for item in object.get_companies %}
-                                                    <li><i>{{ item.company.category }}: {{ item.company.form }} {{ item.company.name }}</i></li>
+                                                    <li><i>{{ item.company.category }}: {{ item.company.form }} {{ item.company.name }}</i>
+                                                    <a style="color: red;" href="{% url 'projects:company_delete' item.pk %}">delete</a>
+                                                    </li>
                                                 {% endfor %}
                                             {% endif %}
                                         <li><a href="{% url 'projects:company_update' %}"><i>... добавить</i></a></li>
@@ -96,18 +98,15 @@
                                                     <div class="line-1"></div>
                                                 </div>
                                         <div class="wprt-spacer" data-desktop="15" data-mobi="15" data-smobi="15"></div>
-                                        <i>Участники проекта</i>
-                                        {% for item in object.get_managers %}
-                                            {{ item.pk }}
-                                        {% endfor %}
+                                        <i>Участники проекта:</i>
                                         {% if object.get_managers %}
                                                 {% for item in object.get_managers %}
                                                     <li><i>{{ item.role | title }}:
                                                         {{ item.manager.first_name }} {{ item.manager.last_name }}</i>
-                                                     <a href="{% url 'projects:manager_delete' item.pk %}">delete</a>
                                                         ({% for i in item.manager.get_company %}
                                                             <i>{{ i.company.form }} {{ i.company.name }}</i>
                                                         {% endfor %})
+                                                    <a style="color: red;" href="{% url 'projects:manager_delete' item.pk %}">delete</a>
                                                     </li>
                                                 {% endfor %}
                                         {% endif %}
@@ -151,7 +150,7 @@
                                                     </tr>
                                                     {% for item in object.get_products %}
                                                     <tr>
-                                                        <td>{{ item.techsol.name }}</td>
+                                                        <td>{{ item.techsol.name }} <a style="color: red;" href="{% url 'projects:product_delete' item.pk %}"> delete</a></td>
                                                         <td style="text-align: right;">{{ item.value }}</td>
                                                         <td style="text-align: center;">{{ item.techsol.measure }}</td>
                                                         <td>{{ item.name }}</td>

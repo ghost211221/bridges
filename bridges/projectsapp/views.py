@@ -44,9 +44,50 @@ class ProjectRead(DetailView):
         return context
 
 
+#  ------------------------------------ CRUD PROJECT'S SOLUTIONS ----------------------------------------------
+
+
 class ProjectSolutionsUpdate(ObjectCreateMixin, View):
     form_model = ProjectSolutionsForm
     template = 'projectsapp/product_update.html'
+
+
+class ProjectSolutionsDelete(View):
+    def get(self, request, pk):
+        solutions = ProjectHasTechnicalSolutions.objects.get(pk=pk)
+        return render(request, 'projectsapp/solution_delete_form.html', context={'solutions': solutions})
+
+    def post(self, request, pk):
+        solutions = ProjectHasTechnicalSolutions.objects.get(pk=pk)
+        solutions.delete()
+        return redirect(reverse('projectsapp:projects'))
+
+
+#  ------------------------------------ CRUD PROJECT'S COMPANIES ----------------------------------------------
+
+
+class ProjectCompanyUpdate(ObjectCreateMixin, View):
+    form_model = ProjectCompanyForm
+    template = 'projectsapp/company_update.html'
+
+
+class ProjectCompanyDelete(View):
+    def get(self, request, pk):
+        companies = ProjectCompany.objects.get(pk=pk)
+        return render(request, 'projectsapp/company_delete_form.html', context={'companies': companies})
+
+    def post(self, request, pk):
+        companies = ProjectCompany.objects.get(pk=pk)
+        companies.delete()
+        return redirect(reverse('projectsapp:projects'))
+
+
+#  ------------------------------------ CRUD PROJECT'S MANAGERS ----------------------------------------------
+
+
+class ProjectManagersUpdate(ObjectCreateMixin, View):
+    form_model = ProjectManagerForm
+    template = 'projectsapp/manager_update.html'
 
 
 class ProjectManagersDelete(View):
@@ -59,33 +100,4 @@ class ProjectManagersDelete(View):
         managers.delete()
         return redirect(reverse('projectsapp:projects'))
 
-
-class ProjectManagersUpdate(ObjectCreateMixin, View):
-    form_model = ProjectManagerForm
-    template = 'projectsapp/manager_update.html'
-
-
-class ProjectCompanyUpdate(ObjectCreateMixin, View):
-    form_model = ProjectCompanyForm
-    template = 'projectsapp/company_update.html'
-
-
-class ProjectDelete(DeleteView):
-    pass
-
-
-# class ProjectManagersUpdate(UpdateView):
-#     model = Project
-#     fields = []
-#     success_url = reverse_lazy('projectsapp:projects')
-#
-#     def get_context_data(self, **kwargs):
-#         data = super(ProjectManagersUpdate, self).get_context_data(**kwargs)
-#         projectformset = inlineformset_factory(Project, ProjectManagers, form=ProjectManagerForm, extra=1)
-#         if self.request.POST:
-#             data['managers'] = projectformset(self.request.POST, instance=self.object)
-#         else:
-#             formset = projectformset(instance=self.object)
-#             data['managers'] = formset
-#             return data
 

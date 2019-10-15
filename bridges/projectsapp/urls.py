@@ -16,7 +16,7 @@ Including another URLconf
 from django.urls import path
 
 from .views import ProjectsList, ProjectRead, ProjectManagersUpdate, ProjectSolutionsUpdate, ProjectCompanyUpdate, \
-    ProjectManagersDelete
+    ProjectManagersDelete, ProjectCompanyDelete, ProjectSolutionsDelete
 
 app_name = 'projectsapp'
 
@@ -26,5 +26,7 @@ urlpatterns = [
     path('manager/update', ProjectManagersUpdate.as_view(), name='manager_update'),
     path('manager/delete/<int:pk>', ProjectManagersDelete.as_view(), name='manager_delete'),
     path('product/update', ProjectSolutionsUpdate.as_view(), name='product_update'),
-    path('company/update', ProjectCompanyUpdate.as_view(), name='company_update')
+    path('product/delete/<int:pk>', ProjectSolutionsDelete.as_view(), name='product_delete'),
+    path('company/update', ProjectCompanyUpdate.as_view(), name='company_update'),
+    path('company/delete/<int:pk>', ProjectCompanyDelete.as_view(), name='company_delete'),
 ]
