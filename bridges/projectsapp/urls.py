@@ -15,14 +15,14 @@ Including another URLconf
 """
 from django.urls import path
 
-from .views import ProjectsList, ProjectRead, ProjectManagesUpdate, ProjectSolutionsUpdate, ProjectCompanyUpdate
+from .views import ProjectsList, ProjectRead, ProjectManagersUpdate, ProjectSolutionsUpdate, ProjectCompanyUpdate
 
 app_name = 'projectsapp'
 
 urlpatterns = [
     path('', ProjectsList.as_view(), name='projects'),
-    path('manager/update', ProjectManagesUpdate.as_view(), name='manager_update'),
+    path('<int:pk>/', ProjectRead.as_view(), name='project'),
+    path('manager/update', ProjectManagersUpdate.as_view(), name='manager_update'),
     path('product/update', ProjectSolutionsUpdate.as_view(), name='product_update'),
     path('company/update', ProjectCompanyUpdate.as_view(), name='company_update'),
-    path('<int:pk>/', ProjectRead.as_view(), name='project'),
 ]

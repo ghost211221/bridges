@@ -49,7 +49,7 @@ class ProjectSolutionsUpdate(ObjectCreateMixin, View):
     template = 'projectsapp/product_update.html'
 
 
-class ProjectManagesUpdate(ObjectCreateMixin, View):
+class ProjectManagersUpdate(ObjectCreateMixin, View):
     form_model = ProjectManagerForm
     template = 'projectsapp/manager_update.html'
 
