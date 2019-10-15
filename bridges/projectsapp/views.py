@@ -12,7 +12,7 @@ from projectsapp.forms import ProjectSolutionsForm, ProjectManagerForm, ProjectC
 from projectsapp.models import Project, ProjectImage, ProjectHasTechnicalSolutions, ProjectCompany, ProjectManagers
 
 # Create your views here.
-from projectsapp.utils import ObjectCreateMixin
+from projectsapp.utils import ObjectCreateMixin, ObjectDeleteMixin
 
 
 class ProjectsList(ListView):
@@ -52,15 +52,10 @@ class ProjectSolutionsUpdate(ObjectCreateMixin, View):
     template = 'projectsapp/product_update.html'
 
 
-class ProjectSolutionsDelete(View):
-    def get(self, request, pk):
-        solutions = ProjectHasTechnicalSolutions.objects.get(pk=pk)
-        return render(request, 'projectsapp/solution_delete_form.html', context={'solutions': solutions})
-
-    def post(self, request, pk):
-        solutions = ProjectHasTechnicalSolutions.objects.get(pk=pk)
-        solutions.delete()
-        return redirect(reverse('projectsapp:projects'))
+class ProjectSolutionsDelete(ObjectDeleteMixin, View):
+    model = ProjectHasTechnicalSolutions
+    template = 'projectsapp/solution_delete_form.html'
+    context = 'solutions'
 
 
 #  ------------------------------------ CRUD PROJECT'S COMPANIES ----------------------------------------------
@@ -71,15 +66,10 @@ class ProjectCompanyUpdate(ObjectCreateMixin, View):
     template = 'projectsapp/company_update.html'
 
 
-class ProjectCompanyDelete(View):
-    def get(self, request, pk):
-        companies = ProjectCompany.objects.get(pk=pk)
-        return render(request, 'projectsapp/company_delete_form.html', context={'companies': companies})
-
-    def post(self, request, pk):
-        companies = ProjectCompany.objects.get(pk=pk)
-        companies.delete()
-        return redirect(reverse('projectsapp:projects'))
+class ProjectCompanyDelete(ObjectDeleteMixin, View):
+    model = ProjectCompany
+    template = 'projectsapp/company_delete_form.html'
+    context = 'companies'
 
 
 #  ------------------------------------ CRUD PROJECT'S MANAGERS ----------------------------------------------
@@ -90,14 +80,9 @@ class ProjectManagersUpdate(ObjectCreateMixin, View):
     template = 'projectsapp/manager_update.html'
 
 
-class ProjectManagersDelete(View):
-    def get(self, request, pk):
-        managers = ProjectManagers.objects.get(pk=pk)
-        return render(request, 'projectsapp/manager_delete_form.html', context={'managers': managers})
-
-    def post(self, request, pk):
-        managers = ProjectManagers.objects.get(pk=pk)
-        managers.delete()
-        return redirect(reverse('projectsapp:projects'))
+class ProjectManagersDelete(ObjectDeleteMixin, View):
+    model = ProjectManagers
+    template = 'projectsapp/manager_delete_form.html'
+    context = 'managers'
 
 
