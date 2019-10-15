@@ -8,9 +8,8 @@ from django.views.generic import View
 from django.views.generic import ListView, CreateView, DeleteView, DetailView
 
 from productsapp.models import TechnicalSolutions
-from projectsapp.forms import ProjectSolutionsForm, ProjectManagerForm
-from projectsapp.models import Project, ProjectImage, ProjectHasTechnicalSolutions
-
+from projectsapp.forms import ProjectSolutionsForm, ProjectManagerForm, ProjectCompanyForm
+from projectsapp.models import Project, ProjectImage, ProjectHasTechnicalSolutions, ProjectCompany, ProjectManagers
 
 # Create your views here.
 from projectsapp.utils import ObjectCreateMixin
@@ -53,6 +52,11 @@ class ProjectSolutionsUpdate(ObjectCreateMixin, View):
 class ProjectManagesUpdate(ObjectCreateMixin, View):
     form_model = ProjectManagerForm
     template = 'projectsapp/manager_update.html'
+
+
+class ProjectCompanyUpdate(ObjectCreateMixin, View):
+    form_model = ProjectCompanyForm
+    template = 'projectsapp/company_update.html'
 
 
 class ProjectDelete(DeleteView):
