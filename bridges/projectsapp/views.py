@@ -13,6 +13,9 @@ from projectsapp.models import Project, ProjectImage, ProjectHasTechnicalSolutio
 
 
 # Create your views here.
+from projectsapp.utils import ObjectCreateMixin
+
+
 class ProjectsList(ListView):
     """docstring for ProductList"""
     paginate_by = 12
@@ -42,32 +45,14 @@ class ProjectRead(DetailView):
         return context
 
 
-class ProjectSolutionsUpdate(View):
-    def get(self, request):
-        form = ProjectSolutionsForm()
-        return render(request, 'projectsapp/product_update.html', context={'form': form})
-
-    def post(self, request):
-        bound_form = ProjectSolutionsForm(request.POST)
-
-        if bound_form.is_valid():
-            bound_form.save()
-            return redirect('projectsapp:projects')
-        return render(request, 'projectsapp/product_update.html', context={'form': bound_form})
+class ProjectSolutionsUpdate(ObjectCreateMixin, View):
+    form_model = ProjectSolutionsForm
+    template = 'projectsapp/product_update.html'
 
 
-class ProjectManagesUpdate(View):
-    def get(self, request):
-        form = ProjectManagerForm()
-        return render(request, 'projectsapp/manager_update.html', context={'form': form})
-
-    def post(self, request):
-        bound_form = ProjectManagerForm(request.POST)
-
-        if bound_form.is_valid():
-            bound_form.save()
-            return redirect('projectsapp:projects')
-        return render(request, 'projectsapp/manager_update.html', context={'form': bound_form})
+class ProjectManagesUpdate(ObjectCreateMixin, View):
+    form_model = ProjectManagerForm
+    template = 'projectsapp/manager_update.html'
 
 
 class ProjectDelete(DeleteView):

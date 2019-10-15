@@ -25,5 +25,3 @@ urlpatterns = [
     path('product/update', ProjectSolutionsUpdate.as_view(), name='product_update'),
     path('<int:pk>/', ProjectRead.as_view(), name='project'),
 ]
-
-# path('product_create', ProjectSolutionsCreate.as_view(), name='product_create'),
