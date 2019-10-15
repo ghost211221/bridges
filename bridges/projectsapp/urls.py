@@ -27,4 +27,5 @@ urlpatterns = [
     path('product/update', ProjectSolutionsUpdate.as_view(), name='product_update'),
     # path('company/update', ProjectCompanyUpdate.as_view(), name='company_update'),
     path('company/update/<int:pk>', projectsapp.company_update, name='company_update'),
+    path('gallery/update/<int:pk>', projectsapp.gallery_update, name='gallery_update'),
 ]
