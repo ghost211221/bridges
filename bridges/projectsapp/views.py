@@ -8,7 +8,6 @@ from django.views.generic import ListView, CreateView, DeleteView, DetailView
 from productsapp.models import TechnicalSolutions
 from .forms import *
 from projectsapp.models import Project, ProjectImage, ProjectHasTechnicalSolutions, ProjectCompany, ProjectManagers
-# Create your views here.
 from projectsapp.utils import ObjectCreateMixin
 
 
@@ -95,7 +94,7 @@ def company_update(request, pk):
                     created_project.save()
                     formset.save()
                     return HttpResponseRedirect(created_project.get_absolute_url())
-    context ={
+    context = {
         'project_form': project_form,
         'formset': formset,
         'page_title': 'Добавление контрагентов',
@@ -120,7 +119,7 @@ def gallery_update(request, pk):
                 created_project.save()
                 formset.save()
                 return HttpResponseRedirect(created_project.get_absolute_url())
-    context ={
+    context = {
         'project_form': project_form,
         'formset': formset,
         'page_title': 'Добавление фотографий',
