@@ -1,12 +1,17 @@
+from django.forms import inlineformset_factory
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
+from .forms import *
+from projectsapp.models import ProjectImage
 
 from django.views.generic import View
 
 from django.views.generic import ListView, DetailView
 
 from projectsapp.forms import ProjectSolutionsForm, ProjectManagerForm, ProjectCompanyForm
-from projectsapp.models import Project, ProjectHasTechnicalSolutions, ProjectCompany, ProjectManagers
+from projectsapp.models import Project, ProjectHasTechnicalSolutions, ProjectCompany
 
-from projectsapp.utils import ObjectCreateMixin, ObjectDeleteMixin
+from projectsapp.utils import ObjectCreateMixin
 
 
 class ProjectsList(ListView):
@@ -38,7 +43,7 @@ class ProjectRead(DetailView):
         return context
 
 
-#  ------------------------------------ CRUD PROJECT'S SOLUTIONS ----------------------------------------------
+#  ------------------------------------ UPDATE PROJECT'S SOLUTIONS ----------------------------------------------
 
 
 class ProjectSolutionsUpdate(ObjectCreateMixin, View):
@@ -46,27 +51,40 @@ class ProjectSolutionsUpdate(ObjectCreateMixin, View):
     template = 'projectsapp/product_update.html'
 
 
-class ProjectSolutionsDelete(ObjectDeleteMixin, View):
-    model = ProjectHasTechnicalSolutions
-    template = 'projectsapp/solution_delete_form.html'
-    context = 'solutions'
+#  ------------------------------------ UPDATE PROJECT'S COMPANIES ----------------------------------------------
 
 
-#  ------------------------------------ CRUD PROJECT'S COMPANIES ----------------------------------------------
+def company_update(request, pk):
+    if id:
+        project = Project.objects.get(pk=pk)
+    else:
+        project = Project()
+    project_form = ProjectForm(instance=project)
+    BookInlineFormSet = inlineformset_factory(Project, ProjectCompany, form=ProjectCompanyForm, extra=1)
+    formset = BookInlineFormSet(instance=project)
+    if request.method == "POST":
+        project_form = ProjectForm(request.POST)
+        if id:
+            project_form = ProjectForm(request.POST, instance=project)
+            formset = BookInlineFormSet(request.POST)
+            if project_form.is_valid():
+                created_project = project_form.save(commit=False)
+                formset = BookInlineFormSet(request.POST, instance=created_project)
+                if formset.is_valid():
+                    created_project.save()
+                    formset.save()
+                    return HttpResponseRedirect(created_project.get_absolute_url())
+    context ={
+        'project_form': project_form,
+        'formset': formset,
+        'page_title': 'Добавление контрагентов',
+        'bred_title': 'Добавление контрагентов',
+        'project': project
+    }
+    return render(request, "projectsapp/company_update.html", context)
 
 
-class ProjectCompanyUpdate(ObjectCreateMixin, View):
-    form_model = ProjectCompanyForm
-    template = 'projectsapp/company_update.html'
-
-
-class ProjectCompanyDelete(ObjectDeleteMixin, View):
-    model = ProjectCompany
-    template = 'projectsapp/company_delete_form.html'
-    context = 'companies'
-
-
-#  ------------------------------------ CRUD PROJECT'S MANAGERS ----------------------------------------------
+#  ------------------------------------ UPDATE PROJECT'S MANAGERS ----------------------------------------------
 
 
 class ProjectManagersUpdate(ObjectCreateMixin, View):
@@ -74,9 +92,59 @@ class ProjectManagersUpdate(ObjectCreateMixin, View):
     template = 'projectsapp/manager_update.html'
 
 
-class ProjectManagersDelete(ObjectDeleteMixin, View):
-    model = ProjectManagers
-    template = 'projectsapp/manager_delete_form.html'
-    context = 'managers'
+def project_managers_update(request, pk):
+    project = get_object_or_404(Project, pk=pk)
+    project_form = ProjectForm(instance=project)
+    managers_formset = inlineformset_factory(Project, ProjectManagers, form=ProjectManagerForm, extra=1)
+    formset = managers_formset(instance=project)
+    if request.method == 'POST':
+        project_form = ProjectForm(request.POST, instance=project)
+        formset = managers_formset(request.POST)
+        if project_form.is_valid():
+            updated_project = project_form.save(commit=False)
+            formset = managers_formset(request.POST, instance=updated_project)
+            if formset.is_valid():
+                updated_project.save()
+                formset.save()
+                return HttpResponseRedirect(updated_project.get_absolut_url())
+    context = {
+        'project_form': project_form,
+        'formset': formset,
+        'page_title': 'Обновление списка участников',
+        'bred_title': 'Список участников',
+        'project': project
+    }
+    return render(request, 'projectsapp/company_update.html', context)
 
 
+#  ------------------------------------ UPDATE PROJECT'S GALLERY ----------------------------------------------
+
+
+def gallery_update(request, pk):
+    if id:
+        project = Project.objects.get(pk=pk)
+    else:
+        project = Project()
+    project_form = ProjectForm(instance=project)
+    BookInlineFormSet = inlineformset_factory(Project, ProjectImage, form=ProjectImageForm, extra=3)
+    formset = BookInlineFormSet(instance=project)
+    if request.method == "POST":
+        project_form = ProjectForm(request.POST)
+        if id:
+            project_form = ProjectForm(request.POST, instance=project)
+            formset = BookInlineFormSet(request.POST, request.FILES)
+            if project_form.is_valid():
+                created_project = project_form.save(commit=False)
+                formset = BookInlineFormSet(request.POST, request.FILES, instance=created_project)
+                if formset.is_valid():
+                    created_project.save()
+                    formset.save()
+                    return HttpResponseRedirect(created_project.get_absolute_url())
+    context ={
+        'project_form': project_form,
+        'formset': formset,
+        'page_title': 'Добавление фотографий',
+        'bred_title': 'Добавление фотографий',
+        'project': project
+    }
+    return render(request, "projectsapp/gallery_update.html", context)
