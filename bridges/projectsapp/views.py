@@ -43,37 +43,69 @@ class ProjectRead(DetailView):
         return context
 
 
+def project_update(request, pk):
+    project = get_object_or_404(Project, pk=pk)
+    project_form = ProjectUpdateForm(instance=project)
+    if request.method == 'POST':
+        project_form = ProjectUpdateForm(request.POST, instance=project)
+        if project_form.is_valid():
+            project_form.save()
+            return HttpResponseRedirect(project.get_absolute_url())
+    context = {
+        'project_form': project_form,
+        'page_title': 'Обновление технических решений',
+        'bred_title': 'Обновление техрешений',
+        'project': project
+    }
+    return render(request, 'projectsapp/company_update.html', context)
+
 #  ------------------------------------ UPDATE PROJECT'S SOLUTIONS ----------------------------------------------
 
 
-class ProjectSolutionsUpdate(ObjectCreateMixin, View):
-    form_model = ProjectSolutionsForm
-    template = 'projectsapp/product_update.html'
+def project_solutions_update(request, pk):
+    project = get_object_or_404(Project, pk=pk)
+    project_form = ProjectForm(instance=project)
+    solutions_formset = inlineformset_factory(Project, ProjectHasTechnicalSolutions, form=ProjectSolutionsForm, extra=1)
+    formset = solutions_formset(instance=project)
+    if request.method == 'POST':
+        project_form = ProjectForm(request.POST, instance=project)
+        formset = solutions_formset(request.POST)
+        if project_form.is_valid():
+            updated_project = project_form.save(commit=False)
+            formset = solutions_formset(request.POST, instance=updated_project)
+            if formset.is_valid():
+                updated_project.save()
+                formset.save()
+                return HttpResponseRedirect(updated_project.get_absolute_url())
+    context = {
+        'project_form': project_form,
+        'formset': formset,
+        'page_title': 'Обновление технических решений',
+        'bred_title': 'Обновление техрешений',
+        'project': project
+    }
+    return render(request, 'projectsapp/company_update.html', context)
 
 
 #  ------------------------------------ UPDATE PROJECT'S COMPANIES ----------------------------------------------
 
 
 def company_update(request, pk):
-    if id:
-        project = Project.objects.get(pk=pk)
-    else:
-        project = Project()
+    project = get_object_or_404(Project, pk=pk)
     project_form = ProjectForm(instance=project)
-    BookInlineFormSet = inlineformset_factory(Project, ProjectCompany, form=ProjectCompanyForm, extra=1)
-    formset = BookInlineFormSet(instance=project)
+    company_formset = inlineformset_factory(Project, ProjectCompany, form=ProjectCompanyForm, extra=1)
+    formset = company_formset(instance=project)
     if request.method == "POST":
         project_form = ProjectForm(request.POST)
-        if id:
-            project_form = ProjectForm(request.POST, instance=project)
-            formset = BookInlineFormSet(request.POST)
-            if project_form.is_valid():
-                created_project = project_form.save(commit=False)
-                formset = BookInlineFormSet(request.POST, instance=created_project)
-                if formset.is_valid():
-                    created_project.save()
-                    formset.save()
-                    return HttpResponseRedirect(created_project.get_absolute_url())
+        project_form = ProjectForm(request.POST, instance=project)
+        formset = company_formset(request.POST)
+        if project_form.is_valid():
+            created_project = project_form.save(commit=False)
+            formset = company_formset(request.POST, instance=created_project)
+            if formset.is_valid():
+                created_project.save()
+                formset.save()
+                return HttpResponseRedirect(created_project.get_absolute_url())
     context ={
         'project_form': project_form,
         'formset': formset,
@@ -85,12 +117,6 @@ def company_update(request, pk):
 
 
 #  ------------------------------------ UPDATE PROJECT'S MANAGERS ----------------------------------------------
-
-
-class ProjectManagersUpdate(ObjectCreateMixin, View):
-    form_model = ProjectManagerForm
-    template = 'projectsapp/manager_update.html'
-
 
 def project_managers_update(request, pk):
     project = get_object_or_404(Project, pk=pk)
@@ -106,7 +132,7 @@ def project_managers_update(request, pk):
             if formset.is_valid():
                 updated_project.save()
                 formset.save()
-                return HttpResponseRedirect(updated_project.get_absolut_url())
+                return HttpResponseRedirect(updated_project.get_absolute_url())
     context = {
         'project_form': project_form,
         'formset': formset,
