@@ -17,6 +17,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'authapp',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -31,7 +32,6 @@ INSTALLED_APPS = [
     'ymapapp',
     'servicesapp',
     'researchapp',
-    'authapp',
     'partnersapp',
 ]
 
@@ -138,4 +138,7 @@ EMAIL_FILE_PATH = 'tmp/email-messages/'
 # укажем модель пользователя, используемую подсистемой разграничения доступа Django
 AUTH_USER_MODEL = 'authapp.Users'
 
+LOGIN_REDIRECT_URL = 'restricted_area'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
 # Authapp end ===================================================
