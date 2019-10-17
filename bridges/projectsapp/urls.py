@@ -14,19 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-
-from .views import ProjectsList, ProjectRead, ProjectManagersUpdate, ProjectSolutionsUpdate, ProjectCompanyUpdate, \
-    ProjectManagersDelete, ProjectCompanyDelete, ProjectSolutionsDelete
+from projectsapp import views as projectsapp
+from .views import ProjectsList, ProjectRead
 
 app_name = 'projectsapp'
 
 urlpatterns = [
     path('', ProjectsList.as_view(), name='projects'),
     path('<int:pk>/', ProjectRead.as_view(), name='project'),
-    path('manager/update', ProjectManagersUpdate.as_view(), name='manager_update'),
-    path('manager/delete/<int:pk>', ProjectManagersDelete.as_view(), name='manager_delete'),
-    path('product/update', ProjectSolutionsUpdate.as_view(), name='product_update'),
-    path('product/delete/<int:pk>', ProjectSolutionsDelete.as_view(), name='product_delete'),
-    path('company/update', ProjectCompanyUpdate.as_view(), name='company_update'),
-    path('company/delete/<int:pk>', ProjectCompanyDelete.as_view(), name='company_delete'),
+    path('update/<int:pk>', projectsapp.project_update, name='project_update'),
+    path('manager/update/<int:pk>', projectsapp.project_managers_update, name='manager_update'),
+    path('product/update/<int:pk>', projectsapp.project_solutions_update, name='product_update'),
+    path('company/update/<int:pk>', projectsapp.company_update, name='company_update'),
+    path('gallery/update/<int:pk>', projectsapp.gallery_update, name='gallery_update'),
 ]

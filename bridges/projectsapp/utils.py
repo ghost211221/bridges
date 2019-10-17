@@ -16,18 +16,3 @@ class ObjectCreateMixin:
             bound_form.save()
             return redirect('projectsapp:projects')
         return render(request, self.template, context={'form': bound_form})
-
-
-class ObjectDeleteMixin:
-    model = None
-    template = None
-    context = None
-
-    def get(self, request, pk):
-        obj = self.model.objects.get(pk=pk)
-        return render(request, self.template, context={self.context: obj})
-
-    def post(self, request, pk):
-        obj = self.model.objects.get(pk=pk)
-        obj.delete()
-        return redirect(reverse('projectsapp:projects'))

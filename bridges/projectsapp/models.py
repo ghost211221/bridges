@@ -1,8 +1,8 @@
 from django.db import models
 from django.db.models.signals import pre_save
+from django.urls import reverse
 from django.utils.text import slugify
 from transliterate import translit
-
 from authapp.models import Company, Users
 from productsapp.models import TechnicalSolutions
 
@@ -39,6 +39,9 @@ class Project(models.Model):
     map_mark = models.SlugField(verbose_name='id метки на карте', max_length=128, blank=True)
     text_for_map = models.TextField(verbose_name='текст для метки', max_length=240, null=True, blank=True)
     is_active = models.BooleanField(verbose_name='активен', default=False)
+
+    def get_absolute_url(self):
+        return reverse('projects:project', args=[str(self.id)])
 
     def __str__(self):
         return f"{self.name} ({self.city})"
@@ -90,8 +93,10 @@ class ProjectImage(models.Model):
 class ProjectHasTechnicalSolutions(models.Model):
     """ Модель связи технических решений применяемых на объекте с указанием их объема  """
     name = models.CharField(verbose_name='название конструкции или участка', max_length=256, blank=True, null=True)
-    project = models.ForeignKey(Project, verbose_name='Строительный проект', related_name="solutions", on_delete=models.CASCADE)
-    techsol = models.ForeignKey(TechnicalSolutions, verbose_name='Техническое решение', on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, verbose_name='Строительный проект', related_name="solutions",
+                                on_delete=models.CASCADE)
+    techsol = models.ForeignKey(TechnicalSolutions, verbose_name='Техническое решение', related_name='projects',
+                                on_delete=models.CASCADE)
     value = models.DecimalField(verbose_name='Объем работ', max_digits=18, decimal_places=2)
     is_active = models.BooleanField(verbose_name='Показывать', default=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
@@ -109,6 +114,8 @@ class ProjectCompany(models.Model):
     CONTRACTOR = 'подрядчик'
     CUSTOMER = 'заказчик'
     INSPECTOR = 'инспектор'
+    SUPERVISION = 'технический заказчик'
+    DESIGNER_SUPERVISION = 'авторский надзор'
     AGENT = 'агент'
     PARTNER = 'партнер'
     STATUS_CHOICES = (
@@ -116,6 +123,8 @@ class ProjectCompany(models.Model):
         (CONTRACTOR, 'подрядчик'),
         (CUSTOMER, 'заказчик'),
         (INSPECTOR, 'инспектор'),
+        (SUPERVISION, 'технический заказчик'),
+        (DESIGNER_SUPERVISION, 'авторский надзор'),
         (AGENT, 'агент'),
         (PARTNER, 'партнер'),
     )
@@ -139,6 +148,8 @@ class ProjectManagers(models.Model):
     CONTRACTOR = 'подрядчик'
     CUSTOMER = 'заказчик'
     INSPECTOR = 'инспектор'
+    SUPERVISION = 'технический надзор'
+    DESIGNER_SUPERVISION = 'авторский надзор'
     AGENT = 'агент'
     PARTNER = 'партнер'
     MANAGER = 'владелец'
@@ -150,6 +161,8 @@ class ProjectManagers(models.Model):
         (CONTRACTOR, 'подрядчик'),
         (CUSTOMER, 'заказчик'),
         (INSPECTOR, 'инспектор'),
+        (SUPERVISION, 'технический надзор'),
+        (DESIGNER_SUPERVISION, 'авторский надзор'),
         (AGENT, 'агент'),
         (PARTNER, 'партнер'),
         (MANAGER, 'владелец'),
