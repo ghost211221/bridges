@@ -53,8 +53,8 @@ def project_update(request, pk):
             return HttpResponseRedirect(project.get_absolute_url())
     context = {
         'project_form': project_form,
-        'page_title': 'Обновление технических решений',
-        'bred_title': 'Обновление техрешений',
+        'page_title': 'Редактирование основной информации',
+        'bred_title': 'Обновление проекта',
         'project': project
     }
     return render(request, 'projectsapp/company_update.html', context)
