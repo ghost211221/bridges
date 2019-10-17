@@ -67,32 +67,25 @@ def register(request):
     #         'page_title': 'Профиль пользователя',
     #         'bred_title': 'Профиль пользователя'
     #     }
-    #     template_name = 'authapp/profile.html'
+    #     template_name = 'authapp/user_profile.html'
     #
     #     def get_context_data(self, *args, **kwargs):
     #         context = super().get_context_data(*args, **kwargs)
     #         return context
 
-    # def profile(request, pk):
-    #     user_companies = CompanyUsers.objects.filter(user_id=pk)
-    #     user = get_object_or_404(Users, pk=pk)
-    #     user_projects = ProjectManagers.objects.filter(manager_id=pk)
-    #     context = {
-    #         'user': user,
-    #         'user_projects': user_projects,
-    #         'user_companies': user_companies,
-    #         'page_title': 'Профиль пользователя',
-    #         'bred_title': 'Профиль пользователя'
-    #     }
-    #     return render(request, 'authapp/profile.html', context)
-    #
-    #
-    # class UserLogoutView(LogoutView):
-    #     extra_context = {
-    #         'page_title': 'Выход с сайта',
-    #         'bred_title': 'Выход с сайта'
-    #     }
-    #     template_name = 'authapp/1_logout.html'
+
+def user_profile(request, pk):
+    user_companies = CompanyUsers.objects.filter(user_id=pk)
+    user = get_object_or_404(Users, pk=pk)
+    user_projects = ProjectManagers.objects.filter(manager_id=pk)
+    context = {
+        'user': user,
+        'user_projects': user_projects,
+        'user_companies': user_companies,
+        'page_title': 'Профиль пользователя',
+        'bred_title': 'Профиль пользователя'
+    }
+    return render(request, 'authapp/user_profile.html', context)
 
 
 def company_self_user_update(request, pk):
@@ -158,3 +151,68 @@ def project_self_user_update(request, pk):
         'bred_title': 'Редактор проектов пользователя'
     }
     return render(request, 'authapp/self_profile_update.html', context)
+
+
+def company_user_update(request, pk):
+    company_user = get_object_or_404(Users, pk=pk)
+    company_user_form = UsersForCompanyUsersForm(instance=company_user)
+    InlineFormset = inlineformset_factory(Users, CompanyUsers, form=CompanyUsersForm, extra=1)
+    formset = InlineFormset(instance=company_user)
+    if request.method == 'POST':
+        company_user_form = UsersForCompanyUsersForm(request.POST, instance=company_user)
+        formset = InlineFormset(request.POST)
+        if company_user_form.is_valid():
+            updated_company_user_form = company_user_form.save(commit=False)
+            formset = InlineFormset(request.POST, instance=updated_company_user_form)
+            if formset.is_valid():
+                updated_company_user_form.save()
+                formset.save()
+                return HttpResponseRedirect(updated_company_user_form.get_absolute_url())
+    context = {
+        'form': company_user_form,
+        'formset': formset,
+        'user': company_user,
+        'page_title': 'Редактор компаний пользователя',
+        'bred_title': 'Редактор компаний пользователя'
+    }
+    return render(request, 'authapp/user_profile_update.html', context)
+
+
+def profile_user_update(request, pk):
+    user = get_object_or_404(Users, pk=pk)
+    user_form = UsersForEditProfileForm(instance=user)
+    if request.method == 'POST':
+        user_form = UsersForEditProfileForm(request.POST, instance=user)
+        if user_form.is_valid():
+            user_form.save()
+            return HttpResponseRedirect(user.get_absolute_url())
+    context ={
+        'form': user_form,
+        'page_title': 'Редактор профиля пользователя',
+        'bred_title': 'Редактор профиля пользователя'
+    }
+    return render(request, 'authapp/user_profile_update.html', context)
+
+
+def project_user_update(request, pk):
+    project_user = get_object_or_404(Users, pk=pk)
+    project_user_form = UsersForProjectManagersForm(instance=project_user)
+    InlineFormset = inlineformset_factory(Users, ProjectManagers, form=ProjectManagersForm, extra=1)
+    formset = InlineFormset(instance=project_user)
+    if request.method == 'POST':
+        project_user_form = UsersForCompanyUsersForm(request.POST, instance=project_user)
+        formset = InlineFormset(request.POST)
+        if project_user_form.is_valid():
+            updated_project_user_form = project_user_form.save(commit=False)
+            formset = InlineFormset(request.POST, instance=updated_project_user_form)
+            if formset.is_valid():
+                updated_project_user_form.save()
+                formset.save()
+                return HttpResponseRedirect(updated_project_user_form.get_absolute_url())
+    context = {
+        'form': project_user_form,
+        'formset': formset,
+        'page_title': 'Редактор проектов пользователя',
+        'bred_title': 'Редактор проектов пользователя'
+    }
+    return render(request, 'authapp/user_profile_update.html', context)
