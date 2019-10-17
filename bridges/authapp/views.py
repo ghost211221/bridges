@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic.detail import DetailView
+from projectsapp.models import ProjectManagers
 from .forms import RegisterUserForm, LoginUserForm
 from .models import Users
 
@@ -41,8 +42,10 @@ class UserLoginView(LoginView):
 
 def profile(request, pk):
     user = get_object_or_404(Users, pk=pk)
+    user_projects = ProjectManagers.objects.filter(manager_id=pk)
     context = {
         'user': user,
+        'user_projects': user_projects,
         'page_title': 'Профиль пользователя',
         'bred_title': 'Профиль пользователя'
     }
