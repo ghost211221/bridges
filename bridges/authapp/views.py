@@ -132,7 +132,7 @@ def company_user_update(request, pk):
     context = {
         'form': company_user_form,
         'formset': formset,
-        'user': company_user,
+        'form_user': company_user,
         'page_title': 'Редактор компаний пользователя',
         'bred_title': 'Редактор компаний пользователя'
     }
@@ -149,6 +149,7 @@ def profile_user_update(request, pk):
             return HttpResponseRedirect(user.get_absolute_url())
     context ={
         'form': user_form,
+        'form_user': user,
         'page_title': 'Редактор профиля пользователя',
         'bred_title': 'Редактор профиля пользователя'
     }
@@ -173,6 +174,7 @@ def project_user_update(request, pk):
     context = {
         'form': project_user_form,
         'formset': formset,
+        'form_user': project_user,
         'page_title': 'Редактор проектов пользователя',
         'bred_title': 'Редактор проектов пользователя'
     }
