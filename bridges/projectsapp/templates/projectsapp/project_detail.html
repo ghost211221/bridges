@@ -117,10 +117,10 @@
                                             {% if object.get_managers %}
                                                 {% for item in object.get_managers %}
                                                     <li><i>{{ item.role | capfirst }}:
-                                                        {{ item.manager.first_name }} {{ item.manager.last_name }}</i>
+                                                        <a href="{{ item.manager.get_absolute_url }}"> {{ item.manager.first_name }} {{ item.manager.last_name }}</a></i>
                                                         {% if item.manager.get_company %}
                                                             ({% for i in item.manager.get_company %}
-                                                                <i>{{ i.company.form }} {{ i.company.name }}</i>
+                                                                <i><a href="{{ i.company.get_absolute_url }}"> {{ i.company.form }} {{ i.company.name }}</a></i>
                                                             {% endfor %})
                                                         {% endif %}
                                                     </li>
