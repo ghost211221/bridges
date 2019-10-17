@@ -99,20 +99,22 @@ def restricted_area(request):
     #     return render(request, 'authapp/profile_update.html', context)
     #
     #
-    # def profile_user_update(request, pk):
-    #     user = get_object_or_404(Users, pk=pk)
-    #     user_form = UsersForEditProfileForm(instance=user)
-    #     if request.method == 'POST':
-    #         user_form = UsersForEditProfileForm(request.POST, instance=user)
-    #         if user_form.is_valid():
-    #             user_form.save()
-    #             return HttpResponseRedirect(user.get_absolute_url())
-    #     context ={
-    #         'form': user_form,
-    #         'page_title': 'Редактор профиля пользователя',
-    #         'bred_title': 'Редактор профиля пользователя'
-    #     }
-    #     return render(request, 'authapp/profile_update.html', context)
+
+
+def profile_user_update(request, pk):
+    user = get_object_or_404(Users, pk=pk)
+    user_form = UsersForEditProfileForm(instance=user)
+    if request.method == 'POST':
+        user_form = UsersForEditProfileForm(request.POST, instance=user)
+        if user_form.is_valid():
+            user_form.save()
+            return HttpResponseRedirect(user.get_absolute_url())
+    context ={
+        'form': user_form,
+        'page_title': 'Редактор профиля пользователя',
+        'bred_title': 'Редактор профиля пользователя'
+    }
+    return render(request, 'authapp/profile_update.html', context)
     #
     #
     # def project_user_update(request, pk):
