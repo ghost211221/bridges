@@ -18,6 +18,7 @@
                                 <div class="col-md-8">
                                     <div>
                                         <h3 class="line-height-normal margin-bottom-10">КРАТКОЕ ОПИСАНИЕ</h3>
+                                        <a href="{% url 'products:product_update' product.slug %}">редактировать</a>
                                         <div class="wprt-lines style-1 custom-3">
                                             <div class="line-1"></div>
                                             <div class="line-2"></div>
@@ -25,12 +26,8 @@
 
                                         <div class="wprt-spacer" data-desktop="30" data-mobi="25" data-smobi="25"></div>
 
+                                        <p>{{ product.short_desc }}</p>
                                         <p>{{ product.description }}</p>
-
-                                        <p>Vestibulum eu libero volutpat, portas quam acc, tempus sem. Donec sodales
-                                            quam id lorem lobortis, vitae. Pellentesque habitant morbi tristique
-                                            senectus et netus et malesuada fames ac turpis egestas. Integer blandit
-                                            nulla quis fermentum hendrerit.</p>
                                     </div>
                                 </div><!-- /.col-md-8 -->
 <!--ДОСТУПНЫЕ СЕРВИСЫ ПО ПРОДУКТУ-->
@@ -69,50 +66,48 @@
                                         <p>Vestibulum eu libero volutpat, portas quam acc, tempus sem. Donec sodales
                                             quam id lorem lobortis, vitae. Pellentesque habitant morbi tristique
                                             senectus et netus et malesuada fames ac turpis egestas. Integer blandit
-                                            nulla quis fermentum hendrerit.</p>
+                                            nulla quis fermentum hendrerit...</p>
                                     </div>
-                                    <div class="col-md-6 row">
-                                        {% for item in mainworks %}
-                                            <div class="wprt-toggle style-2">
-                                                <h3 class="toggle-title">{{ item.name }}</h3>
-                                                <div class="toggle-content" style="color: black;">
-                                                        {{ item.description }}
-                                                        <div class="wprt-spacer" data-desktop="10" data-mobi="10"
-                                                             data-smobi="10"></div>
-                                                {% if item.materials.all %}
-                                                    <p><i><b>Применяемые материалы:</b>
-                                                    {% for i in item.materials.all %}
-                                                        {{ i.name }}{% if not forloop.last %}, {% endif %}
-                                                    {% endfor %}</i>
-                                                </p>
-                                                    {% if item.file %}
-                                                        <a class="wprt-button small rounded-30px"
-                                                           href="#"
-                                                           target="_blank">СКАЧАТЬ PDF</a>
-                                                    {% endif %}
-                                                {% endif %}
-                                                </div>
+                                    <div class="col-md-12">
+                                        <div class="wprt-toggle active style-1">
+                                            <h3 class="toggle-title">Состав работ и материалов</h3>
+                                            <div class="toggle-content" style="font-family: 'Times New Roman'; font-size: larger;
+                                            color: #4d4949;">
+                                                <table>
+                                                    <tr>
+                                                        <td style="text-align: center; font-weight: bold; width: 50%">Наименование работ</td>
+                                                        <td style="text-align: center; font-weight: bold;">Материалы</td>
+                                                        <td style="text-align: center; font-weight: bold; width: 10%">Расход</td>
+                                                        <td style="text-align: center; font-weight: bold; width: 10%">Ед. изм.</td>
+                                                    </tr>
+                                                    {% for item in works %}
+                                                        <tr>
+                                                            <td>{{ item.work.name }}</td>
+                                                            <td style="text-align: right;"><i>
+                                                                {% for i in item.material.all %}
+                                                                    {{ i.name }}
+                                                                    {% if not forloop.last %}, {% endif %}
+                                                                {% endfor %}
+                                                            </i></td>
+                                                            <td style="text-align: center;">{% if item.consumption %}{{ item.consumption }}{% endif %}</td>
+                                                            <td style="text-align: center;">
+                                                                {% if item.material.all %}
+                                                                    {{ item.work.measure.shortcut }}
+                                                                {% endif %}
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </table>
+{#                                                <a class="" href="{% url 'projects:product_update' object.pk %}">... изменить</a>#}
                                             </div>
-                                        {% endfor %}
-                                    </div><!-- /.col-md-12 -->
+                                        </div>
 
-                                    <div class="col-md-6 row">
-                                        {% for item in works %}
-                                            <div class="wprt-toggle style-1">
-                                                <h3 class="toggle-title">{{ item.name }}</h3>
-                                                <div class="toggle-content" style="color: black;">
-                                                        {{ item.description }}
-                                                        <div class="wprt-spacer" data-desktop="10" data-mobi="10"
-                                                             data-smobi="10"></div>
-                                                    {% if item.file %}
-                                                        <a class="wprt-button small rounded-30px"
-                                                           href="/media/{{ item.file }}"
-                                                           target="_blank">СКАЧАТЬ PDF</a>
-                                                    {% endif %}
-                                                </div>
-                                            </div>
-                                        {% endfor %}
-                                </div><!-- /.col-md-8 -->
+                                        <div class="col-md-12">
+                                            <div class="wprt-spacer" data-desktop="70" data-mobi="60"
+                                                 data-smobi="60"></div>
+                                        </div>
+                                    </div><!-- /.row -->
+                                </div><!-- /.col-md-12 -->
 <!--СТАТЬЯ О ТЕХНИЧЕСКОМ РЕШЕНИИ- /ЖУРНАЛЫ И ТД/ PDF LOADER-->
                                 <div class="col-md-12">
                                     <div class="wprt-spacer" data-desktop="30" data-mobi="60" data-smobi="60"></div>
@@ -157,14 +152,13 @@
                                                         <div class="grid">
                                                             <figure class="effect-honey"
                                                                     style="height: 250px;">
-                                                                <a href="{% url 'projects:project' item.project.pk %}">
                                                                     <img src="{{ item.project.image.url }}" alt="">
-                                                                </a>
                                                                 <figcaption>
                                                                     <div>
                                                                         <h2>
                                                                             <a href="{% url 'projects:project' item.project.pk %}">{{ item.project.name }}</a>
                                                                         </h2>
+                                                                        <p></p>
                                                                     </div>
                                                                 </figcaption>
                                                             </figure>
@@ -203,15 +197,19 @@
                                                 <div class="project-item">
                                                     <div class="inner">
                                                         <div class="grid">
-                                                        <figure class="effect-sadie">
-                                                            <img src="{% static 'assets/img/projects/1.jpg' %}" alt="image" />
-                                                            <figcaption>
-                                                                <div>
-                                                                    <h2><a target="_blank" href="#"></a></h2>
-                                                                    <p>{{ item.name }}</p>
-                                                                </div>
-                                                            </figcaption>
-                                                        </figure>
+                                                            {% for i in item.file.all %}
+                                                                <a target="_blank" href="/media/{{ i.file }}">
+                                                                <figure class="effect-sadie" style="height: 420px; margin-top: -58px; margin-left: -3px;">
+
+                                                                    <object><embed src="/media/{{ i.file }}" alt="image" width=300px; height=600px;" /></object>
+                                                                    <figcaption>
+                                                                        <div>
+                                                                            <h2></h2>
+                                                                            <p>{{ i.alt_desc }}</p>
+                                                                        </div>
+                                                                    </figcaption>
+                                                                </figure></a>
+                                                                {% endfor %}
                                                         </div>
                                                     </div>
                                                 </div>

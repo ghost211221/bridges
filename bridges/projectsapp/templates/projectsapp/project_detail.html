@@ -19,7 +19,7 @@
                                         <div class="wprt-galleries galleries w-770px" data-width="142" data-margin="15">
                                             <div id="wprt-slider" class="flexslider">
                                                 <ul class="slides">
-                                                    <!-- ПОДГРУЗКА КАРТИНОК ИЗ МОДЕЛИ ProjectImage-->
+<!----------------------------------------- ПОДГРУЗКА КАРТИНОК ИЗ МОДЕЛИ ProjectImage----------------------------------------->
                                                     {% for item in object.images.select_related %}
                                                         <li class="flex-active-slide">
                                                             <a class="zoom" href="/media/{{ item.image }}"><i
@@ -27,7 +27,7 @@
                                                             <img src="/media/{{ item.image }}" alt="pic"/>
                                                         </li>
                                                     {% endfor %}
-                                                    <!-- / .ПОДГРУЗКА КАРТИНОК ИЗ МОДЕЛИ ProjectImage-->
+<!-- ---------------------------------------/ .ПОДГРУЗКА КАРТИНОК ИЗ МОДЕЛИ ProjectImage----------------------------------------->
 
                                                 </ul>
                                             </div>
@@ -35,42 +35,41 @@
                                             <div id="wprt-carousel" class="flexslider">
                                                 <ul class="slides">
 
-                                                    <!-- ПОДГРУЗКА МИНИАТЮРНЫХ КАРТИНОК ИЗ МОДЕЛИ ProjectImage-->
+<!-------------------------------------------- ПОДГРУЗКА МИНИАТЮРНЫХ КАРТИНОК ИЗ МОДЕЛИ ProjectImage-------------------------------------------->
                                                     {% for item in object.images.select_related %}
                                                         <li><img src="/media/{{ item.image }}" alt="pic"></li>
                                                     {% endfor %}
-                                                    <!-- ПОДГРУЗКА МИНИАТЮРНЫХ КАРТИНОК ИЗ МОДЕЛИ ProjectImage-->
+<!-------------------------------------------- ПОДГРУЗКА МИНИАТЮРНЫХ КАРТИНОК ИЗ МОДЕЛИ ProjectImage-------------------------------------------->
 
                                                 </ul>
                                             </div>
                                         </div>
-                                        <a href="{% url 'projects:gallery_update' object.pk %}">... добавить
-                                            фотографию</a>
+                                        <a href="{% url 'projects:gallery_update' object.pk %}">... изменить фотографии</a>
                                     </div><!-- /.col-md-8 -->
                                     <div class="col-md-4">
                                         <div class="wprt-spacer" data-desktop="0" data-mobi="0" data-smobi="0"></div>
 
-                                        <!-- ИНФОРМАЦИЯ О ПРОЕКТЕ ИЗ МОДЕЛИ Project-->
+{#<!- -------------------------------------------- ИНФОРМАЦИЯ О ПРОЕКТЕ ИЗ МОДЕЛИ Project- -------------------------------------------->#}
                                         <h3 class="line-height-normal margin-bottom-10">{{ object.name }}</h3>
                                         {% if request.user.is_superuser %}
-                                            <a href="#">редактировать</a>
+                                            <a href="{% url 'projects:project_update' object.pk %}">редактировать</a>
                                         {% endif %}
-                                        <div class="wprt-spacer" data-desktop="15" data-mobi="15" data-smobi="15"></div>
-                                        <div class="wprt-lines style-1 custom-4">
-                                            <div class="line-1"></div>
-                                        </div>
+{#                                        <div class="wprt-spacer" data-desktop="15" data-mobi="15" data-smobi="15"></div>#}
+{#                                        <div class="wprt-lines style-1 custom-4">#}
+{#                                            <div class="line-1"></div>#}
+{#                                        </div>#}
                                         <div class="wprt-spacer" data-desktop="15" data-mobi="15" data-smobi="15"></div>
                                         <i>{{ object.city }}. {{ object.description }}<br></i>
 
 
                                         {% if request.user.is_authenticated %}
-                                            {#  ПОЛУЧЕНИЕ АДРЕСА И/ИЛИ КООРДИНАТ#}
+    {#  ------------------------------------------- ПОЛУЧЕНИЕ АДРЕСА И/ИЛИ КООРДИНАТ -------------------------------------------#}
                                             {% if object.address or object.coordinate %}
-                                                <div class="wprt-spacer" data-desktop="15" data-mobi="15"
-                                                     data-smobi="15"></div>
-                                                <div class="wprt-lines style-1 custom-4">
-                                                    <div class="line-1"></div>
-                                                </div>
+{#                                                <div class="wprt-spacer" data-desktop="15" data-mobi="15"#}
+{#                                                     data-smobi="15"></div>#}
+{#                                                <div class="wprt-lines style-1 custom-4">#}
+{#                                                    <div class="line-1"></div>#}
+{#                                                </div>#}
                                                 <div class="wprt-spacer" data-desktop="15" data-mobi="15"
                                                      data-smobi="15"></div>
                                                 {% if object.address %}
@@ -83,7 +82,7 @@
                                                 <p style="color: red"><i>Точное местоположение объекта не указано</i>
                                                 </p>
                                             {% endif %}
-                                            {#  ПОЛУЧЕНИЕ КОНТРАГЕНТОВ ПРОЕКТА#}
+{#  ------------------------------------- ПОЛУЧЕНИЕ КОНТРАГЕНТОВ ПРОЕКТА -------------------------------------#}
                                             <div class="wprt-spacer" data-desktop="15" data-mobi="15"
                                                  data-smobi="15"></div>
                                             <div class="wprt-lines style-1 custom-4">
@@ -95,6 +94,7 @@
                                             {% if object.get_companies %}
                                                 {% for item in object.get_companies %}
                                                     <li>
+                                                        <i>{{ item.role | capfirst }}: {{ item.company.form }} {{ item.company.name }}</i>
                                                         <i>
                                                             {{ item.company.category }}: <a href="{{ item.company.get_absolute_url }}">{{ item.company.form }} {{ item.company.name }}</a>
                                                         </i>
@@ -103,9 +103,9 @@
                                                 {% endfor %}
                                             {% endif %}
                                             <li><a href="{% url 'projects:company_update' object.pk %}"><i>...
-                                                добавить</i></a>
+                                                изменить</i></a>
                                             </li>
-                                            {#  ПОЛУЧЕНИЕ УЧАСТНИКОВ ПРОЕКТА#}
+{# ---------------------------------------------------- ПОЛУЧЕНИЕ УЧАСТНИКОВ ПРОЕКТА----------------------------------------------------#}
                                             <div class="wprt-spacer" data-desktop="15" data-mobi="15"
                                                  data-smobi="15"></div>
                                             <div class="wprt-lines style-1 custom-4">
@@ -116,15 +116,17 @@
                                             <i>Участники проекта</i>
                                             {% if object.get_managers %}
                                                 {% for item in object.get_managers %}
-                                                    <li><i>{{ item.role | title }}:
+                                                    <li><i>{{ item.role | capfirst }}:
                                                         {{ item.manager.first_name }} {{ item.manager.last_name }}</i>
-                                                        ({% for i in item.manager.get_company %}
-                                                            <i>{{ i.company.form }} {{ i.company.name }}</i>
-                                                        {% endfor %})
+                                                        {% if item.manager.get_company %}
+                                                            ({% for i in item.manager.get_company %}
+                                                                <i>{{ i.company.form }} {{ i.company.name }}</i>
+                                                            {% endfor %})
+                                                        {% endif %}
                                                     </li>
                                                 {% endfor %}
                                             {% endif %}
-                                            <li><a href="{% url 'projects:manager_update' %}"><i>... добавить</i></a>
+                                            <li><a href="{% url 'projects:manager_update' object.pk %}"><i>... изменить</i></a>
                                             </li>
                                             <div class="wprt-spacer" data-desktop="15" data-mobi="15"
                                                  data-smobi="15"></div>
@@ -157,10 +159,11 @@
                                     <div class="col-md-12">
                                         <div class="wprt-toggle active style-1">
                                             <h3 class="toggle-title">Технические решения</h3>
-                                            <div class="toggle-content" style="color: black;">
+                                            <div class="toggle-content" style="font-family: 'Times New Roman'; font-size: larger;
+                                            color: #4d4949;">
                                                 <table>
                                                     <tr>
-                                                        <td style="text-align: center; font-weight: bold; width: 40%">
+                                                        <td style="text-align: center; font-weight: bold; width: 40%;">
                                                             Техническое решение
                                                         </td>
                                                         <td style="text-align: center; font-weight: bold;">Объем</td>
@@ -179,8 +182,7 @@
                                                         </tr>
                                                     {% endfor %}
                                                 </table>
-                                                <a class="btn btn-primary btn-round"
-                                                   href="{% url 'projects:product_update' %}">добавить</a>
+                                                <a class="" href="{% url 'projects:product_update' object.pk %}">... изменить</a>
                                             </div>
                                         </div>
 
