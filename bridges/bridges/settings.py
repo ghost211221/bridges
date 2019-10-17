@@ -142,3 +142,5 @@ LOGIN_REDIRECT_URL = 'restricted_area'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 # Authapp end ===================================================
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
