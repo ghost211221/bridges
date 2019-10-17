@@ -169,12 +169,12 @@
                                                             конструкции
                                                         </td>
                                                     </tr>
-                                                    {% for item in works %}
+                                                    {% for item in object.get_products %}
                                                         <tr>
+                                                            <td>{{ item.techsol.name }}</td>
+                                                            <td style="text-align: right;">{{ item.value }}</td>
+                                                            <td style="text-align: center;">{{ item.techsol.measure }}</td>
                                                             <td>{{ item.name }}</td>
-                                                            <td style="text-align: right;">{{ item.material.name }}</td>
-                                                            <td style="text-align: center;">{{ item.consumption }}</td>
-                                                            <td>{{ item.material.measure.name }}</td>
                                                         </tr>
                                                     {% endfor %}
                                                 </table>
