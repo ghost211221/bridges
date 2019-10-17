@@ -1,6 +1,8 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 
+from productsapp.forms import ProductUpdateForm
 from productsapp.models import TechnicalSolutions
 from researchapp.models import Document
 
@@ -23,7 +25,7 @@ def product(request, slug):
     docs = Document.objects.filter(techsol__pk=item.pk)
     researches = docs.filter(type__in=(2, 3,))
     documents = docs.filter(type__id=1)
-    feedback = docs.filter(type__id=4)
+    feedback = docs.filter(type__id=4).order_by('-pk')
 
     content = {
         'projects': item.get_projects(),
@@ -36,3 +38,20 @@ def product(request, slug):
         'feedback': feedback
     }
     return render(request, 'productsapp/product.html', content)
+
+
+def product_update(request, slug):
+    product = get_object_or_404(TechnicalSolutions, slug=slug)
+    product_form = ProductUpdateForm(instance=product)
+    if request.method == 'POST':
+        product_form = ProductUpdateForm(request.POST, instance=product)
+        if product_form.is_valid():
+            product_form.save()
+            return HttpResponseRedirect(product.get_absolute_url())
+    context = {
+        'product_form': product_form,
+        'page_title': 'Обновление технических решений',
+        'bred_title': 'Обновление техрешений',
+        'product': product
+    }
+    return render(request, 'productsapp/product_update.html', context)

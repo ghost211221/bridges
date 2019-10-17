@@ -1,7 +1,9 @@
+from django.db import transaction
 from django.forms import inlineformset_factory
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from .forms import *
+from projectsapp.models import Project, ProjectImage, ProjectHasTechnicalSolutions, ProjectCompany, ProjectManagers
 from projectsapp.models import ProjectImage
 
 from django.views.generic import View
@@ -53,8 +55,8 @@ def project_update(request, pk):
             return HttpResponseRedirect(project.get_absolute_url())
     context = {
         'project_form': project_form,
-        'page_title': 'Обновление технических решений',
-        'bred_title': 'Обновление техрешений',
+        'page_title': 'Редактирование основной информации',
+        'bred_title': 'Обновление проекта',
         'project': project
     }
     return render(request, 'projectsapp/company_update.html', context)
@@ -147,26 +149,21 @@ def project_managers_update(request, pk):
 
 
 def gallery_update(request, pk):
-    if id:
-        project = Project.objects.get(pk=pk)
-    else:
-        project = Project()
+    project = Project.objects.get(pk=pk)
     project_form = ProjectForm(instance=project)
     BookInlineFormSet = inlineformset_factory(Project, ProjectImage, form=ProjectImageForm, extra=3)
     formset = BookInlineFormSet(instance=project)
     if request.method == "POST":
-        project_form = ProjectForm(request.POST)
-        if id:
-            project_form = ProjectForm(request.POST, instance=project)
-            formset = BookInlineFormSet(request.POST, request.FILES)
-            if project_form.is_valid():
-                created_project = project_form.save(commit=False)
-                formset = BookInlineFormSet(request.POST, request.FILES, instance=created_project)
-                if formset.is_valid():
-                    created_project.save()
-                    formset.save()
-                    return HttpResponseRedirect(created_project.get_absolute_url())
-    context ={
+        project_form = ProjectForm(request.POST, instance=project)
+        formset = BookInlineFormSet(request.POST, request.FILES)
+        if project_form.is_valid():
+            created_project = project_form.save(commit=False)
+            formset = BookInlineFormSet(request.POST, request.FILES, instance=created_project)
+            if formset.is_valid():
+                created_project.save()
+                formset.save()
+                return HttpResponseRedirect(created_project.get_absolute_url())
+    context = {
         'project_form': project_form,
         'formset': formset,
         'page_title': 'Добавление фотографий',
