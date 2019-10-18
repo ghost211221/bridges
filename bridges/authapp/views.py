@@ -9,7 +9,7 @@ from .models import *
 @login_required
 def restricted_area(request):
     user = request.user
-    user_companies = CompanyUsers.objects.filter(user_id=user.pk)
+    user_companies = CompanyUsers.objects.filter(user_id=user.pk, works=True)
     user_projects = ProjectManagers.objects.filter(manager_id=user.pk)
     context = {
         'section': 'restricted_area',
@@ -179,3 +179,25 @@ def project_user_update(request, pk):
         'bred_title': 'Редактор проектов пользователя'
     }
     return render(request, 'authapp/user_profile_update.html', context)
+
+
+def company_self_user_list(request, pk):
+    user_companies_list = CompanyUsers.objects.filter(user_id=pk).order_by('-works')
+    context = {
+        'user_companies_list': user_companies_list,
+        'page_title': 'Список компаний пользователя',
+        'bred_title': 'Список компаний пользователя'
+    }
+    return render(request, 'authapp/self_list.html', context)
+
+
+def company_user_list(request, pk):
+    user = get_object_or_404(Users, pk=pk)
+    user_companies_list = CompanyUsers.objects.filter(user_id=pk).order_by('-works')
+    context = {
+        'user_companies_list': user_companies_list,
+        'user': user,
+        'page_title': 'Список компаний пользователя',
+        'bred_title': 'Список компаний пользователя'
+    }
+    return render(request, 'authapp/user_list.html', context)
