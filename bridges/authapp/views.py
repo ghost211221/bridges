@@ -82,7 +82,7 @@ def profile_self_user_update(request, pk):
         if user_form.is_valid():
             user_form.save()
             return HttpResponseRedirect(user.get_self_absolute_url())
-    context ={
+    context = {
         'form': user_form,
         'page_title': 'Редактор профиля пользователя',
         'bred_title': 'Редактор профиля пользователя'
