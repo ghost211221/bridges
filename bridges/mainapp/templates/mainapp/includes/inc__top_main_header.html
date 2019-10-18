@@ -24,13 +24,6 @@
                     <li class="menu-item"><a href="{% url 'partners:partners_list' %}">Партнеры</a></li>
                     <li class="menu-item"><a href="{% url 'research:research' %}">Наука</a></li>
                     <li class="menu-item"><a href="{% url 'ymapapp:map' %}">Карта</a></li>
-                    {% if request.user.is_authenticated %}
-                        <li class="menu-item">
-                            <a href="{% url 'restricted_area' %}">
-                                <span class="{% if section == 'restricted_area' %}active{% endif %}">Кабинет</span>
-                            </a>
-                        </li>
-                    {% endif %}
                 </ul>
             </nav><!-- /#main-nav -->
             {#ГЛАВНОЕ МЕНЮ#}
