@@ -36,7 +36,7 @@ def register(request):
 
 
 def user_profile(request, pk):
-    user_companies = CompanyUsers.objects.filter(user_id=pk)
+    user_companies = CompanyUsers.objects.filter(user_id=pk, works=True)
     user = get_object_or_404(Users, pk=pk)
     user_projects = ProjectManagers.objects.filter(manager_id=pk)
     context = {
