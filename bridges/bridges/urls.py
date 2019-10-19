@@ -11,7 +11,9 @@ urlpatterns = [
     path('map/', include('ymapapp.urls', namespace='ymap')),
     path('admin/', admin.site.urls),
     path('research/', include('researchapp.urls', namespace='research')),
-    path('auth/', include('authapp.urls', namespace='auth'))
+    path('auth/', include('authapp.urls')),
+    path('partners/', include('partnersapp.urls', namespace='partners')),
+    path('services/', include('servicesapp.urls', namespace='services'))
 ]
 
 if settings.DEBUG:

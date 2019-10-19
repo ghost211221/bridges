@@ -4,18 +4,22 @@ from .models import *
 
 
 @login_required
-def service_list(request):
-    services = Service.objects.all().exclude(is_active=False)
+def services_list(request):
+    # services = Service.objects.all().exclude(is_active=False)
     context ={
-        'service_list': services,
+        # 'service_list': services,
+        'page_title': 'Услуги компании',
+        'bred_title': 'Услуги компании',
     }
-    return render(request, 'serviceapp/service_list.html', context)
+    return render(request, 'servicesapp/services_list.html', context)
 
 
 @login_required
-def service_detail(request, slug):
-    service = get_object_or_404(Service, slug=slug)
+def services_single(request, pk):
+    service = get_object_or_404(Service, pk=pk)
     context = {
         'service_detail': service,
+        'page_title': service,
+        'bred_title': service,
     }
-    return render(request, 'serviceapp/service_detail.html', context)
+    return render(request, 'servicesapp/services_detail.html', context)

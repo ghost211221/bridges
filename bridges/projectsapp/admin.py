@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from .models import *
 
 
@@ -12,6 +13,17 @@ class ProjectHasTechnicalSolutionsInline(admin.TabularInline):
     extra = 0
 
 
+class ProjectCompanyInline(admin.TabularInline):
+    model = ProjectCompany
+    extra = 0
+
+
+class ProjectManagersInline(admin.TabularInline):
+    model = ProjectManagers
+    extra = 0
+    # fields = ('role', 'manager', 'is_active', 'description',)
+
+
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
@@ -20,18 +32,15 @@ class ProjectAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     exclude = ['map_mark']
     inlines = [
+        ProjectManagersInline,
+        ProjectCompanyInline,
         ProjectHasTechnicalSolutionsInline,
-        ProjectImageInline,
+        ProjectImageInline
     ]
 
 
 @admin.register(ProjectHasTechnicalSolutions)
-class ProjectHasTechnicalSolutionsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'value', 'created', 'updated',)
-    list_display_links = ('id', 'value',)
+class ProjectAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    list_display_links = ('name',)
 
-
-@admin.register(ProjectImage)
-class ProjectImageAdmin(admin.ModelAdmin):
-    list_display = ('id', 'image', 'is_active', 'created', 'updated',)
-    list_display_links = ('id', 'image',)

@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class ServiceCategory(models.Model):
@@ -30,3 +31,6 @@ class Service(models.Model):
     class Meta:
         verbose_name = 'Услуга'
         verbose_name_plural = 'Услуги'
+
+    def get_absolute_url(self):
+        return reverse('services:services_single', args=[str(self.id)])

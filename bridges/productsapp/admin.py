@@ -79,6 +79,11 @@ class WorkImageInline(admin.TabularInline):
     extra = 0
 
 
+class ProductWorkInline(admin.TabularInline):
+    model = ProductWork
+    extra = 0
+
+
 class WorkAdmin(admin.ModelAdmin):
     # prepopulated_fields = {'slug': ('name',)}
     list_display = ('name', 'category', 'measure',)
@@ -104,6 +109,18 @@ class WorkImageAdmin(admin.ModelAdmin):
 admin.site.register(WorkImage, WorkImageAdmin)
 
 
+class ProductWorkAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'product',)
+    list_display_links = ('product',)
+    search_fields = ('product', )
+
+    class Meta:
+        model = ProductWork
+
+
+admin.site.register(ProductWork, ProductWorkAdmin)
+
+
 # -----------------------    МОДЕЛИ ПРОДУКТОВ (ТЕХНИЧЕСКИХ РЕШЕНИЙ)   -------------------------------------
 
 
@@ -112,12 +129,17 @@ class TechnicalSolutionsImageInline(admin.TabularInline):
     extra = 0
 
 
+class ProductServicesInline(admin.TabularInline):
+    model = TechnicalSolutionsHasService
+    extra = 0
+
+
 class TechnicalSolutionsAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
     list_display = ('name', )
     list_display_links = ('name',)
     search_fields = ('name',)
-    inlines = [TechnicalSolutionsImageInline]
+    inlines = [TechnicalSolutionsImageInline, ProductWorkInline, ProductServicesInline]
 
     class Meta:
         model = TechnicalSolutions
@@ -135,3 +157,4 @@ class TechnicalSolutionsImageAdmin(admin.ModelAdmin):
 
 
 admin.site.register(TechnicalSolutionsImage, TechnicalSolutionsImageAdmin)
+

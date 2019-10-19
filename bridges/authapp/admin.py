@@ -1,8 +1,10 @@
 from django.contrib import admin
-from .models import CategoryCompany, FormCompany, Company, Users
+from .models import CategoryCompany, FormCompany, Company, Users, CompanyUsers
 
 
-# Register your models here.
+class CompanyUsersInline(admin.TabularInline):
+    model = CompanyUsers
+    extra = 0
 
 
 @admin.register(CategoryCompany)
@@ -20,15 +22,7 @@ class FormCompanyAdmin(admin.ModelAdmin):
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
     list_display = ('name', 'inn', 'category', 'city')
-    search_fields = ('name',
-                     'short_name',
-                     'form_company',
-                     'category',
-                     'inn',
-                     'city',
-                     'address',
-                     'phone',
-                     'email',)
+    search_fields = ('name', 'inn', )
     # укажем быстрые фильтры для фильтрации записей
     list_filter = ('category', 'city')
 
@@ -36,24 +30,21 @@ class CompanyAdmin(admin.ModelAdmin):
 @admin.register(Users)
 class UsersAdmin(admin.ModelAdmin):
     # поля, которые не нужно редактировать в админке
-    readonly_fields = ('password', 'is_superuser', 'last_login', 'date_joined')  # 'user_permissions', 'groups')
+    readonly_fields = ('password', 'is_superuser', 'last_login', 'date_joined')  #'user_permissions', 'groups')
 
     # какие поля выводить в админке
-    list_display = ('username', 'first_name', 'last_name', 'is_staff', 'is_active', 'phone', 'email')
+    list_display = ('username', 'first_name', 'last_name', 'is_active', 'is_staff', 'phone', 'email',)
 
     # по каким полям может осуществляться поиск в админке
     search_fields = ('username',
                      'first_name',
                      'last_name',
                      'patronymic',
-                     'company',
-                     'position',
-                     'project',
                      'phone',
                      'email',)
 
     # укажем быстрые фильтры для фильтрации записей
-    list_filter = ('is_staff', 'is_active', 'gender', 'company', 'city')
+    list_filter = ('is_staff', 'is_active', 'gender')
 
     # в админке поля формы можно группировать
     fieldsets = (
@@ -61,5 +52,8 @@ class UsersAdmin(admin.ModelAdmin):
          {'fields': ('username', 'password', 'first_name', 'last_name', 'patronymic', 'gender', 'birthday')}),
         ('Контактные данные', {'fields': ('phone', 'email')}),
         ('Данные сотрудника',
-         {'fields': ('is_staff', 'is_active', 'city', 'company', 'groups', 'position', 'project',)}),
+         {'fields': ('is_staff', 'is_active', 'groups',)}),
     )
+    inlines = [
+        CompanyUsersInline,
+    ]

@@ -1,0 +1,10 @@
+{% extends 'productsapp/base.html' %}
+{% load static %}
+{% block content-container %}
+    <div style="height: 50px;"></div>
+    <div class="container">
+        <h1 class="line-height-normal margin-bottom-10">Вы действительно хотите удалить компанию {{ partner.name }}?</h1>
+        <p><a href="{% url 'partners:partner_delete_confirm' partner.pk %}" class="btn btn-danger">Удалить</a></p>
+        <p><a href="{{ partner.get_absolute_url }}" class="btn btn-info">Вернуться назад</a></p>
+    </div>
+{% endblock %}

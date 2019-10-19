@@ -1,106 +1,64 @@
 {% load static %}
 <header id="site-header" class="header-front-page style-5">
-                <div id="site-header-inner" class="container">
-                    <div class="wrap-inner">
-                        <div id="site-logo" class="clearfix">
-                            <div id="site-logo-inner">
-                                <a href="/" title="Construction" rel="home"
-                                   class="main-logo">
-                                    <img src="{% static 'assets/img/logo-light.png' %}" alt="Construction"
-                                         data-retina="{% static 'assets/img/logo-light@2x.png' %}" data-width="200"
-                                         data-height="30">
-                                </a>
-                            </div>
-                        </div><!-- /#site-logo -->
+    <div id="site-header-inner" class="container">
+        <div class="wrap-inner">
+            <div id="site-logo" class="clearfix">
+                <div id="site-logo-inner">
+                    <a href="/" title="Construction" rel="home"
+                       class="main-logo">
+                        <img src="{% static 'assets/img/logo-light.png' %}" alt="Construction"
+                             data-retina="{% static 'assets/img/logo-light@2x.png' %}" data-width="200"
+                             data-height="30">
+                    </a>
+                </div>
+            </div><!-- /#site-logo -->
 
-                        <div class="mobile-button"><span></span></div><!-- //mobile menu button -->
-{#ГЛАВНОЕ МЕНЮ#}
-                        <nav id="main-nav" class="main-nav">
-                            <ul class="menu">
-                                <li class="menu-item current-menu-item"><a href="{% url 'main:index' %}">Главная</a></li>
-                                <li class="menu-item"><a href="{% url 'products:products' %}">Технологии</a></li>
-{#                                <li class="menu-item"><a href="#">Услуги</a></li>#}
-                                <li class="menu-item"><a href="{% url 'projects:projects' %}">Проекты</a></li>
-                                <li class="menu-item"><a href="{% url 'research:research' %}">Наука</a></li>
-                                <li class="menu-item"><a href="{% url 'ymapapp:map' %}">Карта</a></li>
-                            </ul>
-                        </nav><!-- /#main-nav -->
-{#ГЛАВНОЕ МЕНЮ#}
-                        <div id="header-search">
-                            <a class="header-search-icon" href="#"><span class="fa fa-search"></span></a>
+            <div class="mobile-button"><span></span></div><!-- //mobile menu button -->
+            {#ГЛАВНОЕ МЕНЮ#}
+            <nav id="main-nav" class="main-nav">
+                <ul class="menu">
+                    <li class="menu-item current-menu-item"><a href="{% url 'main:index' %}">Главная</a></li>
+                    <li class="menu-item"><a href="{% url 'products:products' %}">Технологии</a></li>
+                    {#                                <li class="menu-item"><a href="#">Услуги</a></li>#}
+                    <li class="menu-item"><a href="{% url 'projects:projects' %}">Проекты</a></li>
+                    <li class="menu-item"><a href="{% url 'services:services_list' %}">Услуги</a></li>
+                    <li class="menu-item"><a href="{% url 'partners:partners_list' %}">Партнеры</a></li>
+                    <li class="menu-item"><a href="{% url 'research:research' %}">Наука</a></li>
+                    <li class="menu-item"><a href="{% url 'ymapapp:map' %}">Карта</a></li>
+                </ul>
+            </nav><!-- /#main-nav -->
+            {#ГЛАВНОЕ МЕНЮ#}
+            <div id="header-search">
+                <a class="header-search-icon" href="#"><span class="fa fa-search"></span></a>
 
-                            <form role="search" method="get" class="header-search-form" action="#">
-                                <label>
-                                    <input type="text" value="" name="s" class="header-search-field"
-                                           placeholder="Type and hit enter...">
-                                </label>
-                                <button type="submit" class="header-search-submit" title="Search">Search</button>
-                                <input type="hidden" name="post_type" value="post">
-                            </form>
-                        </div><!-- /#header-search -->
+                <form action="{% url 'partners:company_search' %}" method="get" class="header-search-form">
+                    <label>
+                        <input type="search" name="q" class="header-search-field"
+                               placeholder="Поиск...">
+                    </label>
+                    <button type="submit" class="header-search-submit" title="Search">Search</button>
+                    <input type="hidden" name="post_type" value="post">
+                </form>
+            </div><!-- /#header-search -->
 
-                        <div class="nav-top-cart-wrapper">
-                            <a class="nav-cart-trigger" href="#">
-                        <span class="fa fa-shopping-cart cart-icon">
-                            <span class="shopping-cart-items-count">3</span>
-                        </span>
-                            </a>
-
-                            <div class="nav-shop-cart">
-                                <div class="widget_shopping_cart_content">
-                                    <ul class="cart_list product_list_widget ">
-                                        <li class="mini_cart_item">
-                                            <a href="#" class="remove" title="Remove this item">×</a>
-                                            <a href="#">
-                                                <img width="160" height="160"
-                                                     src="{% static 'assets/img/shop-item.png' %}" alt="image">
-                                                Shop Item 01
-                                            </a>
-
-                                            <span class="quantity">1 × <span class="woocommerce-Price-amount amount">
-                                        <span class="woocommerce-Price-currencySymbol">$</span>200.00</span>
-                                    </span>
-                                        </li>
-                                        <li class="mini_cart_item">
-                                            <a href="#" class="remove" title="Remove this item">×</a>
-                                            <a href="#">
-                                                <img width="160" height="160"
-                                                     src="{% static 'assets/img/shop-item.png' %}" alt="image">
-                                                Shop Item 02
-                                            </a>
-
-                                            <span class="quantity">1 × <span class="woocommerce-Price-amount amount">
-                                        <span class="woocommerce-Price-currencySymbol">$</span>70.00</span>
-                                    </span>
-                                        </li>
-                                        <li class="mini_cart_item">
-                                            <a href="#" class="remove" title="Remove this item">×</a>
-                                            <a href="#">
-                                                <img width="160" height="160"
-                                                     src="{% static 'assets/img/shop-item.png' %}" alt="image">
-                                                Shop Item 03
-                                            </a>
-
-                                            <span class="quantity">1 × <span class="woocommerce-Price-amount amount">
-                                        <span class="woocommerce-Price-currencySymbol">$</span>30.00</span>
-                                    </span>
-                                        </li>
-                                    </ul><!-- /.product_list_widget -->
-
-                                    <p class="total">
-                                        <strong>Subtotal:</strong>
-                                        <span class="woocommerce-Price-amount amount">
-                                    <span class="woocommerce-Price-currencySymbol">$</span>300.00
-                                </span>
-                                    </p>
-
-                                    <p class="buttons">
-                                        <a href="#" class="wprt-button small">View Cart</a>
-                                        <a href="#" class="wprt-button small checkout">Checkout</a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div><!-- /.nav-top-cart-wrapper -->
+            <div class="nav-top-cart-wrapper">
+                <a class="nav-cart-trigger" href="#">
+                    <span class="fa fa-user cart-icon"></span>
+                </a>
+                <div class="nav-shop-cart">
+                    <div class="widget_shopping_cart_content">
+                        <p class="buttons">
+                            <a href="{% url 'restricted_area' %}" class="wprt-button small">Личный Кабинет</a>
+                            {% if request.user.is_authenticated %}
+                                <a href="{% url 'logout' %}" class="wprt-button small checkout">Выйти</a>
+                            {% else %}
+                                <a href="{% url 'login' %}" class="wprt-button small checkout">Войти</a>
+                            {% endif %}
+                        </p>
                     </div>
-                </div><!-- /#site-header-inner -->
-            </header>
+                </div>
+            </div><!-- /.nav-top-cart-wrapper -->
+
+        </div>
+    </div><!-- /#site-header-inner -->
+</header>
