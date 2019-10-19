@@ -38,6 +38,16 @@ class ProjectRead(DetailView):
         return context
 
 
+def project_detail(request, pk):
+    project = Project.objects.get(pk=pk)
+    context = {
+        'object': project,
+        'page_title': 'Детальная информация о проекте',
+        'bred_title': 'Информация о проекте',
+    }
+    return render(request, 'projectsapp/project_detail.html', context)
+
+
 def project_update(request, pk):
     project = get_object_or_404(Project, pk=pk)
     project_form = ProjectUpdateForm(instance=project)
