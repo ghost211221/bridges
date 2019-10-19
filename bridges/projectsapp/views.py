@@ -112,7 +112,7 @@ def company_update(request, pk):
                 return HttpResponseRedirect(created_project.get_absolute_url())
     context ={
         'project_form': project_form,
-        'formset': formset,
+        'formset1': formset,
         'page_title': 'Добавление контрагентов',
         'bred_title': 'Добавление контрагентов',
         'project': project
@@ -128,7 +128,7 @@ class ProductManagersUpdate(PermissionRequiredMixin, UpdateView):
     template_name = 'projectsapp/company_update.html'
     request = None
 
-    def get_formset_class(self, formset=ProjectManagerUpdateFormset, extra=0, form=ProjectManagerForm, fk_name='project', **kwargs):
+    def get_formset_class(self, formset=ProjectManagerUpdateFormset, extra=1, form=ProjectManagerForm, fk_name='project', **kwargs):
         return inlineformset_factory(
             self.model, ProjectManagerForm._meta.model, formset=formset, extra=extra, form=form, fk_name=fk_name)
 
@@ -196,7 +196,7 @@ def gallery_update(request, pk):
                 return HttpResponseRedirect(created_project.get_absolute_url())
     context = {
         'project_form': project_form,
-        'formset': formset,
+        'formset1': formset,
         'page_title': 'Добавление фотографий',
         'bred_title': 'Добавление фотографий',
         'project': project
