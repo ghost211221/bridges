@@ -4,42 +4,29 @@ from django.shortcuts import render, get_object_or_404
 from .forms import *
 from projectsapp.models import Project, ProjectImage, ProjectHasTechnicalSolutions, ProjectCompany, ProjectManagers
 from projectsapp.models import ProjectImage
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, UpdateView
 from projectsapp.forms import ProjectSolutionsForm, ProjectManagerForm, ProjectCompanyForm
+from projectsapp.forms import ProjectManagerUpdateFormset
 from projectsapp.models import Project, ProjectHasTechnicalSolutions, ProjectCompany
-
-<<<<<<< HEAD
 
 from django.http import HttpResponseRedirect
 from django.db.models import Q
-=======
->>>>>>> upstream/sprint_2
+
+from django.contrib.auth.mixins import  PermissionRequiredMixin
+
 
 class ProjectsList(ListView):
     """docstring for ProductList"""    
     model = Project
-<<<<<<< HEAD
-    pk_field = 'techsol'
-    paginate_by = 6    
-    template_name = 'projectsapp/grid.html'   
 
-    def get_queryset(self, **kwargs):
-        query = Q()
-        if 'pk' in self.kwargs:
-            query = Q((self.pk_field, self.kwargs['pk']))
-            return super().get_queryset().filter(query)
-        else:
-            return super().get_queryset() 
-=======
     template_name = 'projectsapp/grid.html'
     extra_context = {}
->>>>>>> upstream/sprint_2
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         products = TechnicalSolutions.objects.all()
         values = ProjectHasTechnicalSolutions.objects.all()
-        context.update({'values': values,
+        # context.update({'values': values,
         context.update({'products': products,
                         'values': values,
                         'page_title': 'Проекты компании',
@@ -101,9 +88,6 @@ def project_solutions_update(request, pk):
         'bred_title': 'Обновление техрешений',
         'project': project
     }
-<<<<<<< HEAD
-    return render(request, 'projectsapp/project.html', content)
-=======
     return render(request, 'projectsapp/company_update.html', context)
 
 
@@ -137,30 +121,59 @@ def company_update(request, pk):
 
 
 #  ------------------------------------ UPDATE PROJECT'S MANAGERS ----------------------------------------------
+class ProductManagersUpdate(PermissionRequiredMixin, UpdateView):
+    model = Project
+    form_class = ProjectManagerForm
+    permission_required = f'{model._meta.app_label}.change_{model.__name__}'
+    template_name = 'projectsapp/company_update.html'
+    request = None
 
-def project_managers_update(request, pk):
-    project = get_object_or_404(Project, pk=pk)
-    project_form = ProjectForm(instance=project)
-    managers_formset = inlineformset_factory(Project, ProjectManagers, form=ProjectManagerForm, extra=1)
-    formset = managers_formset(instance=project)
-    if request.method == 'POST':
-        project_form = ProjectForm(request.POST, instance=project)
-        formset = managers_formset(request.POST)
-        if project_form.is_valid():
-            updated_project = project_form.save(commit=False)
-            formset = managers_formset(request.POST, instance=updated_project)
-            if formset.is_valid():
-                updated_project.save()
-                formset.save()
-                return HttpResponseRedirect(updated_project.get_absolute_url())
-    context = {
-        'project_form': project_form,
-        'formset': formset,
-        'page_title': 'Обновление списка участников',
-        'bred_title': 'Список участников',
-        'project': project
-    }
-    return render(request, 'projectsapp/company_update.html', context)
+    def get_formset_class(self, formset=ProjectManagerUpdateFormset, extra=0, form=ProjectManagerForm, fk_name='project', **kwargs):
+        return inlineformset_factory(
+            self.model, ProjectManagerForm._meta.model, formset=formset, extra=extra, form=form, fk_name=fk_name)
+
+    def get_formset(self, **kwargs):
+        self.formset = self.get_formset_class(**kwargs)(
+            data=self.request and self.request.POST or None,
+            files=self.request and self.request.FILES or None,
+            instance=getattr(self, 'object', self.get_object()), initial=kwargs.get('initial', {}))
+        print("formset: ", self.formset)
+        return self.formset
+
+    def form_valid(self, form, **kwargs):
+        response = super().form_valid(form)
+        if self.get_formset(**kwargs).is_valid():
+            self.formset.save()
+        print("responce: ", response)
+        return response
+
+    def get_context_data(self, **kwargs):
+        print("context: ", super().get_context_data(formset1=self.get_formset(), **kwargs))
+        return super().get_context_data(formset1=self.get_formset(), **kwargs)
+
+# def project_managers_update(request, pk):
+#     project = get_object_or_404(Project, pk=pk)
+#     project_form = ProjectForm(instance=project)
+#     managers_formset = inlineformset_factory(Project, ProjectManagers, form=ProjectManagerForm, extra=1)
+#     formset = managers_formset(instance=project)
+#     if request.method == 'POST':
+#         project_form = ProjectForm(request.POST, instance=project)
+#         formset = managers_formset(request.POST)
+#         if project_form.is_valid():
+#             updated_project = project_form.save(commit=False)
+#             formset = managers_formset(request.POST, instance=updated_project)
+#             if formset.is_valid():
+#                 updated_project.save()
+#                 formset.save()
+#                 return HttpResponseRedirect(updated_project.get_absolute_url())
+#     context = {
+#         'project_form': project_form,
+#         'formset': formset,
+#         'page_title': 'Обновление списка участников',
+#         'bred_title': 'Список участников',
+#         'project': project
+#     }
+#     return render(request, 'projectsapp/company_update.html', context)
 
 
 #  ------------------------------------ UPDATE PROJECT'S GALLERY ----------------------------------------------
@@ -189,4 +202,3 @@ def gallery_update(request, pk):
         'project': project
     }
     return render(request, "projectsapp/gallery_update.html", context)
->>>>>>> upstream/sprint_2
