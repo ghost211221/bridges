@@ -1,15 +1,12 @@
-from django.db import transaction
 from django.forms import inlineformset_factory
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from .forms import *
 from projectsapp.models import Project, ProjectImage, ProjectHasTechnicalSolutions, ProjectCompany, ProjectManagers
 from projectsapp.models import ProjectImage
-from django.views.generic import View
 from django.views.generic import ListView, DetailView
 from projectsapp.forms import ProjectSolutionsForm, ProjectManagerForm, ProjectCompanyForm
 from projectsapp.models import Project, ProjectHasTechnicalSolutions, ProjectCompany
-from projectsapp.utils import ObjectCreateMixin
 
 
 class ProjectsList(ListView):
