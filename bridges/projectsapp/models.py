@@ -169,9 +169,10 @@ class ProjectManagers(models.Model):
         (COMMERSANT, 'коммерсант'),
         (ASSISTANT, 'ассистент'),
     )
-    project = models.ForeignKey(Project, verbose_name='проект', on_delete=models.CASCADE, related_name="managers")
+    project = models.ForeignKey(Project, verbose_name='проект', on_delete=models.CASCADE, related_name="managers",
+                                blank=True, null=True)
     role = models.CharField(verbose_name='роль в проекте', max_length=24, choices=STATUS_CHOICES)
-    manager = models.ForeignKey(Users, verbose_name='Участники', on_delete=models.CASCADE)
+    manager = models.ForeignKey(Users, verbose_name='Участники', on_delete=models.CASCADE, blank=True, null=True)
     description = models.TextField(verbose_name='комментарий', blank=True)
     is_active = models.BooleanField(verbose_name='Активный', default=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)

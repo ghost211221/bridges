@@ -11,7 +11,6 @@ from django.views.generic import View, CreateView
 from django.views.generic import ListView, DetailView
 from projectsapp.forms import ProjectSolutionsForm, ProjectManagerForm, ProjectCompanyForm
 from projectsapp.models import Project, ProjectHasTechnicalSolutions, ProjectCompany
-from projectsapp.utils import ObjectCreateMixin
 
 
 class ProjectsList(ListView):
@@ -41,6 +40,20 @@ class ProjectRead(DetailView):
                         'bred_title': 'Информация о проекте'
                         })
         return context
+
+# # ----------------------------------- ОТ ВАСИЛИЯ -----------------------------------
+#
+#
+# def project_detail(request, pk):
+#     project = Project.objects.get(pk=pk)
+#     context = {
+#         'object': project,
+#         'page_title': 'Детальная информация о проекте',
+#         'bred_title': 'Информация о проекте',
+#     }
+#     return render(request, 'projectsapp/project_detail.html', context)
+#
+# # ------------------------------------ ОТ ВАСИЛИЯ ----------------------------------
 
 
 def project_update(request, pk):
@@ -141,7 +154,6 @@ def project_managers_update(request, pk):
         'project': project
     }
     return render(request, 'projectsapp/company_update.html', context)
-
 
 
 #  ------------------------------------ UPDATE PROJECT'S GALLERY ----------------------------------------------
