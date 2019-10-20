@@ -1,4 +1,4 @@
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.forms import inlineformset_factory
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
@@ -74,6 +74,7 @@ def company_self_user_update(request, pk):
     return render(request, 'authapp/self_profile_update.html', context)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def profile_self_user_update(request, pk):
     user = get_object_or_404(Users, pk=pk)
     user_form = UsersForEditProfileForm(instance=user)
@@ -90,6 +91,7 @@ def profile_self_user_update(request, pk):
     return render(request, 'authapp/self_profile_update.html', context)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def project_self_user_update(request, pk):
     project_user = get_object_or_404(Users, pk=pk)
     project_user_form = UsersForProjectManagersForm(instance=project_user)
@@ -114,6 +116,7 @@ def project_self_user_update(request, pk):
     return render(request, 'authapp/self_profile_update.html', context)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def company_user_update(request, pk):
     company_user = get_object_or_404(Users, pk=pk)
     company_user_form = UsersForCompanyUsersForm(instance=company_user)
@@ -139,6 +142,7 @@ def company_user_update(request, pk):
     return render(request, 'authapp/user_profile_update.html', context)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def profile_user_update(request, pk):
     user = get_object_or_404(Users, pk=pk)
     user_form = UsersForEditProfileForm(instance=user)
@@ -156,6 +160,7 @@ def profile_user_update(request, pk):
     return render(request, 'authapp/user_profile_update.html', context)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def project_user_update(request, pk):
     project_user = get_object_or_404(Users, pk=pk)
     project_user_form = UsersForProjectManagersForm(instance=project_user)

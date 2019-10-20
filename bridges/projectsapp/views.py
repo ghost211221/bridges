@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import user_passes_test
 from django.db import transaction
 from django.forms import inlineformset_factory
 from django.http import HttpResponseRedirect
@@ -41,21 +42,10 @@ class ProjectRead(DetailView):
                         })
         return context
 
-# # ----------------------------------- ОТ ВАСИЛИЯ -----------------------------------
-#
-#
-# def project_detail(request, pk):
-#     project = Project.objects.get(pk=pk)
-#     context = {
-#         'object': project,
-#         'page_title': 'Детальная информация о проекте',
-#         'bred_title': 'Информация о проекте',
-#     }
-#     return render(request, 'projectsapp/project_detail.html', context)
-#
-# # ------------------------------------ ОТ ВАСИЛИЯ ----------------------------------
+#  ------------------------------------ UPDATE PROJECT'S DETAILS ----------------------------------------------
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def project_update(request, pk):
     project = get_object_or_404(Project, pk=pk)
     project_form = ProjectUpdateForm(instance=project)
@@ -75,6 +65,7 @@ def project_update(request, pk):
 #  ------------------------------------ UPDATE PROJECT'S SOLUTIONS ----------------------------------------------
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def project_solutions_update(request, pk):
     project = get_object_or_404(Project, pk=pk)
     project_form = ProjectForm(instance=project)
@@ -103,6 +94,7 @@ def project_solutions_update(request, pk):
 #  ------------------------------------ UPDATE PROJECT'S COMPANIES ----------------------------------------------
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def company_update(request, pk):
     project = get_object_or_404(Project, pk=pk)
     project_form = ProjectForm(instance=project)
@@ -131,6 +123,8 @@ def company_update(request, pk):
 
 #  ------------------------------------ UPDATE PROJECT'S MANAGERS ----------------------------------------------
 
+
+@user_passes_test(lambda u: u.is_superuser)
 def project_managers_update(request, pk):
     project = get_object_or_404(Project, pk=pk)
     project_form = ProjectForm(instance=project)
@@ -159,6 +153,7 @@ def project_managers_update(request, pk):
 #  ------------------------------------ UPDATE PROJECT'S GALLERY ----------------------------------------------
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def gallery_update(request, pk):
     project = Project.objects.get(pk=pk)
     project_form = ProjectForm(instance=project)
