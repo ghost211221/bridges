@@ -1340,3 +1340,6 @@ only screen and (                min-resolution: 2dppx){
 .width_table_50 {
     width: 50px;
 }
+.errorlist {
+    color: red;
+}
