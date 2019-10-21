@@ -36,3 +36,15 @@ class ProjectImageForm(forms.ModelForm):
     class Meta:
         model = ProjectImage
         fields = ['image']
+
+
+class ProjectDiscussItemForm(forms.ModelForm):
+    class Meta:
+        model = ProjectDiscussItem
+        fields = ['comment']
+
+
+class ProjectDiscussMemberForm(forms.ModelForm):
+    class Meta:
+        model = ProjectDiscussMember
+        fields = '__all__'
