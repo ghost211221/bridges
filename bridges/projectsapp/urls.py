@@ -13,4 +13,5 @@ urlpatterns = [
     path('company/update/<int:pk>', projectsapp.company_update, name='company_update'),
     path('gallery/update/<int:pk>', projectsapp.gallery_update, name='gallery_update'),
     path('discuss/items/<int:pk>', projectsapp.project_discuss_items, name='project_discuss_items'),
+    path('discuss/edit/members/<int:pk>', projectsapp.project_discuss_edit_members,name='project_discuss_edit_members'),
 ]
