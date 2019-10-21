@@ -174,3 +174,13 @@ def gallery_update(request, pk):
         'project': project
     }
     return render(request, "projectsapp/gallery_update.html", context)
+
+
+def project_discuss_items(request, pk):
+    project = Project.objects.get(pk=pk)
+    context = {
+        'object': project,
+        'page_title': 'Обсуждение проекта',
+        'bred_title': 'Обсуждение проекта',
+    }
+    return render(request, 'projectsapp/project_discuss_detail.html', context)
