@@ -137,9 +137,9 @@
                                                 {% endfor %}
                                             {% endif %}
                                             {% if request.user.is_superuser %}
-                                                <li>
-                                                    <a href="{% url 'projects:manager_update' object.pk %}"><i>... изменить</i></a>
-                                                </li>
+{#                                                <li>#}
+{#                                                    <a href="{% url 'projects:manager_update' object.pk %}"><i>... изменить</i></a>#}
+{#                                                </li>#}
                                                 <li>
                                                     <a href="{% url 'projects:manager_create' object.pk %}"><i>... добавить</i></a>
                                                 </li>
