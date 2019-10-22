@@ -1,15 +1,16 @@
-from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.decorators import user_passes_test, login_required
 from django.forms import inlineformset_factory, modelformset_factory
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from django.utils.decorators import method_decorator
 
 from projectsapp.utils import CreateMixin
 from .forms import *
 from projectsapp.models import ProjectManagers
 from projectsapp.models import ProjectImage
-from django.views.generic import View, CreateView
+from django.views.generic import View, DeleteView
 from django.views.generic import ListView, DetailView
-from projectsapp.forms import ProjectSolutionsForm, ProjectManagerForm, ProjectCompanyForm
+from projectsapp.forms import ProjectSolutionsForm, ProjectCompanyForm
 from projectsapp.models import Project, ProjectHasTechnicalSolutions, ProjectCompany
 
 
@@ -130,6 +131,18 @@ class ProjectsManagerCreateView(CreateMixin, View):
     template = 'projectsapp/project_manager_add.html'
     FormSet = modelformset_factory(form_model, fields='__all__')
 
+
+class ProjectsManagerDeleteView(View):
+
+    def get(self, requset, pk):
+        manager = get_object_or_404(ProjectManagers, pk=pk)
+        return render(requset, 'projectsapp/projectmanagers_confirm_delete.html', context={'manager': manager})
+
+    def post(self, request, pk):
+        manager = get_object_or_404(ProjectManagers, pk=pk)
+        project = manager.project
+        manager.delete()
+        return HttpResponseRedirect(project.get_absolute_url())
 
 # @user_passes_test(lambda u: u.is_superuser)
 # def project_managers_update(request, pk):

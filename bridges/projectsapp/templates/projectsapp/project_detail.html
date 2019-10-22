@@ -127,12 +127,9 @@
                                                                 <i><a href="{{ i.company.get_absolute_url }}"> {{ i.company.form }} {{ i.company.name }}</a></i>
                                                             {% endfor %})
                                                         {% endif %}
-{#                                                        {% if request.user.is_superuser %}#}
-{#                                                            <form action="" method="post">#}
-{#                                                                {% csrf_token %}#}
-{#                                                                <button type="submit" value="удалить" class="btn btn-success">удалить</button>#}
-{#                                                            </form>#}
-{#                                                        {% endif %}#}
+                                                        {% if request.user.is_superuser %}
+                                                            <a href="{% url 'projects:manager_delete' item.pk %}"><i>... удалить</i></a>
+                                                        {% endif %}
                                                     </li>
                                                 {% endfor %}
                                             {% endif %}

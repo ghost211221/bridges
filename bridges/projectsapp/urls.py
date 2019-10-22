@@ -24,9 +24,9 @@ urlpatterns = [
     path('<int:pk>/', ProjectRead.as_view(), name='project'),
     # path('<int:pk>/', projectsapp.project_detail, name='project'),
     path('update/<int:pk>', projectsapp.project_update, name='project_update'),
-    # path('manager/update/<int:pk>', projectsapp.project_managers_update, name='manager_update'),
     path('product/update/<int:pk>', projectsapp.project_solutions_update, name='product_update'),
     path('company/update/<int:pk>', projectsapp.company_update, name='company_update'),
     path('gallery/update/<int:pk>', projectsapp.gallery_update, name='gallery_update'),
-    path('manager/create/<int:project_pk>', projectsapp.ProjectsManagerCreateView.as_view(), name='manager_create')
+    path('manager/create/<int:project_pk>', projectsapp.ProjectsManagerCreateView.as_view(), name='manager_create'),
+    path('manager/delete/<int:pk>', projectsapp.ProjectsManagerDeleteView.as_view(), name='manager_delete')
 ]
