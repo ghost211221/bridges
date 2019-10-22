@@ -29,7 +29,7 @@ class ProjectSolutionsForm(forms.ModelForm):
 class ProjectCompanyForm(forms.ModelForm):
     class Meta:
         model = ProjectCompany
-        fields = ['company', 'role']
+        fields = ['company', 'role', 'project']
 
 
 class ProjectImageForm(forms.ModelForm):
@@ -43,4 +43,12 @@ class ProjectManagerCreateForm(forms.ModelForm):
 
     class Meta:
         model = ProjectManagers
+        fields = '__all__'
+
+
+class ProjectCompanyCreateForm(forms.ModelForm):
+    project = forms.ModelChoiceField(queryset=Project.objects.all(), widget=forms.HiddenInput())
+
+    class Meta:
+        model = ProjectCompany
         fields = '__all__'

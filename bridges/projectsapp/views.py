@@ -96,31 +96,13 @@ def project_solutions_update(request, pk):
 #  ------------------------------------ PROJECT'S COMPANIES ----------------------------------------------
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def company_update(request, pk):
-    project = get_object_or_404(Project, pk=pk)
-    project_form = ProjectForm(instance=project)
-    company_formset = inlineformset_factory(Project, ProjectCompany, form=ProjectCompanyForm, extra=1)
-    formset = company_formset(instance=project)
-    if request.method == "POST":
-        project_form = ProjectForm(request.POST)
-        project_form = ProjectForm(request.POST, instance=project)
-        formset = company_formset(request.POST)
-        if project_form.is_valid():
-            created_project = project_form.save(commit=False)
-            formset = company_formset(request.POST, instance=created_project)
-            if formset.is_valid():
-                created_project.save()
-                formset.save()
-                return HttpResponseRedirect(created_project.get_absolute_url())
-    context ={
-        'project_form': project_form,
-        'formset': formset,
-        'page_title': 'Добавление контрагентов',
-        'bred_title': 'Добавление контрагентов',
-        'project': project
-    }
-    return render(request, "projectsapp/company_update.html", context)
+class ProjectsCompanyCreateView(CreateMixin, View):
+    form_model = ProjectCompany
+    form = ProjectCompanyCreateForm
+    template = 'projectsapp/projectcompany_form.html'
+    FormSet = modelformset_factory(form_model, fields='__all__')
+    variable = 'company'
+    viriable_model = Company
 
 
 #  ------------------------------------ PROJECT'S MANAGERS ----------------------------------------------
@@ -130,6 +112,8 @@ class ProjectsManagerCreateView(CreateMixin, View):
     form = ProjectManagerCreateForm
     template = 'projectsapp/projectmanagers_form.html'
     FormSet = modelformset_factory(form_model, fields='__all__')
+    variable = 'manager'
+    viriable_model = Users
 
 
 class ProjectsManagerDeleteView(DeleteMixin, View):

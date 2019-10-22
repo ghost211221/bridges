@@ -104,8 +104,11 @@
                                                 {% endfor %}
                                             {% endif %}
                                             {% if request.user.is_superuser %}
-                                                <li><a href="{% url 'projects:company_update' object.pk %}"><i>...
-                                                    изменить</i></a>
+{#                                                <li>#}
+{#                                                    <a href="{% url 'projects:company_create' object.pk %}"><i>... изменить</i></a>#}
+{#                                                </li>#}
+                                                <li>
+                                                    <a href="{% url 'projects:company_create' object.pk %}"><i>... добавить</i></a>
                                                 </li>
                                                 <div class="wprt-spacer" data-desktop="15" data-mobi="15"
                                                      data-smobi="15"></div>

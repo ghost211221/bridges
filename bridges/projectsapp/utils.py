@@ -25,6 +25,8 @@ class CreateMixin:
     form_model = None
     form = None
     template = None
+    variable = None
+    viriable_model = None
 
     def get(self, request, project_pk):
         project = Project.objects.get(pk=project_pk)
@@ -40,7 +42,7 @@ class CreateMixin:
         if form.is_valid():
             hacked = {
                 "project": Project.objects.get(pk=form.data["project"]),
-                "manager": Users.objects.get(pk=form.data["manager"])
+                self.variable: self.viriable_model.objects.get(pk=form.data[self.variable])
             }
             data = {**form.data, **hacked}
             data = {k: v[0] if isinstance(v, list) else v for k, v in data.items() if
