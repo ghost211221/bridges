@@ -100,6 +100,7 @@
                                                         <i>
                                                             {{ item.role | capfirst }}: <a href="{{ item.company.get_absolute_url }}">{{ item.company.form }} {{ item.company.name }}</a>
                                                         </i>
+                                                    <a href="{% url 'projects:company_delete' item.pk %}"><i>... удалить</i></a>
                                                     </li>
                                                 {% endfor %}
                                             {% endif %}
@@ -130,9 +131,7 @@
                                                                 <i><a href="{{ i.company.get_absolute_url }}"> {{ i.company.form }} {{ i.company.name }}</a></i>
                                                             {% endfor %})
                                                         {% endif %}
-                                                        {% if request.user.is_superuser %}
                                                             <a href="{% url 'projects:manager_delete' item.pk %}"><i>... удалить</i></a>
-                                                        {% endif %}
                                                     </li>
                                                 {% endfor %}
                                             {% endif %}

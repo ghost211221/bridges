@@ -105,6 +105,11 @@ class ProjectsCompanyCreateView(CreateMixin, View):
     viriable_model = Company
 
 
+class ProjectsCompanyDeleteView(DeleteMixin, View):
+    form_model = ProjectCompany
+    template = 'projectsapp/projectmanagers_confirm_delete.html'
+
+
 #  ------------------------------------ PROJECT'S MANAGERS ----------------------------------------------
 
 class ProjectsManagerCreateView(CreateMixin, View):
