@@ -1,18 +1,3 @@
-"""bridges URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/2.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.urls import path
 from projectsapp import views as projectsapp
 from .views import ProjectsList, ProjectRead
@@ -29,5 +14,7 @@ urlpatterns = [
     path('company/delete/<int:pk>', projectsapp.ProjectsCompanyDeleteView.as_view(), name='company_delete'),
     path('manager/create/<int:project_pk>', projectsapp.ProjectsManagerCreateView.as_view(), name='manager_create'),
     path('manager/delete/<int:pk>', projectsapp.ProjectsManagerDeleteView.as_view(), name='manager_delete'),
-    path('gallery/update/<int:pk>', projectsapp.gallery_update, name='gallery_update')
+    path('gallery/update/<int:pk>', projectsapp.gallery_update, name='gallery_update'),
+    path('discuss/items/<int:pk>', projectsapp.project_discuss_items, name='project_discuss_items'),
+    path('discuss/edit/members/<int:pk>', projectsapp.project_discuss_edit_members,name='project_discuss_edit_members'),
 ]

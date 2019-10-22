@@ -48,3 +48,15 @@ class ProjectSolutionsCreateForm(forms.ModelForm):
     class Meta:
         model = ProjectHasTechnicalSolutions
         fields = '__all__'
+
+
+class ProjectDiscussItemForm(forms.ModelForm):
+    class Meta:
+        model = ProjectDiscussItem
+        fields = ['comment']
+
+
+class ProjectDiscussMemberForm(forms.ModelForm):
+    class Meta:
+        model = ProjectDiscussMember
+        fields = '__all__'

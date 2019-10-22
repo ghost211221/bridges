@@ -13,7 +13,8 @@ urlpatterns = [
     path('research/', include('researchapp.urls', namespace='research')),
     path('auth/', include('authapp.urls')),
     path('partners/', include('partnersapp.urls', namespace='partners')),
-    path('services/', include('servicesapp.urls', namespace='services'))
+    path('services/', include('servicesapp.urls', namespace='services')),
+    path('orders/', include('ordersapp.urls', namespace='orders')),
 ]
 
 if settings.DEBUG:
