@@ -124,7 +124,6 @@ def company_update(request, pk):
 
 #  ------------------------------------ PROJECT'S MANAGERS ----------------------------------------------
 
-@user_passes_test(lambda u: u.is_superuser)
 class ProjectsManagerCreateView(CreateMixin, View):
     form_model = ProjectManagers
     form = ProjectManagerCreateForm
