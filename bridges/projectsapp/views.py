@@ -4,15 +4,17 @@ from django.shortcuts import render, get_object_or_404
 from .forms import *
 from projectsapp.models import Project, ProjectImage, ProjectHasTechnicalSolutions, ProjectCompany, ProjectManagers
 from projectsapp.models import ProjectImage
-from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from projectsapp.forms import ProjectSolutionsForm, ProjectManagerForm, ProjectCompanyForm
 from projectsapp.forms import ProjectManagerUpdateFormset
 from projectsapp.models import Project, ProjectHasTechnicalSolutions, ProjectCompany
+from authapp.models import Users
 
 from django.http import HttpResponseRedirect
 from django.db.models import Q
 
 from django.contrib.auth.mixins import  PermissionRequiredMixin
+from django.urls import reverse_lazy
 
 
 class ProjectsList(ListView):
@@ -37,7 +39,8 @@ class ProjectsList(ListView):
 
 class ProjectRead(DetailView):
     model = Project
-    extra_context = {}
+    extra_context = {}    
+    not_empty_url = reverse_lazy('projects:project')
 
     def get_context_data(self, **kwargs):
         context = super(ProjectRead, self).get_context_data(**kwargs)
@@ -119,37 +122,81 @@ def company_update(request, pk):
     }
     return render(request, "projectsapp/company_update.html", context)
 
+#  ------------------------------------ PROJECT'S MANAGERS CRUD ----------------------------------------------
 
-#  ------------------------------------ UPDATE PROJECT'S MANAGERS ----------------------------------------------
-class ProductManagersUpdate(PermissionRequiredMixin, UpdateView):
-    model = Project
-    form_class = ProjectManagerForm
-    permission_required = f'{model._meta.app_label}.change_{model.__name__}'
-    template_name = 'projectsapp/company_update.html'
-    request = None
+def get_manager(pk):
+    """находит менеджера по id"""
+    return Users.objects.get(pk=pk)
+ 
+class ProjectManagersList(ListView):
+    model = ProjectManagers
+    template_name = 'projectsapp/manager_update.html'
 
-    def get_formset_class(self, formset=ProjectManagerUpdateFormset, extra=1, form=ProjectManagerForm, fk_name='project', **kwargs):
-        return inlineformset_factory(
-            self.model, ProjectManagerForm._meta.model, formset=formset, extra=extra, form=form, fk_name=fk_name)
-
-    def get_formset(self, **kwargs):
-        self.formset = self.get_formset_class(**kwargs)(
-            data=self.request and self.request.POST or None,
-            files=self.request and self.request.FILES or None,
-            instance=getattr(self, 'object', self.get_object()), initial=kwargs.get('initial', {}))
-        print("formset: ", self.formset)
-        return self.formset
-
-    def form_valid(self, form, **kwargs):
-        response = super().form_valid(form)
-        if self.get_formset(**kwargs).is_valid():
-            self.formset.save()
-        print("responce: ", response)
-        return response
+    pk_field = 'project'
+    def get_queryset(self):
+        query = Q()
+        if 'pk' in self.kwargs:
+            query = Q((self.pk_field, self.kwargs['pk']))
+        return super().get_queryset().filter(query)
 
     def get_context_data(self, **kwargs):
-        print("context: ", super().get_context_data(formset1=self.get_formset(), **kwargs))
-        return super().get_context_data(formset1=self.get_formset(), **kwargs)
+        context = super(ProjectManagersList, self).get_context_data(**kwargs)
+        context['form'] = ProjectManagerForm()
+        """может быть есть более быстрый и правильный способ добавить инфу о менеджере в объект по его manager_id"""
+        for obj in context['object_list']:
+            setattr(obj, 'manager_name', get_manager(obj.manager_id))
+        return context
+
+    
+
+
+
+
+
+class CreateProjectManager(PermissionRequiredMixin, CreateView):
+    model = ProjectManagers
+
+class UpdateProjectManager(PermissionRequiredMixin, UpdateView):
+    model = ProjectManagers
+
+class DeleteProjectManager(PermissionRequiredMixin, UpdateView):
+    model = ProjectManagers
+
+
+# #  ------------------------------------ UPDATE PROJECT'S MANAGERS ----------------------------------------------
+# class ProductManagersUpdate(PermissionRequiredMixin, UpdateView):
+#     model = Project
+#     form_class = ProjectManagerForm
+#     permission_required = f'{model._meta.app_label}.change_{model.__name__}'
+#     template_name = 'projectsapp/company_update.html'
+#     request = None
+
+#     def get_formset_class(self, formset=ProjectManagerUpdateFormset, extra=1, form=ProjectManagerForm, fk_name='project', **kwargs):
+#         return inlineformset_factory(
+#             self.model, ProjectManagerForm._meta.model, formset=formset, extra=extra, form=form, fk_name=fk_name)
+
+#     def get_formset(self, **kwargs):
+#         self.formset = self.get_formset_class(**kwargs)(
+#             data=self.request and self.request.POST or None,
+#             files=self.request and self.request.FILES or None,
+#             instance=getattr(self, 'object', self.get_object()), initial=kwargs.get('initial', {}))
+#         print("fomset: ", self.formset)
+#         return self.formset
+
+#     def form_valid(self, form, **kwargs):
+#         response = super().form_valid(form)
+#         if self.get_formset(**kwargs).is_valid():
+#             self.formset.save()
+#         print("===============================")
+#         print("responce: ", response)
+#         print("===============================")
+#         return response
+
+#     def get_context_data(self, **kwargs):
+#         print("===============================")
+#         print("context: ", super().get_context_data(formset1=self.get_formset(), **kwargs))
+#         print("===============================")
+#         return super().get_context_data(formset1=self.get_formset(), **kwargs)
 
 # def project_managers_update(request, pk):
 #     project = get_object_or_404(Project, pk=pk)
