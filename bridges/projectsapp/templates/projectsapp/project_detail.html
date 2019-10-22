@@ -199,9 +199,8 @@
                                                         </tr>
                                                     {% endfor %}
                                                 </table>
-{#                                            {% if request.user.is_superuser %}#}
-                                                <a class="" href="{% url 'projects:product_update' object.pk %}">... изменить</a>
-{#                                            {% endif %}#}
+{#                                                <a class="" href="{% url 'projects:product_update' object.pk %}">... изменить</a>#}
+                                                <a href="{% url 'projects:product_create' object.pk %}"><i>... добавить</i></a>
                                             </div>
                                         </div>
 

@@ -10,7 +10,7 @@ from projectsapp.models import ProjectManagers
 from projectsapp.models import ProjectImage
 from django.views.generic import View, DeleteView
 from django.views.generic import ListView, DetailView
-from projectsapp.forms import ProjectSolutionsForm, ProjectCompanyForm
+from projectsapp.forms import ProjectSolutionsForm
 from projectsapp.models import Project, ProjectHasTechnicalSolutions, ProjectCompany
 
 
@@ -65,6 +65,15 @@ def project_update(request, pk):
 
 
 #  ------------------------------------ PROJECT'S SOLUTIONS ----------------------------------------------
+
+
+class ProjectsSolutionsCreateView(CreateMixin, View):
+    form_model = ProjectHasTechnicalSolutions
+    form = ProjectSolutionsCreateForm
+    template = 'projectsapp/projectsolutions_form.html'
+    FormSet = modelformset_factory(form_model, fields='__all__')
+    variable = 'techsol'
+    viriable_model = TechnicalSolutions
 
 
 @user_passes_test(lambda u: u.is_superuser)
