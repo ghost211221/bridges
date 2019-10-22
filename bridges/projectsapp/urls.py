@@ -28,4 +28,5 @@ urlpatterns = [
     path('product/update/<int:pk>', projectsapp.project_solutions_update, name='product_update'),
     path('company/update/<int:pk>', projectsapp.company_update, name='company_update'),
     path('gallery/update/<int:pk>', projectsapp.gallery_update, name='gallery_update'),
+    path('manager/create/<int:project_pk>', projectsapp.ProjectsManagerCreateView.as_view(), name='manager_create')
 ]

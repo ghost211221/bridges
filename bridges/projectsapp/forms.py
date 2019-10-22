@@ -36,3 +36,11 @@ class ProjectImageForm(forms.ModelForm):
     class Meta:
         model = ProjectImage
         fields = ['image']
+
+
+class ProjectManagerCreateForm(forms.ModelForm):
+    project = forms.ModelChoiceField(queryset=Project.objects.all(), widget=forms.HiddenInput())
+
+    class Meta:
+        model = ProjectManagers
+        fields = '__all__'

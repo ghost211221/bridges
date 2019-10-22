@@ -1,14 +1,12 @@
 from django.contrib.auth.decorators import user_passes_test
-from django.db import transaction
-from django.forms import inlineformset_factory
-from django.http import HttpResponseRedirect
+from django.forms import inlineformset_factory, modelformset_factory
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
-from django.urls import reverse_lazy
 
 from .forms import *
-from projectsapp.models import Project, ProjectImage, ProjectHasTechnicalSolutions, ProjectCompany, ProjectManagers
+from projectsapp.models import ProjectManagers
 from projectsapp.models import ProjectImage
-from django.views.generic import View, CreateView
+from django.views.generic import View
 from django.views.generic import ListView, DetailView
 from projectsapp.forms import ProjectSolutionsForm, ProjectManagerForm, ProjectCompanyForm
 from projectsapp.models import Project, ProjectHasTechnicalSolutions, ProjectCompany
@@ -42,7 +40,8 @@ class ProjectRead(DetailView):
                         })
         return context
 
-#  ------------------------------------ UPDATE PROJECT'S DETAILS ----------------------------------------------
+
+#  ------------------------------------ PROJECT'S DETAILS ----------------------------------------------
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -62,7 +61,8 @@ def project_update(request, pk):
     }
     return render(request, 'projectsapp/company_update.html', context)
 
-#  ------------------------------------ UPDATE PROJECT'S SOLUTIONS ----------------------------------------------
+
+#  ------------------------------------ PROJECT'S SOLUTIONS ----------------------------------------------
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -91,7 +91,7 @@ def project_solutions_update(request, pk):
     return render(request, 'projectsapp/company_update.html', context)
 
 
-#  ------------------------------------ UPDATE PROJECT'S COMPANIES ----------------------------------------------
+#  ------------------------------------ PROJECT'S COMPANIES ----------------------------------------------
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -121,7 +121,34 @@ def company_update(request, pk):
     return render(request, "projectsapp/company_update.html", context)
 
 
-#  ------------------------------------ UPDATE PROJECT'S MANAGERS ----------------------------------------------
+#  ------------------------------------ PROJECT'S MANAGERS ----------------------------------------------
+
+
+class ProjectsManagerCreateView(View):
+    ProjectManagersFormSet = modelformset_factory(ProjectManagers, fields='__all__')
+
+    def get(self, request, project_pk):
+        form = ProjectManagerCreateForm(initial={"project": Project.objects.get(pk=project_pk)})
+        context = {
+            'project_manager_form': form
+        }
+        return render(request, template_name='projectsapp/project_manager_add.html', context=context)
+
+    def post(self, request, project_pk):
+        form = ProjectManagerCreateForm(request.POST)
+        if form.is_valid():
+            hacked = {
+                "project": Project.objects.get(pk=form.data["project"]),
+                "manager": Users.objects.get(pk=form.data["manager"])
+            }
+            data = {**form.data, **hacked}
+            data = {k: v[0] if isinstance(v, list) else v for k, v in data.items() if
+                    k in {f.name for f in ProjectManagers._meta.fields}}
+            data['is_active'] = True if data['is_active'] == 'on' else False
+            obj = ProjectManagers(**data)
+            obj.save()
+            return HttpResponseRedirect("/")
+        return HttpResponse(status=400)
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -145,12 +172,13 @@ def project_managers_update(request, pk):
         'formset': formset,
         'page_title': 'Обновление списка участников',
         'bred_title': 'Список участников',
-        'project': project
+        'project': project,
+        'user': request.user
     }
     return render(request, 'projectsapp/company_update.html', context)
 
 
-#  ------------------------------------ UPDATE PROJECT'S GALLERY ----------------------------------------------
+#  ------------------------------------ PROJECT'S GALLERY ----------------------------------------------
 
 
 @user_passes_test(lambda u: u.is_superuser)

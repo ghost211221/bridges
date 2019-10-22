@@ -127,12 +127,21 @@
                                                                 <i><a href="{{ i.company.get_absolute_url }}"> {{ i.company.form }} {{ i.company.name }}</a></i>
                                                             {% endfor %})
                                                         {% endif %}
+{#                                                        {% if request.user.is_superuser %}#}
+{#                                                            <form action="" method="post">#}
+{#                                                                {% csrf_token %}#}
+{#                                                                <button type="submit" value="удалить" class="btn btn-success">удалить</button>#}
+{#                                                            </form>#}
+{#                                                        {% endif %}#}
                                                     </li>
                                                 {% endfor %}
                                             {% endif %}
                                             {% if request.user.is_superuser %}
                                                 <li>
                                                     <a href="{% url 'projects:manager_update' object.pk %}"><i>... изменить</i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="{% url 'projects:manager_create' object.pk %}"><i>... добавить</i></a>
                                                 </li>
                                             <div class="wprt-spacer" data-desktop="15" data-mobi="15"
                                                  data-smobi="15"></div>
@@ -162,6 +171,8 @@
                                         </div>
                                         <div class="wprt-spacer" data-desktop="20" data-mobi="40" data-smobi="40"></div>
                                     </div>
+
+{# ---------------------------------------------------- РАБОТА НАД ПРОЕКТОМ ----------------------------------------------------#}
 
                                     <div class="col-md-12">
                                         <div class="wprt-toggle active style-1">
