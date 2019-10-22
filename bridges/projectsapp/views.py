@@ -76,30 +76,9 @@ class ProjectsSolutionsCreateView(CreateMixin, View):
     viriable_model = TechnicalSolutions
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def project_solutions_update(request, pk):
-    project = get_object_or_404(Project, pk=pk)
-    project_form = ProjectForm(instance=project)
-    solutions_formset = inlineformset_factory(Project, ProjectHasTechnicalSolutions, form=ProjectSolutionsForm, extra=1)
-    formset = solutions_formset(instance=project)
-    if request.method == 'POST':
-        project_form = ProjectForm(request.POST, instance=project)
-        formset = solutions_formset(request.POST)
-        if project_form.is_valid():
-            updated_project = project_form.save(commit=False)
-            formset = solutions_formset(request.POST, instance=updated_project)
-            if formset.is_valid():
-                updated_project.save()
-                formset.save()
-                return HttpResponseRedirect(updated_project.get_absolute_url())
-    context = {
-        'project_form': project_form,
-        'formset': formset,
-        'page_title': 'Обновление технических решений',
-        'bred_title': 'Обновление техрешений',
-        'project': project
-    }
-    return render(request, 'projectsapp/company_update.html', context)
+class ProjectsSolutionsDeleteView(DeleteMixin, View):
+    form_model = ProjectHasTechnicalSolutions
+    template = 'projectsapp/projectmanagers_confirm_delete.html'
 
 
 #  ------------------------------------ PROJECT'S COMPANIES ----------------------------------------------
