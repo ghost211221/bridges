@@ -51,7 +51,7 @@
                                     {% endfor %}
                                  <a href="{% url 'products:product_service_update' product.slug %}">редактировать</a>
                                 <p></p>
-                                    <p><a href="#" class="wprt-button small rounded-3px">Заказать</a></p>
+                                    <p><a href="{% url 'orders:order_create' product.pk %}" class="wprt-button small rounded-3px">Заказать</a></p>
                                 </div><!-- /.col-md-4 -->
 <!--СОСТАВ РАБОТ И МАТЕРИАЛОВ-->
                                 <div class="col-md-12">

@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'servicesapp',
     'researchapp',
     'partnersapp',
+    'ordersapp',
 ]
 
 MIDDLEWARE = [
