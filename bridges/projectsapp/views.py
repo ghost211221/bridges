@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.utils.decorators import method_decorator
 
-from projectsapp.utils import CreateMixin
+from projectsapp.utils import CreateMixin, DeleteMixin
 from .forms import *
 from projectsapp.models import ProjectManagers
 from projectsapp.models import ProjectImage
@@ -128,47 +128,13 @@ def company_update(request, pk):
 class ProjectsManagerCreateView(CreateMixin, View):
     form_model = ProjectManagers
     form = ProjectManagerCreateForm
-    template = 'projectsapp/project_manager_add.html'
+    template = 'projectsapp/projectmanagers_form.html'
     FormSet = modelformset_factory(form_model, fields='__all__')
 
 
-class ProjectsManagerDeleteView(View):
-
-    def get(self, requset, pk):
-        manager = get_object_or_404(ProjectManagers, pk=pk)
-        return render(requset, 'projectsapp/projectmanagers_confirm_delete.html', context={'manager': manager})
-
-    def post(self, request, pk):
-        manager = get_object_or_404(ProjectManagers, pk=pk)
-        project = manager.project
-        manager.delete()
-        return HttpResponseRedirect(project.get_absolute_url())
-
-# @user_passes_test(lambda u: u.is_superuser)
-# def project_managers_update(request, pk):
-#     project = get_object_or_404(Project, pk=pk)
-#     project_form = ProjectForm(instance=project)
-#     managers_formset = inlineformset_factory(Project, ProjectManagers, form=ProjectManagerForm, extra=1)
-#     formset = managers_formset(instance=project)
-#     if request.method == 'POST':
-#         project_form = ProjectForm(request.POST, instance=project)
-#         formset = managers_formset(request.POST)
-#         if project_form.is_valid():
-#             updated_project = project_form.save(commit=False)
-#             formset = managers_formset(request.POST, instance=updated_project)
-#             if formset.is_valid():
-#                 updated_project.save()
-#                 formset.save()
-#                 return HttpResponseRedirect(updated_project.get_absolute_url())
-#     context = {
-#         'project_form': project_form,
-#         'formset': formset,
-#         'page_title': 'Обновление списка участников',
-#         'bred_title': 'Список участников',
-#         'project': project,
-#         'user': request.user
-#     }
-#     return render(request, 'projectsapp/company_update.html', context)
+class ProjectsManagerDeleteView(DeleteMixin, View):
+    form_model = ProjectManagers
+    template = 'projectsapp/projectmanagers_confirm_delete.html'
 
 
 #  ------------------------------------ PROJECT'S GALLERY ----------------------------------------------

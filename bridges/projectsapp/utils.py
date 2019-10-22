@@ -1,11 +1,8 @@
-from django.forms import modelformset_factory
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.shortcuts import render, redirect, get_object_or_404
 
 from authapp.models import Users
-from projectsapp.forms import ProjectManagerCreateForm
-from projectsapp.models import Project, ProjectManagers
+from projectsapp.models import Project
 
 
 class ObjectCreateMixin:
@@ -33,7 +30,7 @@ class CreateMixin:
         project = Project.objects.get(pk=project_pk)
         form = self.form(initial={"project": project})
         context = {
-            'project_manager_form': form
+            'form': form
         }
         return render(request, template_name=self.template, context=context)
 
@@ -53,3 +50,18 @@ class CreateMixin:
             obj.save()
             return HttpResponseRedirect(project.get_absolute_url())
         return HttpResponse(status=400)
+
+
+class DeleteMixin:
+    form_model = None
+    template = None
+
+    def get(self, requset, pk):
+        obj = get_object_or_404(self.form_model, pk=pk)
+        return render(requset, self.template, context={'obj': obj})
+
+    def post(self, request, pk):
+        item = get_object_or_404(self.form_model, pk=pk)
+        project = item.project
+        item.delete()
+        return HttpResponseRedirect(project.get_absolute_url())
