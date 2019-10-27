@@ -43,6 +43,9 @@ class Project(models.Model):
     def get_absolute_url(self):
         return reverse('projects:project', args=[str(self.id)])
 
+    def get_absolute_discuss_url(self):
+        return reverse('projects:project_discuss_items', args=[str(self.id)])
+
     def __str__(self):
         return f"{self.name} ({self.city})"
 
@@ -128,10 +131,11 @@ class ProjectCompany(models.Model):
         (AGENT, 'агент'),
         (PARTNER, 'партнер'),
     )
-    role = models.CharField(verbose_name='роль в проекте', max_length=24, choices=STATUS_CHOICES, blank=True)
     project = models.ForeignKey(Project, blank=True, null=True, default=None, on_delete=models.CASCADE,
                                 related_name="companies")
-    company = models.ForeignKey(Company, verbose_name='Выберите компанию', blank=True, null=True, default=None, on_delete=models.CASCADE)
+    role = models.CharField(verbose_name='роль в проекте', max_length=24, choices=STATUS_CHOICES, blank=True)
+    company = models.ForeignKey(Company, verbose_name='Выберите компанию', blank=True, null=True, default=None,
+                                on_delete=models.CASCADE)
     is_active = models.BooleanField(verbose_name='Активный', default=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
@@ -169,10 +173,10 @@ class ProjectManagers(models.Model):
         (COMMERSANT, 'коммерсант'),
         (ASSISTANT, 'ассистент'),
     )
-    project = models.ForeignKey(Project, verbose_name='проект', blank=True, null=True, default=None, on_delete=models.CASCADE,
-                                related_name="managers")
-    role = models.CharField(verbose_name='роль в проекте', max_length=24, choices=STATUS_CHOICES, blank=True)
-    manager = models.ForeignKey(Users, verbose_name='Участники', blank=True, null=True, default=None, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, verbose_name='проект', on_delete=models.CASCADE, related_name="managers",
+                                blank=True, null=True)
+    role = models.CharField(verbose_name='роль в проекте', max_length=24, choices=STATUS_CHOICES)
+    manager = models.ForeignKey(Users, verbose_name='Участники', on_delete=models.CASCADE, blank=True, null=True)
     description = models.TextField(verbose_name='комментарий', blank=True)
     is_active = models.BooleanField(verbose_name='Активный', default=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
@@ -181,3 +185,20 @@ class ProjectManagers(models.Model):
     class Meta:
         verbose_name = 'Участник проекта'
         verbose_name_plural = 'Участники проекта'
+
+
+class ProjectDiscussMember(models.Model):
+    project = models.ForeignKey(Project, verbose_name='проект обсуждения', on_delete=models.CASCADE)
+    user = models.ForeignKey(Users, verbose_name='участник обсуждения', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return 'участник дискусии {}'.format(self.project)
+
+
+class ProjectDiscussItem(models.Model):
+    project = models.ForeignKey(Project, verbose_name='проект обсуждения', on_delete=models.CASCADE)
+    user = models.ForeignKey(Users, verbose_name='участник обсуждения', on_delete=models.CASCADE)
+    comment = models.TextField(verbose_name='добавить сообщение', max_length=1500, null=True, blank=True)
+
+    def __str__(self):
+        return 'комментарий к дискусии {}'.format(self.project)

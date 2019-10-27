@@ -1,12 +1,21 @@
-from django.forms import inlineformset_factory
+from django.contrib.auth.decorators import user_passes_test, login_required
+from django.forms import inlineformset_factory, modelformset_factory
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+
+from projectsapp.utils import CreateMixin, DeleteMixin
 from .forms import *
+<<<<<<< HEAD
 from projectsapp.models import Project, ProjectImage, ProjectHasTechnicalSolutions, ProjectCompany, ProjectManagers
 from projectsapp.models import ProjectImage
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from projectsapp.forms import ProjectSolutionsForm, ProjectManagerForm, ProjectCompanyForm
 from projectsapp.forms import ProjectManagerUpdateFormset
+=======
+from projectsapp.models import ProjectImage, ProjectManagers
+from django.views.generic import View
+from django.views.generic import ListView, DetailView
+>>>>>>> upstream/sprint_3
 from projectsapp.models import Project, ProjectHasTechnicalSolutions, ProjectCompany
 from authapp.models import Users
 
@@ -50,6 +59,10 @@ class ProjectRead(DetailView):
         return context
 
 
+#  ------------------------------------ PROJECT'S DETAILS ----------------------------------------------
+
+
+@user_passes_test(lambda u: u.is_superuser)
 def project_update(request, pk):
     project = get_object_or_404(Project, pk=pk)
     project_form = ProjectUpdateForm(instance=project)
@@ -66,37 +79,24 @@ def project_update(request, pk):
     }
     return render(request, 'projectsapp/company_update.html', context)
 
-#  ------------------------------------ UPDATE PROJECT'S SOLUTIONS ----------------------------------------------
+
+#  ------------------------------------ PROJECT'S SOLUTIONS ----------------------------------------------
 
 
-def project_solutions_update(request, pk):
-    project = get_object_or_404(Project, pk=pk)
-    project_form = ProjectForm(instance=project)
-    solutions_formset = inlineformset_factory(Project, ProjectHasTechnicalSolutions, form=ProjectSolutionsForm, extra=1)
-    formset = solutions_formset(instance=project)
-    if request.method == 'POST':
-        project_form = ProjectForm(request.POST, instance=project)
-        formset = solutions_formset(request.POST)
-        if project_form.is_valid():
-            updated_project = project_form.save(commit=False)
-            formset = solutions_formset(request.POST, instance=updated_project)
-            if formset.is_valid():
-                updated_project.save()
-                formset.save()
-                return HttpResponseRedirect(updated_project.get_absolute_url())
-    context = {
-        'project_form': project_form,
-        'formset': formset,
-        'page_title': 'Обновление технических решений',
-        'bred_title': 'Обновление техрешений',
-        'project': project
-    }
-    return render(request, 'projectsapp/company_update.html', context)
+class ProjectsSolutionsCreateView(CreateMixin, View):
+    form_model = ProjectHasTechnicalSolutions
+    form = ProjectSolutionsCreateForm
+    template = 'projectsapp/projectsolutions_form.html'
+    FormSet = modelformset_factory(form_model, fields='__all__')
+    variable = 'techsol'
+    viriable_model = TechnicalSolutions
 
 
-#  ------------------------------------ UPDATE PROJECT'S COMPANIES ----------------------------------------------
+class ProjectsSolutionsDeleteView(DeleteMixin, View):
+    form_model = ProjectHasTechnicalSolutions
+    template = 'projectsapp/projectmanagers_confirm_delete.html'
 
-
+<<<<<<< HEAD
 def company_update(request, pk):
     project = get_object_or_404(Project, pk=pk)
     project_form = ProjectForm(instance=project)
@@ -221,11 +221,46 @@ class DeleteProjectManager(PermissionRequiredMixin, UpdateView):
 #         'project': project
 #     }
 #     return render(request, 'projectsapp/company_update.html', context)
+=======
+
+#  ------------------------------------ PROJECT'S COMPANIES ----------------------------------------------
 
 
-#  ------------------------------------ UPDATE PROJECT'S GALLERY ----------------------------------------------
+class ProjectsCompanyCreateView(CreateMixin, View):
+    form_model = ProjectCompany
+    form = ProjectCompanyCreateForm
+    template = 'projectsapp/projectcompany_form.html'
+    FormSet = modelformset_factory(form_model, fields='__all__')
+    variable = 'company'
+    viriable_model = Company
 
 
+class ProjectsCompanyDeleteView(DeleteMixin, View):
+    form_model = ProjectCompany
+    template = 'projectsapp/projectmanagers_confirm_delete.html'
+
+
+#  ------------------------------------ PROJECT'S MANAGERS ----------------------------------------------
+
+class ProjectsManagerCreateView(CreateMixin, View):
+    form_model = ProjectManagers
+    form = ProjectManagerCreateForm
+    template = 'projectsapp/projectmanagers_form.html'
+    FormSet = modelformset_factory(form_model, fields='__all__')
+    variable = 'manager'
+    viriable_model = Users
+>>>>>>> upstream/sprint_3
+
+
+class ProjectsManagerDeleteView(DeleteMixin, View):
+    form_model = ProjectManagers
+    template = 'projectsapp/projectmanagers_confirm_delete.html'
+
+
+#  ------------------------------------ PROJECT'S GALLERY ----------------------------------------------
+
+
+@user_passes_test(lambda u: u.is_superuser)
 def gallery_update(request, pk):
     project = Project.objects.get(pk=pk)
     project_form = ProjectForm(instance=project)
@@ -249,3 +284,60 @@ def gallery_update(request, pk):
         'project': project
     }
     return render(request, "projectsapp/gallery_update.html", context)
+
+
+def project_discuss_items(request, pk):
+    project = Project.objects.get(pk=pk)
+    project_discuss_items = ProjectDiscussItem.objects.filter(project_id=pk)
+    discuss_users = ProjectDiscussMember.objects.filter(project_id=pk)
+    self_user = request.user
+    if discuss_users.filter(user=self_user).exists():
+        if request.method == 'POST':
+            report_form = ProjectDiscussItemForm(data=request.POST)
+            if report_form.is_valid():
+                new_report_form = report_form.save(commit=False)
+                new_report_form.project = project
+                new_report_form.user = request.user
+                new_report_form.save()
+                return redirect(project.get_absolute_discuss_url())
+        else:
+            report_form = ProjectDiscussItemForm()
+        context = {
+            'object': project,
+            'project_discuss_items': project_discuss_items,
+            'discuss_users': discuss_users,
+            'form': report_form,
+            'page_title': 'Обсуждение проекта',
+            'bred_title': 'Обсуждение проекта',
+        }
+        return render(request, 'projectsapp/project_discuss_detail.html', context)
+    else:
+        context = {
+            'page_title': 'Доступ запрещен',
+        }
+        return render(request, 'projectsapp/project_access_denied.html', context)
+
+
+def project_discuss_edit_members(request, pk):
+    project = get_object_or_404(Project, pk=pk)
+    project_form = ProjectForm(instance=project)
+    InlineFormset = inlineformset_factory(Project, ProjectDiscussMember, form=ProjectDiscussMemberForm, extra=1)
+    formset = InlineFormset(instance=project)
+    if request.method == 'POST':
+        project_form = ProjectForm(request.POST, instance=project)
+        formset = InlineFormset(request.POST)
+        if project_form.is_valid():
+            updated_project_form = project_form.save(commit=False)
+            formset = InlineFormset(request.POST, instance=updated_project_form)
+            if formset.is_valid():
+                updated_project_form.save()
+                formset.save()
+                return HttpResponseRedirect(project.get_absolute_discuss_url())
+    context = {
+        'project': project,
+        'form': project_form,
+        'formset': formset,
+        'page_title': 'Редактирование участников проекта',
+        'bred_title': 'Редактирование участников проекта',
+    }
+    return render(request, 'projectsapp/discuss_members_update.html', context)

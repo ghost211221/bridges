@@ -1,7 +1,8 @@
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.forms import inlineformset_factory
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from ordersapp.models import Order
 from .forms import *
 from .models import *
 
@@ -11,12 +12,14 @@ def restricted_area(request):
     user = request.user
     user_companies = CompanyUsers.objects.filter(user_id=user.pk, works=True)
     user_projects = ProjectManagers.objects.filter(manager_id=user.pk)
+    user_orders = Order.objects.filter(user_id=user.pk)
     context = {
         'section': 'restricted_area',
         'page_title': 'Личный кабинет',
         'bred_title': 'Личный кабинет',
         'user_companies': user_companies,
         'user_projects': user_projects,
+        'user_orders': user_orders
     }
     return render(request, 'authapp/restricted_area.html', context)
 
@@ -74,6 +77,7 @@ def company_self_user_update(request, pk):
     return render(request, 'authapp/self_profile_update.html', context)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def profile_self_user_update(request, pk):
     user = get_object_or_404(Users, pk=pk)
     user_form = UsersForEditProfileForm(instance=user)
@@ -90,6 +94,7 @@ def profile_self_user_update(request, pk):
     return render(request, 'authapp/self_profile_update.html', context)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def project_self_user_update(request, pk):
     project_user = get_object_or_404(Users, pk=pk)
     project_user_form = UsersForProjectManagersForm(instance=project_user)
@@ -114,6 +119,7 @@ def project_self_user_update(request, pk):
     return render(request, 'authapp/self_profile_update.html', context)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def company_user_update(request, pk):
     company_user = get_object_or_404(Users, pk=pk)
     company_user_form = UsersForCompanyUsersForm(instance=company_user)
@@ -139,6 +145,7 @@ def company_user_update(request, pk):
     return render(request, 'authapp/user_profile_update.html', context)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def profile_user_update(request, pk):
     user = get_object_or_404(Users, pk=pk)
     user_form = UsersForEditProfileForm(instance=user)
@@ -156,6 +163,7 @@ def profile_user_update(request, pk):
     return render(request, 'authapp/user_profile_update.html', context)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def project_user_update(request, pk):
     project_user = get_object_or_404(Users, pk=pk)
     project_user_form = UsersForProjectManagersForm(instance=project_user)

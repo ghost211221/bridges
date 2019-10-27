@@ -16,24 +16,49 @@ class ProjectUpdateForm(forms.ModelForm):
         fields = ['name', 'status', 'city', 'address', 'coordinate', 'description', 'is_active']
 
 
-class ProjectManagerForm(forms.ModelForm):
-    class Meta:
-        model = ProjectManagers
-        fields = ['manager', 'role']
-
 class ProjectSolutionsForm(forms.ModelForm):
     class Meta:
         model = ProjectHasTechnicalSolutions
         fields = ['techsol', 'name', 'value']
 
 
-class ProjectCompanyForm(forms.ModelForm):
+class ProjectImageForm(forms.ModelForm):
+    class Meta:
+        model = ProjectImage
+        fields = ['image']
+
+
+class ProjectManagerCreateForm(forms.ModelForm):
+    project = forms.ModelChoiceField(queryset=Project.objects.all(), widget=forms.HiddenInput())
+
+    class Meta:
+        model = ProjectManagers
+        fields = '__all__'
+
+
+class ProjectCompanyCreateForm(forms.ModelForm):
+    project = forms.ModelChoiceField(queryset=Project.objects.all(), widget=forms.HiddenInput())
+
     class Meta:
         model = ProjectCompany
-        fields = ['company', 'role']
+        fields = '__all__'
 
 
-class ProjectImageForm(forms.ModelForm):
+class ProjectSolutionsCreateForm(forms.ModelForm):
+    project = forms.ModelChoiceField(queryset=Project.objects.all(), widget=forms.HiddenInput())
+
+    class Meta:
+        model = ProjectHasTechnicalSolutions
+        fields = '__all__'
+
+
+class ProjectDiscussItemForm(forms.ModelForm):
+    class Meta:
+        model = ProjectDiscussItem
+        fields = ['comment']
+
+
+class ProjectDiscussMemberForm(forms.ModelForm):
     class Meta:
         model = ProjectImage
         fields = ['image']
