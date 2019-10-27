@@ -5,17 +5,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from projectsapp.utils import CreateMixin, DeleteMixin
 from .forms import *
-<<<<<<< HEAD
-from projectsapp.models import Project, ProjectImage, ProjectHasTechnicalSolutions, ProjectCompany, ProjectManagers
-from projectsapp.models import ProjectImage
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from projectsapp.forms import ProjectSolutionsForm, ProjectManagerForm, ProjectCompanyForm
-from projectsapp.forms import ProjectManagerUpdateFormset
-=======
 from projectsapp.models import ProjectImage, ProjectManagers
 from django.views.generic import View
-from django.views.generic import ListView, DetailView
->>>>>>> upstream/sprint_3
+from django.views.generic import ListView, DetailView, DeleteView, CreateView
 from projectsapp.models import Project, ProjectHasTechnicalSolutions, ProjectCompany
 from authapp.models import Users
 
@@ -96,7 +88,6 @@ class ProjectsSolutionsDeleteView(DeleteMixin, View):
     form_model = ProjectHasTechnicalSolutions
     template = 'projectsapp/projectmanagers_confirm_delete.html'
 
-<<<<<<< HEAD
 def company_update(request, pk):
     project = get_object_or_404(Project, pk=pk)
     project_form = ProjectForm(instance=project)
@@ -123,44 +114,48 @@ def company_update(request, pk):
     return render(request, "projectsapp/company_update.html", context)
 
 #  ------------------------------------ PROJECT'S MANAGERS CRUD ----------------------------------------------
-
-def get_manager(pk):
-    """находит менеджера по id"""
-    return Users.objects.get(pk=pk)
- 
-class ProjectManagersList(ListView):
+    
+class CreateProjectManager(PermissionRequiredMixin, CreateView):
     model = ProjectManagers
-    template_name = 'projectsapp/manager_update.html'
-
-    pk_field = 'project'
-    def get_queryset(self):
-        query = Q()
-        if 'pk' in self.kwargs:
-            query = Q((self.pk_field, self.kwargs['pk']))
-        return super().get_queryset().filter(query)
-
-    def get_context_data(self, **kwargs):
-        context = super(ProjectManagersList, self).get_context_data(**kwargs)
-        context['form'] = ProjectManagerForm()
-        """может быть есть более быстрый и правильный способ добавить инфу о менеджере в объект по его manager_id"""
-        for obj in context['object_list']:
-            setattr(obj, 'manager_name', get_manager(obj.manager_id))
-        return context
-
+    form_class = ProjectManagerCreateForm
+    permission_required = f'{model._meta.app_label}.change_{model.__name__}'
+    template = 'projectsapp/projectmanagers_form.html'
     
 
 
+    form = ProjectManagerCreateForm
+    def get(self, request, project_pk):
+        self.project = Project.objects.get(pk=project_pk)
+        self.success_url = self.project.get_absolute_url()
+        form = self.form(initial={"project": self.project})
+        context = {
+            'form': form
+        }
+        return render(request, template_name=self.template, context=context)
 
+    def form_valid(self, form, **kwargs):
+        response = super().form_valid(form)
+        if form(**kwargs).is_valid():
+            form.save()
+        return reverse(self.success_url)
 
+    def get_context_data(self, **kwargs):
+        project = Project.objects.get(pk=project_pk)
+        context = super(CreateProjectManager, self).get_context_data(**kwargs)
+        context.update({"project": project})                     
+        return context
 
-class CreateProjectManager(PermissionRequiredMixin, CreateView):
+class DeleteProjectManager(PermissionRequiredMixin, DeleteView):
     model = ProjectManagers
+    permission_required = f'{model._meta.app_label}.change_{model.__name__}'
 
-class UpdateProjectManager(PermissionRequiredMixin, UpdateView):
-    model = ProjectManagers
+    template = 'projectsapp/projectmanagers_confirm_delete.html'
 
-class DeleteProjectManager(PermissionRequiredMixin, UpdateView):
-    model = ProjectManagers
+    def post(self, request, pk):
+        item = get_object_or_404(self.model, pk=pk)
+        project = item.project
+        item.delete()
+        return HttpResponseRedirect(project.get_absolute_url())
 
 
 # #  ------------------------------------ UPDATE PROJECT'S MANAGERS ----------------------------------------------
@@ -221,7 +216,6 @@ class DeleteProjectManager(PermissionRequiredMixin, UpdateView):
 #         'project': project
 #     }
 #     return render(request, 'projectsapp/company_update.html', context)
-=======
 
 #  ------------------------------------ PROJECT'S COMPANIES ----------------------------------------------
 
@@ -249,7 +243,6 @@ class ProjectsManagerCreateView(CreateMixin, View):
     FormSet = modelformset_factory(form_model, fields='__all__')
     variable = 'manager'
     viriable_model = Users
->>>>>>> upstream/sprint_3
 
 
 class ProjectsManagerDeleteView(DeleteMixin, View):
