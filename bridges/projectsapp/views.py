@@ -271,7 +271,7 @@ def gallery_update(request, pk):
                 return HttpResponseRedirect(created_project.get_absolute_url())
     context = {
         'project_form': project_form,
-        'formset1': formset,
+        'formset': formset,
         'page_title': 'Добавление фотографий',
         'bred_title': 'Добавление фотографий',
         'project': project
