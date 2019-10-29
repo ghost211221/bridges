@@ -29,9 +29,13 @@ def product(request, slug):
     documents = docs.filter(type__id=1)
     product_services = Service.objects.filter(technicalsolutionshasservice__technicalsolutions__slug=slug)
     feedback = docs.filter(type__id=4).order_by('pk')
+    if request.user.is_staff:
+        projects = item.get_projects()
+    else:
+        projects = item.get_projects().filter(project__status='завершен')
 
     content = {
-        'projects': item.get_projects(),
+        'projects': projects,
         'works': item.get_works(),
         'page_title': item,
         'bred_title': item,
