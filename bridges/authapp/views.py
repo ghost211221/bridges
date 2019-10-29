@@ -1,8 +1,9 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.forms import inlineformset_factory
+from django.forms import inlineformset_factory, modelformset_factory
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from ordersapp.models import Order
+from django.views.generic import View, CreateView
 from .forms import *
 from .models import *
 
@@ -117,6 +118,10 @@ def project_self_user_update(request, pk):
         'bred_title': 'Редактор проектов пользователя'
     }
     return render(request, 'authapp/self_profile_update.html', context)
+
+
+class ProjectsManagerCreateView(CreateView):
+    pass
 
 
 @user_passes_test(lambda u: u.is_superuser)

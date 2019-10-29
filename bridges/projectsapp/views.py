@@ -1,6 +1,5 @@
-from django.contrib.auth.decorators import user_passes_test, login_required
+from django.contrib.auth.decorators import user_passes_test
 from django.forms import inlineformset_factory, modelformset_factory
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 
 from projectsapp.utils import CreateMixin, DeleteMixin
@@ -12,9 +11,8 @@ from projectsapp.models import Project, ProjectHasTechnicalSolutions, ProjectCom
 from authapp.models import Users
 
 from django.http import HttpResponseRedirect
-from django.db.models import Q
 
-from django.contrib.auth.mixins import  PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.urls import reverse_lazy
 
 
@@ -88,74 +86,75 @@ class ProjectsSolutionsDeleteView(DeleteMixin, View):
     form_model = ProjectHasTechnicalSolutions
     template = 'projectsapp/projectmanagers_confirm_delete.html'
 
-def company_update(request, pk):
-    project = get_object_or_404(Project, pk=pk)
-    project_form = ProjectForm(instance=project)
-    company_formset = inlineformset_factory(Project, ProjectCompany, form=ProjectCompanyForm, extra=1)
-    formset = company_formset(instance=project)
-    if request.method == "POST":
-        project_form = ProjectForm(request.POST)
-        project_form = ProjectForm(request.POST, instance=project)
-        formset = company_formset(request.POST)
-        if project_form.is_valid():
-            created_project = project_form.save(commit=False)
-            formset = company_formset(request.POST, instance=created_project)
-            if formset.is_valid():
-                created_project.save()
-                formset.save()
-                return HttpResponseRedirect(created_project.get_absolute_url())
-    context ={
-        'project_form': project_form,
-        'formset1': formset,
-        'page_title': 'Добавление контрагентов',
-        'bred_title': 'Добавление контрагентов',
-        'project': project
-    }
-    return render(request, "projectsapp/company_update.html", context)
+
+# def company_update(request, pk):
+#     project = get_object_or_404(Project, pk=pk)
+#     project_form = ProjectForm(instance=project)
+#     company_formset = inlineformset_factory(Project, ProjectCompany, form=ProjectCompanyForm, extra=1)
+#     formset = company_formset(instance=project)
+#     if request.method == "POST":
+#         project_form = ProjectForm(request.POST)
+#         project_form = ProjectForm(request.POST, instance=project)
+#         formset = company_formset(request.POST)
+#         if project_form.is_valid():
+#             created_project = project_form.save(commit=False)
+#             formset = company_formset(request.POST, instance=created_project)
+#             if formset.is_valid():
+#                 created_project.save()
+#                 formset.save()
+#                 return HttpResponseRedirect(created_project.get_absolute_url())
+#     context ={
+#         'project_form': project_form,
+#         'formset1': formset,
+#         'page_title': 'Добавление контрагентов',
+#         'bred_title': 'Добавление контрагентов',
+#         'project': project
+#     }
+#     return render(request, "projectsapp/company_update.html", context)
 
 #  ------------------------------------ PROJECT'S MANAGERS CRUD ----------------------------------------------
     
-class CreateProjectManager(PermissionRequiredMixin, CreateView):
-    model = ProjectManagers
-    form_class = ProjectManagerCreateForm
-    permission_required = f'{model._meta.app_label}.change_{model.__name__}'
-    template = 'projectsapp/projectmanagers_form.html'
-    
-
-
-    form = ProjectManagerCreateForm
-    def get(self, request, project_pk):
-        self.project = Project.objects.get(pk=project_pk)
-        self.success_url = self.project.get_absolute_url()
-        form = self.form(initial={"project": self.project})
-        context = {
-            'form': form
-        }
-        return render(request, template_name=self.template, context=context)
-
-    def form_valid(self, form, **kwargs):
-        response = super().form_valid(form)
-        if form(**kwargs).is_valid():
-            form.save()
-        return reverse(self.success_url)
-
-    def get_context_data(self, **kwargs):
-        project = Project.objects.get(pk=project_pk)
-        context = super(CreateProjectManager, self).get_context_data(**kwargs)
-        context.update({"project": project})                     
-        return context
-
-class DeleteProjectManager(PermissionRequiredMixin, DeleteView):
-    model = ProjectManagers
-    permission_required = f'{model._meta.app_label}.change_{model.__name__}'
-
-    template = 'projectsapp/projectmanagers_confirm_delete.html'
-
-    def post(self, request, pk):
-        item = get_object_or_404(self.model, pk=pk)
-        project = item.project
-        item.delete()
-        return HttpResponseRedirect(project.get_absolute_url())
+# class CreateProjectManager(PermissionRequiredMixin, CreateView):
+#     model = ProjectManagers
+#     form_class = ProjectManagerCreateForm
+#     permission_required = f'{model._meta.app_label}.change_{model.__name__}'
+#     template = 'projectsapp/projectmanagers_form.html'
+#
+#
+#
+#     form = ProjectManagerCreateForm
+#     def get(self, request, project_pk):
+#         self.project = Project.objects.get(pk=project_pk)
+#         self.success_url = self.project.get_absolute_url()
+#         form = self.form(initial={"project": self.project})
+#         context = {
+#             'form': form
+#         }
+#         return render(request, template_name=self.template, context=context)
+#
+#     def form_valid(self, form, **kwargs):
+#         response = super().form_valid(form)
+#         if form(**kwargs).is_valid():
+#             form.save()
+#         return reverse(self.success_url)
+#
+#     def get_context_data(self, **kwargs):
+#         project = Project.objects.get(pk=project_pk)
+#         context = super(CreateProjectManager, self).get_context_data(**kwargs)
+#         context.update({"project": project})
+#         return context
+#
+# class DeleteProjectManager(PermissionRequiredMixin, DeleteView):
+#     model = ProjectManagers
+#     permission_required = f'{model._meta.app_label}.change_{model.__name__}'
+#
+#     template = 'projectsapp/projectmanagers_confirm_delete.html'
+#
+#     def post(self, request, pk):
+#         item = get_object_or_404(self.model, pk=pk)
+#         project = item.project
+#         item.delete()
+#         return HttpResponseRedirect(project.get_absolute_url())
 
 
 # #  ------------------------------------ UPDATE PROJECT'S MANAGERS ----------------------------------------------

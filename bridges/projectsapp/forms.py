@@ -63,6 +63,7 @@ class ProjectDiscussMemberForm(forms.ModelForm):
         model = ProjectImage
         fields = ['image']
 
+
 class ProjectManagerUpdateFormset(forms.models.BaseInlineFormSet):
     management_template = '<{tag} name="{prefix}-management_form">{form}</{tag}>'.format
     form_template = '<{tag} name="{prefix}-{index}-form">{form}</{tag}>'.format
