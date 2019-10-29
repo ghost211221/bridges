@@ -17,17 +17,22 @@ from django.urls import reverse_lazy
 
 
 class ProjectsList(ListView):
-    """docstring for ProductList"""    
+    """docstring for ProductList"""
+    paginate_by = 6
     model = Project
-
     template_name = 'projectsapp/grid.html'
     extra_context = {}
+
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            return Project.objects.all()
+        else:
+            return Project.objects.filter(status__exact='завершен')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         products = TechnicalSolutions.objects.all()
         values = ProjectHasTechnicalSolutions.objects.all()
-        # context.update({'values': values,
         context.update({'products': products,
                         'values': values,
                         'page_title': 'Проекты компании',
@@ -40,6 +45,12 @@ class ProjectRead(DetailView):
     model = Project
     extra_context = {}    
     not_empty_url = reverse_lazy('projects:project')
+
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            return Project.objects.all()
+        else:
+            return Project.objects.filter(status__exact='завершен')
 
     def get_context_data(self, **kwargs):
         context = super(ProjectRead, self).get_context_data(**kwargs)
