@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'researchapp',
     'partnersapp',
     'ordersapp',
+    'newsapp',
 ]
 
 MIDDLEWARE = [
