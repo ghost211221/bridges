@@ -15,6 +15,8 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.urls import reverse_lazy
 
+#  ------------------------------------ PROJECT'S CRUD ----------------------------------------------
+
 
 class ProjectsList(ListView):
     """docstring for ProductList"""
@@ -60,7 +62,10 @@ class ProjectRead(DetailView):
         return context
 
 
-#  ------------------------------------ PROJECT'S DETAILS ----------------------------------------------
+class ProjectCreateView(CreateView):
+    model = Project
+    form_class = ProjectUpdateForm
+    template_name = 'projectsapp/gallery_update.html'
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -68,7 +73,7 @@ def project_update(request, pk):
     project = get_object_or_404(Project, pk=pk)
     project_form = ProjectUpdateForm(instance=project)
     if request.method == 'POST':
-        project_form = ProjectUpdateForm(request.POST, instance=project)
+        project_form = ProjectUpdateForm(request.POST, request.FILES, instance=project)
         if project_form.is_valid():
             project_form.save()
             return HttpResponseRedirect(project.get_absolute_url())
@@ -78,10 +83,10 @@ def project_update(request, pk):
         'bred_title': 'Обновление проекта',
         'project': project
     }
-    return render(request, 'projectsapp/company_update.html', context)
+    return render(request, 'projectsapp/gallery_update.html', context)
 
 
-#  ------------------------------------ PROJECT'S SOLUTIONS ----------------------------------------------
+#  ------------------------------------ PROJECT'S SOLUTIONS CRUD ----------------------------------------------
 
 
 class ProjectsSolutionsCreateView(CreateMixin, View):
@@ -227,7 +232,7 @@ class ProjectsSolutionsDeleteView(DeleteMixin, View):
 #     }
 #     return render(request, 'projectsapp/company_update.html', context)
 
-#  ------------------------------------ PROJECT'S COMPANIES ----------------------------------------------
+#  ------------------------------------ PROJECT'S COMPANIES CruD ----------------------------------------------
 
 
 class ProjectsCompanyCreateView(CreateMixin, View):
@@ -244,7 +249,7 @@ class ProjectsCompanyDeleteView(DeleteMixin, View):
     template = 'projectsapp/projectmanagers_confirm_delete.html'
 
 
-#  ------------------------------------ PROJECT'S MANAGERS ----------------------------------------------
+#  ------------------------------------ PROJECT'S MANAGERS CruD ----------------------------------------------
 
 class ProjectsManagerCreateView(CreateMixin, View):
     form_model = ProjectManagers
@@ -260,7 +265,7 @@ class ProjectsManagerDeleteView(DeleteMixin, View):
     template = 'projectsapp/projectmanagers_confirm_delete.html'
 
 
-#  ------------------------------------ PROJECT'S GALLERY ----------------------------------------------
+#  ------------------------------------ PROJECT'S GALLERY crUd----------------------------------------------
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -287,6 +292,9 @@ def gallery_update(request, pk):
         'project': project
     }
     return render(request, "projectsapp/gallery_update.html", context)
+
+
+#  ------------------------------------ PROJECT'S GALLERY crUd----------------------------------------------
 
 
 def project_discuss_items(request, pk):
