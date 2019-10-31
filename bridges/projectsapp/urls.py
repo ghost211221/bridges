@@ -22,4 +22,3 @@ urlpatterns = [
     path('discuss/edit/members/<int:pk>', projectsapp.project_discuss_edit_members,
          name='project_discuss_edit_members'),
 ]
-
