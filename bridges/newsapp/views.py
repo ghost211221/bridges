@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.shortcuts import render
 
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView
@@ -5,6 +7,7 @@ from django.views.generic import ListView, DetailView, DeleteView, CreateView, U
 from django.contrib.auth.mixins import  PermissionRequiredMixin
 
 from .models import News
+
 
 # Create your views here.
 class NewsListView(ListView):
@@ -16,6 +19,8 @@ class NewsListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update({})
+        print(context)
+        print(context['object_list'][0].__dict__.items())
         return context
 
 # Create your views here.
