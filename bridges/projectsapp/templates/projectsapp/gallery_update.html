@@ -6,6 +6,7 @@
 
         <form action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}
+            {{ form.as_p }}
             {{ project_form.as_p }}
             {{ formset.as_p }}
             <button type="submit" value="сохранить" class="btn btn-success">
@@ -23,11 +24,6 @@
 
 {% endblock %}
 
-{% block js %}
-    {{ block.super }}
-    <script src="{% static 'assets/js/orders_scripts.js' %}"></script>
-    <script src="{% static 'assets/js/jquery.formset.js' %}"></script>
-{% endblock %}
 
 
 

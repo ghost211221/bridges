@@ -1,8 +1,8 @@
+from django.contrib import admin
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.urls import reverse
 
-
-# Create your models here.
 
 class CategoryCompany(models.Model):
     """ модель содержит информацию о категории компании,
@@ -57,6 +57,9 @@ class Company(models.Model):
     def __str__(self):
         return self.name.title()
 
+    def get_absolute_url(self):
+        return reverse('partners:partner_detail', args=[str(self.id)])
+
 
 class Users(AbstractUser):
     """ модель содержит информацию о всех пользователях, включая superuser, сотрудников компании
@@ -66,8 +69,8 @@ class Users(AbstractUser):
     Создадим дополнительные поля. """
     GENDER_CHOICES = (
         (None, 'не указан'),
-        ('male', 'мужчина'),
-        ('female', 'женщина'),
+        ('male', 'муж'),
+        ('female', 'жен'),
     )
     username = models.CharField(verbose_name='Логин*', max_length=50, unique=True)  # переопределили из-за verbose_name
     first_name = models.CharField(verbose_name='Имя', max_length=50)
@@ -81,11 +84,20 @@ class Users(AbstractUser):
         verbose_name = "Пользователь"
         ordering = ['-date_joined']
 
+    def get_self_absolute_url(self):
+        return reverse('restricted_area')
+
+    def get_absolute_url(self):
+        return reverse('user_profile', args=[str(self.id)])
+
     def get_company(self):
         return self.company.select_related()
 
     def __str__(self):
-        return str(f"{self.first_name} {self.patronymic} {self.last_name}")
+        if self.patronymic:
+            return str(f"{self.first_name} {self.patronymic} {self.last_name}")
+        else:
+            return str(f"{self.first_name} {self.last_name}")
 
 
 class CompanyUsers(models.Model):
@@ -93,6 +105,7 @@ class CompanyUsers(models.Model):
     user = models.ForeignKey(Users, on_delete=models.PROTECT, verbose_name='Сотрудник', blank=True,
                              related_name='company')
     position = models.CharField(verbose_name='Должность', max_length=50, blank=True)
+    works = models.BooleanField(verbose_name='Работает в компании', default=True, null=True)
 
     class Meta:
         verbose_name = 'Компания - работодатель'

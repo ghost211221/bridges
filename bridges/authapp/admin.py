@@ -22,15 +22,7 @@ class FormCompanyAdmin(admin.ModelAdmin):
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
     list_display = ('name', 'inn', 'category', 'city')
-    search_fields = ('name',
-                     'short_name',
-                     'form_company',
-                     'category',
-                     'inn',
-                     'city',
-                     'address',
-                     'phone',
-                     'email',)
+    search_fields = ('name', 'inn', )
     # укажем быстрые фильтры для фильтрации записей
     list_filter = ('category', 'city')
 
@@ -38,10 +30,10 @@ class CompanyAdmin(admin.ModelAdmin):
 @admin.register(Users)
 class UsersAdmin(admin.ModelAdmin):
     # поля, которые не нужно редактировать в админке
-    readonly_fields = ('password', 'is_superuser', 'last_login', 'date_joined')  # 'user_permissions', 'groups')
+    readonly_fields = ('password', 'is_superuser', 'last_login', 'date_joined')  #'user_permissions', 'groups')
 
     # какие поля выводить в админке
-    list_display = ('username', 'first_name', 'last_name', 'is_active', 'is_staff', 'phone', 'email')
+    list_display = ('username', 'first_name', 'last_name', 'is_active', 'is_staff', 'phone', 'email',)
 
     # по каким полям может осуществляться поиск в админке
     search_fields = ('username',
@@ -57,7 +49,7 @@ class UsersAdmin(admin.ModelAdmin):
     # в админке поля формы можно группировать
     fieldsets = (
         ('Личные данные',
-         {'fields': ('username', 'password', 'first_name', 'last_name', 'patronymic', 'gender', 'birthday')}),
+         {'fields': ('username', 'password', 'is_superuser', 'last_login', 'date_joined', 'first_name', 'last_name', 'patronymic', 'gender', 'birthday')}),
         ('Контактные данные', {'fields': ('phone', 'email')}),
         ('Данные сотрудника',
          {'fields': ('is_staff', 'is_active', 'groups',)}),

@@ -1,0 +1,122 @@
+{% extends 'productsapp/base.html' %}
+{% load static %}
+{% block content-container %}
+    <!-- Main Content -->
+    <div id="main-content" class="site-main clearfix">
+        <div id="content-wrap">
+            <div id="site-content" class="site-content clearfix">
+                <div id="inner-content" class="inner-content-wrap">
+                    <div class="page-content">
+                        <section class="wprt-section">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="wprt-spacer" data-desktop="80" data-mobi="60" data-smobi="60"></div>
+                                    </div><!-- /.col-md-12 -->
+                                    <!--КРАТКОЕ ОПИСАНИЕ-->
+                                    <div class="col-md-8">
+                                        <div>
+                                            <h1 class="line-height-normal margin-bottom-10">Название
+                                                компании: {{ partner.name }}</h1>
+                                            <p>
+                                                <a href="{% url 'partners:partner_delete' partner.pk %}">... удалить
+                                                    компанию</a>
+
+                                            </p>
+                                            <p></p>
+                                            <h3 class="line-height-normal margin-bottom-10">ПРОЕКТЫ КОМПАНИИ</h3>
+                                            <div class="wprt-lines style-1 custom-3">
+                                                <div class="line-1"></div>
+                                                <div class="line-2"></div>
+                                            </div>
+
+                                            <div class="wprt-spacer" data-desktop="30" data-mobi="25"
+                                                 data-smobi="25"></div>
+                                            {% if company_projects %}
+                                                {% for item in company_projects %}
+                                                    <ul class="wprt-list style-2 accent-color margin-bottom-25">
+
+                                                        <li><p class="n_text"><strong>Название проекта:</strong><a
+                                                                href="{{ item.project.get_absolute_url }}"> {{ item.project }}</a>
+                                                            <br> <strong>Роль в проекте:</strong> {{ item.role }}</p></li>
+
+                                                    </ul>
+                                                {% endfor %}
+                                            {% else %}
+                                                <p>Компания {{ partner.name }} не участвовала ни в одном
+                                                    проекте.</p>
+                                            {% endif %}
+                                        </div>
+                                    </div><!-- /.col-md-8 -->
+                                    <!--ДОСТУПНЫЕ СЕРВИСЫ ПО ПРОДУКТУ-->
+                                    <div class="col-md-4">
+                                        <div class="wprt-spacer" data-desktop="0" data-mobi="20" data-smobi="20"></div>
+
+                                        <h3 class="line-height-normal margin-bottom-10">СОТРУДНИКИ КОМПАНИИ</h3>
+
+
+                                        <div class="wprt-spacer" data-desktop="30" data-mobi="25" data-smobi="25"></div>
+                                        <ul class="wprt-list style-2 accent-color margin-bottom-25">
+                                            {% for item in company_users %}
+                                                <li>
+                                                    <p class="n_text"><strong>ФИО:</strong><a href="{{ item.user.get_absolute_url }}"> {{ item.user.first_name }} {% if item.user.patronymic %}{{ item.user.patronymic }}{% endif %} {{ item.user.last_name }}</a>
+                                                        <br><strong>Должность:</strong> {{ item.position }}</p>
+                                                </li>
+                                            {% endfor %}
+                                            <a href="{% url 'partnersapp:partner_user_update' partner.pk %}">... редактировать</a>
+                                            {#                                            <li><strong>Заказчик:</strong> ThemeForest Builder</li>#}
+                                            {#                                            <li><strong>Проектировщик:</strong> Richardson and Sandra</li>#}
+                                            {#                                            <li><strong>подрядчик:</strong> GraphicRiver Builder Corporate</li>#}
+                                            {#                                            <li><strong>Бюджет:</strong> $1 250 000,00</li>#}
+                                        </ul>
+
+                                        {#                                        <a href="#" class="wprt-button small rounded-3px">LIVE PREVIEW</a>#}
+                                    </div><!-- /.col-md-4 -->
+                                    <!--СОСТАВ РАБОТ И МАТЕРИАЛОВ-->
+                                    <div class="col-md-12">
+                                        <div class="wprt-spacer" data-desktop="30" data-mobi="25"
+                                             data-smobi="25"></div>
+
+                                        <div>
+                                            <h2 class="line-height-normal margin-bottom-10">ИССЛЕДОВАНИЯ И
+                                                ДОКУМЕНТАЦИЯ</h2>
+                                        </div>
+                                        <div class="wprt-lines style-1 custom-3">
+                                            <div class="line-1"></div>
+                                            <div class="line-2"></div>
+                                        </div>
+                                        <div class="wprt-spacer" data-desktop="30" data-mobi="25"
+                                             data-smobi="25"></div>
+                                        <div class="col-md-6 row">
+                                            {% if company_documents %}
+                                                {% for item in company_documents %}
+                                                    <div class="wprt-toggle style-2">
+                                                        <h3 class="toggle-title">{{ item.name }}</h3>
+                                                        <div class="toggle-content" style="color: black;">
+                                                            <p class="n_text">{{ item.description }}</p>
+                                                            <div class="wprt-spacer" data-desktop="10" data-mobi="10"
+                                                                 data-smobi="10"></div>
+                                                            {% for i in item.file.all %}
+                                                            <a class="wprt-button small rounded-30px"
+                                                               href="/media/{{ i.file }}"
+                                                               target="_blank">СКАЧАТЬ PDF</a>
+                                                                {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            {% else %}
+                                                <p>Компания {{ partner.name }} не выпустила ни одного исследования и
+                                                    документации.</p>
+                                            {% endif %}
+                                        </div>
+                                    </div><!-- /.col-md-12 -->
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ Main Content -->
+{% endblock %}

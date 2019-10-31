@@ -24,6 +24,16 @@ class ProjectManagersInline(admin.TabularInline):
     # fields = ('role', 'manager', 'is_active', 'description',)
 
 
+class ProjectDiscussItemInline(admin.TabularInline):
+    model = ProjectDiscussItem
+    extra = 0
+
+
+class ProjectDiscussMemberInline(admin.TabularInline):
+    model = ProjectDiscussMember
+    extra = 0
+
+
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
@@ -35,7 +45,9 @@ class ProjectAdmin(admin.ModelAdmin):
         ProjectManagersInline,
         ProjectCompanyInline,
         ProjectHasTechnicalSolutionsInline,
-        ProjectImageInline
+        ProjectImageInline,
+        ProjectDiscussMemberInline,
+        ProjectDiscussItemInline
     ]
 
 
@@ -44,3 +56,8 @@ class ProjectAdmin(admin.ModelAdmin):
     list_display = ('name',)
     list_display_links = ('name',)
 
+
+@admin.register(ProjectManagers)
+class ProjectManagersAdmin(admin.ModelAdmin):
+    list_display = ('manager',)
+    list_display_links = ('manager',)

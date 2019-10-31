@@ -17,12 +17,14 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'authapp',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.postgres',
     'mainapp',
     'productsapp',
     'projectsapp',
@@ -30,7 +32,10 @@ INSTALLED_APPS = [
     'ymapapp',
     'servicesapp',
     'researchapp',
-    'authapp',
+    'partnersapp',
+    'ordersapp',
+    'newsapp',
+    'imagekit',
 ]
 
 MIDDLEWARE = [
@@ -136,4 +141,9 @@ EMAIL_FILE_PATH = 'tmp/email-messages/'
 # укажем модель пользователя, используемую подсистемой разграничения доступа Django
 AUTH_USER_MODEL = 'authapp.Users'
 
+LOGIN_REDIRECT_URL = 'restricted_area'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
 # Authapp end ===================================================
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

@@ -1,5 +1,11 @@
+from imagekit.models.fields import ImageSpecField, ProcessedImageField
+from imagekit.processors import ResizeToFit, Adjust, ResizeToFill
+
 from django.db import models
+
+from servicesapp.models import Service
 # --------------------------------   МОДЕЛИ ЕДИНИЦ ИЗМЕРЕНИЙ  -------------------------------------
+from django.urls import reverse
 
 
 class MeasureTypes(models.Model):
@@ -19,6 +25,7 @@ class MeasureTypes(models.Model):
         verbose_name = 'Единица измерения'
         verbose_name_plural = 'Единицы измерения'
 
+
 # -----------------------    МОДЕЛИ ПРОДУКТОВ (ТЕХНИЧЕСКИХ РЕШЕНИЙ)   -------------------------------------
 
 
@@ -30,17 +37,21 @@ class TechnicalSolutions(models.Model):
     name = models.CharField(verbose_name='название материала', max_length=128, unique=True)
     slug = models.SlugField(verbose_name='слаг', max_length=128, unique=True)
     measure = models.ForeignKey(MeasureTypes, verbose_name='Единица измерения', on_delete=models.CASCADE, default=1)
-    image = models.ImageField(upload_to='аватарка', blank=True)
+    image = ProcessedImageField(upload_to='products_images', processors=[ResizeToFill(370, 220)], format='JPEG',
+                                options={'quality': 60})
     alt_desc = models.CharField(verbose_name='alt фотографии', max_length=500, blank=True)
-    short_desc = models.CharField(verbose_name='краткое описание материала', max_length=500, blank=True, null=True)
+    short_desc = models.TextField(verbose_name='краткое описание материала', blank=True, null=True)
     description = models.TextField(verbose_name='описание материала', blank=True)
     price = models.DecimalField(verbose_name='цена', max_digits=8, decimal_places=2, default=0)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(verbose_name='обновлен', auto_now_add=False, auto_now=True)
     is_active = models.BooleanField(verbose_name='активен', default=True)
 
+    def get_absolute_url(self):
+        return reverse('products:product', args=[str(self.slug)])
+
     def __str__(self):
-        return self.name
+        return f"{self.name}"
 
     def get_projects(self):
         return self.projects.select_related().distinct('project_id')
@@ -209,11 +220,23 @@ class WorkImage(models.Model):
 
 class ProductWork(models.Model):
     product = models.ForeignKey(TechnicalSolutions, related_name='works', on_delete=models.CASCADE)
+<<<<<<< HEAD
     work = models.ForeignKey(Work, on_delete=models.CASCADE)
     material = models.ManyToManyField(Material, blank=True)
     consumption = models.DecimalField(verbose_name='расход материала', max_digits=8, decimal_places=2, blank=True, null=True)
+=======
+    work = models.ForeignKey(Work, verbose_name='Вид работы', on_delete=models.CASCADE)
+    material = models.ManyToManyField(Material, verbose_name='Применяемые материалы', blank=True)
+    consumption = models.DecimalField(verbose_name='расход материала', max_digits=8, decimal_places=2, blank=True,
+                                      null=True)
+>>>>>>> sprint_3
     value = models.DecimalField(verbose_name='трудозатраты', max_digits=8, decimal_places=2, default=0)
 
     class Meta:
         verbose_name = 'Перечень работ продукта'
         verbose_name_plural = 'Перечень работ продукта'
+
+
+class TechnicalSolutionsHasService(models.Model):
+    technicalsolutions = models.ForeignKey(TechnicalSolutions, on_delete=models.CASCADE)
+    service = models.ForeignKey(Service, verbose_name='услуга', on_delete=models.CASCADE)

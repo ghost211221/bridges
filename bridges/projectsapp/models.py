@@ -6,6 +6,9 @@ from transliterate import translit
 from authapp.models import Company, Users
 from productsapp.models import TechnicalSolutions
 
+from imagekit.models.fields import ProcessedImageField
+from imagekit.processors import ResizeToFill
+
 
 class Project(models.Model):
     """ Модель проекта строительства со статусом """
@@ -27,9 +30,10 @@ class Project(models.Model):
         (DONE, 'завершен'),
     )
     name = models.CharField(verbose_name='название', max_length=256, unique=True)
-    slug = models.SlugField(verbose_name='слаг', max_length=128, unique=True)
+    slug = models.SlugField(verbose_name='слаг', max_length=128, blank=True)
     description = models.TextField(verbose_name='описание', blank=True)
-    image = models.ImageField(upload_to='аватарка', blank=True)
+    image = ProcessedImageField(upload_to='projects_images/avatars', processors=[ResizeToFill(530, 530)], format='JPEG',
+                              options={'quality': 90})
     status = models.CharField(verbose_name='статус', max_length=24, choices=STATUS_CHOICES, blank=True)
     creation_date = models.DateTimeField(verbose_name='создан', auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(verbose_name='обновлен', auto_now=True)
@@ -42,6 +46,9 @@ class Project(models.Model):
 
     def get_absolute_url(self):
         return reverse('projects:project', args=[str(self.id)])
+
+    def get_absolute_discuss_url(self):
+        return reverse('projects:project_discuss_items', args=[str(self.id)])
 
     def __str__(self):
         return f"{self.name} ({self.city})"
@@ -57,6 +64,9 @@ class Project(models.Model):
 
     def get_managers(self):
         return self.managers.select_related()
+
+    def get_finished_projects(self):
+        pass
 
     class Meta:
         ordering = ('-updated',)
@@ -76,10 +86,15 @@ pre_save.connect(pre_save_map_mark, sender=Project)
 # СВЯЗАНО
 class ProjectImage(models.Model):
     """ Галерея фотографий для проекта строительства """
+    def get_file_path(self, pk):
+        directory_name = self.project.pk
+        return directory_name
+
     project = models.ForeignKey(Project, blank=True, null=True, default=None, on_delete=models.CASCADE,
                                 related_name="images")
     alt_desc = models.CharField(verbose_name='alt фотографии', max_length=128, blank=True)
-    image = models.ImageField(verbose_name='Фотография', upload_to='products_images', blank=True)
+    image = ProcessedImageField(upload_to=get_file_path, processors=[ResizeToFill(530, 530)], format='JPEG',
+                                options={'quality': 90})
     is_active = models.BooleanField(verbose_name='Показывать', default=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
@@ -128,10 +143,11 @@ class ProjectCompany(models.Model):
         (AGENT, 'агент'),
         (PARTNER, 'партнер'),
     )
-    role = models.CharField(verbose_name='роль в проекте', max_length=24, choices=STATUS_CHOICES, blank=True)
     project = models.ForeignKey(Project, blank=True, null=True, default=None, on_delete=models.CASCADE,
                                 related_name="companies")
-    company = models.ForeignKey(Company, verbose_name='Выберите компанию', blank=True, null=True, default=None, on_delete=models.CASCADE)
+    role = models.CharField(verbose_name='роль в проекте', max_length=24, choices=STATUS_CHOICES, blank=True)
+    company = models.ForeignKey(Company, verbose_name='Выберите компанию', blank=True, null=True, default=None,
+                                on_delete=models.CASCADE)
     is_active = models.BooleanField(verbose_name='Активный', default=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
@@ -169,10 +185,10 @@ class ProjectManagers(models.Model):
         (COMMERSANT, 'коммерсант'),
         (ASSISTANT, 'ассистент'),
     )
-    project = models.ForeignKey(Project, blank=True, null=True, default=None, on_delete=models.CASCADE,
-                                related_name="managers")
-    role = models.CharField(verbose_name='роль в проекте', max_length=24, choices=STATUS_CHOICES, blank=True)
-    manager = models.ForeignKey(Users, verbose_name='Участники', blank=True, null=True, default=None, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, verbose_name='проект', on_delete=models.CASCADE, related_name="managers",
+                                blank=True, null=True)
+    role = models.CharField(verbose_name='роль в проекте', max_length=24, choices=STATUS_CHOICES)
+    manager = models.ForeignKey(Users, verbose_name='Участники', on_delete=models.CASCADE, blank=True, null=True)
     description = models.TextField(verbose_name='комментарий', blank=True)
     is_active = models.BooleanField(verbose_name='Активный', default=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
@@ -181,3 +197,20 @@ class ProjectManagers(models.Model):
     class Meta:
         verbose_name = 'Участник проекта'
         verbose_name_plural = 'Участники проекта'
+
+
+class ProjectDiscussMember(models.Model):
+    project = models.ForeignKey(Project, verbose_name='проект обсуждения', on_delete=models.CASCADE)
+    user = models.ForeignKey(Users, verbose_name='участник обсуждения', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return 'участник дискусии {}'.format(self.project)
+
+
+class ProjectDiscussItem(models.Model):
+    project = models.ForeignKey(Project, verbose_name='проект обсуждения', on_delete=models.CASCADE)
+    user = models.ForeignKey(Users, verbose_name='участник обсуждения', on_delete=models.CASCADE)
+    comment = models.TextField(verbose_name='добавить сообщение', max_length=1500, null=True, blank=True)
+
+    def __str__(self):
+        return 'комментарий к дискусии {}'.format(self.project)
