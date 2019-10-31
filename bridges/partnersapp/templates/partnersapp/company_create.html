@@ -1,0 +1,15 @@
+{% extends 'productsapp/base.html' %}
+{% load static %}
+{% block content-container %}
+    <div style="height: 50px;"></div>
+    <div class="container">
+
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" value="сохранить" class="btn btn-success">
+                сохранить
+            </button>
+        </form>
+    </div>
+{% endblock %}

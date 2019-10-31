@@ -11,7 +11,11 @@ urlpatterns = [
     path('map/', include('ymapapp.urls', namespace='ymap')),
     path('admin/', admin.site.urls),
     path('research/', include('researchapp.urls', namespace='research')),
-    path('auth/', include('authapp.urls', namespace='auth'))
+    path('auth/', include('authapp.urls')),
+    path('partners/', include('partnersapp.urls', namespace='partners')),
+    path('services/', include('servicesapp.urls', namespace='services')),
+    path('orders/', include('ordersapp.urls', namespace='orders')),
+    path('news/', include('newsapp.urls', namespace='news')),
 ]
 
 if settings.DEBUG:
