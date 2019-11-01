@@ -1343,3 +1343,6 @@ only screen and (                min-resolution: 2dppx){
 .errorlist {
     color: red;
 }
+.main_text {
+	font-size: 34px;
+}
