@@ -3,7 +3,6 @@ from django.shortcuts import render, get_object_or_404
 from .models import *
 
 
-@login_required
 def services_list(request):
     # services = Service.objects.all().exclude(is_active=False)
     context ={
@@ -14,7 +13,6 @@ def services_list(request):
     return render(request, 'servicesapp/services_list.html', context)
 
 
-@login_required
 def services_single(request, pk):
     service = get_object_or_404(Service, pk=pk)
     context = {

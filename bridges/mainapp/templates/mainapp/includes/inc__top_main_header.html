@@ -6,7 +6,7 @@
                 <div id="site-logo-inner">
                     <a href="/" title="Construction" rel="home"
                        class="main-logo">
-                        <img src="{% static 'assets/img/logo-light.png' %}" alt="Construction"
+                        <img src="{% static 'assets/img/channels4_banner.jpg' %}" alt="Construction"
                              data-retina="{% static 'assets/img/channels4_banner.jpg' %}" data-width="200"
                              data-height="30">
                     </a>
@@ -28,10 +28,22 @@
                             <span class="{% if request.resolver_match.url_name == 'services_list' %}active{% endif %}">Услуги</span>
                         </a>
                     </li>
-                    <li class="menu-item">
-                        <a href="{% url 'projects:projects' %}" class="active">
-                            <span class="{% if request.resolver_match.url_name == 'projects' %}active{% endif %}">Проекты</span>
-                        </a>
+                    <li class="menu-item menu-item-has-children"><a href="#">Проекты</a>
+                        <ul class="sub-menu" style="width: auto;">
+                            <li class="menu-item">
+                                <a href="{% url 'projects:projects' %}">
+                                    <span class="{% if request.resolver_match.url_name == 'projects' %}active{% endif %}">Галерея</span>
+                                </a>
+                            </li>
+{#                            <li class="menu-item">#}
+{#                                <a href="#">Таблица</a>#}
+{#                            </li>#}
+                            <li class="menu-item">
+                                <a href="{% url 'ymapapp:map' %}">
+                                    <span class="{% if request.resolver_match.url_name == 'map' %}active{% endif %}">Карта</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="menu-item">
                         <a href="{% url 'research:research' %}">
@@ -42,11 +54,6 @@
                         <li class="menu-item">
                             <a href="{% url 'partners:partners_list' %}" class="active">
                                 <span class="{% if request.resolver_match.url_name == 'partners_list' %}active{% endif %}">Партнеры</span>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="{% url 'ymapapp:map' %}">
-                                <span class="{% if request.resolver_match.url_name == 'map' %}active{% endif %}">Карта</span>
                             </a>
                         </li>
                     {% endif %}

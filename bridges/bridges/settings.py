@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'partnersapp',
     'ordersapp',
     'newsapp',
+    'imagekit',
 ]
 
 MIDDLEWARE = [
