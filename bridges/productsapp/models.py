@@ -234,3 +234,6 @@ class ProductWork(models.Model):
 class TechnicalSolutionsHasService(models.Model):
     technicalsolutions = models.ForeignKey(TechnicalSolutions, on_delete=models.CASCADE)
     service = models.ForeignKey(Service, verbose_name='услуга', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.service}"

@@ -1,4 +1,3 @@
-from django.forms import inlineformset_factory
 from django.shortcuts import render, redirect
 from ordersapp.forms import OrderForm
 from ordersapp.models import Order
@@ -9,6 +8,7 @@ def order_create(request, pk):
 	product = TechnicalSolutions.objects.get(pk=pk)
 	users_orders = Order.objects.filter(user=request.user)
 	count_orders = len(users_orders)
+	order_form = OrderForm(product=pk)
 	if request.method == 'POST':
 		order_form = OrderForm(request.POST)
 		if order_form.is_valid():
@@ -20,8 +20,6 @@ def order_create(request, pk):
 				created_form.order_number = count_orders + 1
 			created_form.save()
 			return redirect(product.get_absolute_url())
-	else:
-		order_form = OrderForm()
 	context = {
 		'form': order_form,
 		'product': product,
