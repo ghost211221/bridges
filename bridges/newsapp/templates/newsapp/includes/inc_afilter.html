@@ -1,0 +1,4 @@
+        {% for item in products %}
+            <a href="{% url 'news:news_list' %}">{{ item.name }}</a>
+        {% endfor %}
+

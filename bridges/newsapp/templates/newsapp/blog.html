@@ -8,7 +8,7 @@
                     {% for object in object_list %}
                         <article class="hentry">
                             <div class="post-media clearfix">
-                                <a href="#"><img src="/media/{{ object.image }}" alt="image"></a>
+                                <a href="#"><img src="/media/{{ object.image }}" style="width:830px" alt="image"></a>
                             </div><!-- /.post-media -->
 
                             <div class="post-content-wrap">
@@ -34,7 +34,7 @@
                                             </span>
                                             <span class="post-meta-categories item">
                                                 <span class="inner">
-                                                    {% include 'newsapp/includes/inc_filter.html' %}
+                                                    {% include 'newsapp/includes/inc_news_category.html' %}
                                                 </span>
                                             </span>
                                         </div>
@@ -73,7 +73,7 @@
                     <div class="widget widget_categories">
                         <h2 class="widget-title"><span>CATEGORIES</span></h2>
                         <ul>
-                            {% include 'projectsapp/includes/inc__projects_filter.html' %}
+                            {% include 'newsapp/includes/inc_filter.html' %}
                         </ul>
                     </div>
 
@@ -118,11 +118,7 @@
                     <div class="widget widget_tag_cloud">
                         <h2 class="widget-title"><span>TAGS CLOUD</span></h2>
                         <div class="tagcloud">
-                            <a href="#">Buildings</a>
-                            <a href="#">Architectural</a>
-                            <a href="#">Interior</a>
-                            <a href="#">Construction</a>
-                            <a href="#">Smart House</a>
+                            {% include 'newsapp/includes/inc_afilter.html' %}
                         </div>
                     </div>
                 </div><!-- /#inner-sidebar -->

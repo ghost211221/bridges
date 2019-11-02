@@ -7,6 +7,8 @@ from django.views.generic import ListView, DetailView, DeleteView, CreateView, U
 from django.contrib.auth.mixins import  PermissionRequiredMixin
 
 from .models import News
+from .models import TechnicalSolutions
+from .models import NewsHasTechnicalSolutions
 
 
 # Create your views here.
@@ -16,11 +18,28 @@ class NewsListView(ListView):
 
     template_name = 'newsapp/blog.html'
     extra_context = {}
+
+    def get_queryset(self):
+        return News.objects.all()
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update({})
+        products = TechnicalSolutions.objects.all()
+        news_category = NewsHasTechnicalSolutions.objects.all()
+        for news in context['object_list']:
+            catList = []
+            for category in news_category:
+                if news.id == category.news_id:
+                    catList.append(category.name)
+            setattr(news, 'catLoist', catList)
+        print(news_category)
+        print(news_category[0].__dict__.items())
+        print("========================================")
         print(context)
         print(context['object_list'][0].__dict__.items())
+        context.update({'products': products,
+                        'news_category': news_category,
+        })
         return context
 
 # Create your views here.
