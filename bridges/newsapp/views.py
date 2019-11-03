@@ -49,7 +49,7 @@ class NewsDetailView(DetailView):
     """docstring for ProductList"""    
     model = News
 
-    template_name = 'newsapp/blog.html'
+    template_name = 'newsapp/blog_detail.html'
     extra_context = {}
 
 
