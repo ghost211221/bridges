@@ -8,9 +8,9 @@ def order_create(request, pk):
 	product = TechnicalSolutions.objects.get(pk=pk)
 	users_orders = Order.objects.filter(user=request.user)
 	count_orders = len(users_orders)
-	order_form = OrderForm(product=pk)
+	order_form = OrderForm(queryset=pk)
 	if request.method == 'POST':
-		order_form = OrderForm(request.POST)
+		order_form = OrderForm(request.POST, queryset=pk)
 		if order_form.is_valid():
 			created_form = order_form.save(commit=False)
 			created_form.user = request.user
