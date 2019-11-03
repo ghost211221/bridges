@@ -101,9 +101,8 @@ class Users(AbstractUser):
 
 
 class CompanyUsers(models.Model):
-    company = models.ForeignKey(Company, on_delete=models.PROTECT, verbose_name='Компания', blank=True)
-    user = models.ForeignKey(Users, on_delete=models.PROTECT, verbose_name='Сотрудник', blank=True,
-                             related_name='company')
+    company = models.ForeignKey(Company, on_delete=models.PROTECT, verbose_name='Компания')
+    user = models.ForeignKey(Users, on_delete=models.PROTECT, verbose_name='Сотрудник', related_name='company')
     position = models.CharField(verbose_name='Должность', max_length=50, blank=True)
     works = models.BooleanField(verbose_name='Работает в компании', default=True, null=True)
 
