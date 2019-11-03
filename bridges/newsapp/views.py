@@ -33,11 +33,6 @@ class NewsListView(ListView):
                 if news.id == category.news_id:
                     catList.append(category.name)
             setattr(news, 'catList', catList)
-        # print(news_category)
-        # print(news_category[0].__dict__.items())
-        # print("========================================")
-        # print(context)
-        # print(context['object_list'][0].__dict__.items())
         context.update({'products': products,
                         'news_category': news_category,
                         'latest_news': latest_news,
@@ -48,9 +43,14 @@ class NewsListView(ListView):
 class NewsDetailView(DetailView):
     """docstring for ProductList"""    
     model = News
+    products = TechnicalSolutions.objects.all()
+    latest_news = News.objects.all()[:3]
 
     template_name = 'newsapp/blog_detail.html'
     extra_context = {}
+    extra_context.update({'products': products,
+                        'latest_news': latest_news,
+    })
 
 
 # Create your views here.
