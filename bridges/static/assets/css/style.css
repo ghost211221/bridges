@@ -239,6 +239,31 @@ input[type="button"]:focus,
 input[type="reset"]:focus,
 input[type="submit"]:focus { outline: 0; background-color: #4b4b4b; color: #fff; }
 
+.delete-button{
+    background-color: red;
+    border: 3px solid red;
+}
+
+.delete-button:hover{
+    background-color: #4b4b4b;
+    border: 3px solid #4b4b4b;
+    transition: 0.5s;
+}
+
+.confirm-button{
+    background-color: royalblue;
+    border: 3px solid royalblue;
+}
+
+.confirm-button:hover{
+    background-color: darkblue;
+    border: 3px solid darkblue;
+}
+
+.cancel-button{
+    background-color: grey;
+    border: 2px solid grey;
+}
 /* Placeholder color */
 ::-webkit-input-placeholder { color: #c1c1c1; }
 :-moz-placeholder { color: #c1c1c1; }
