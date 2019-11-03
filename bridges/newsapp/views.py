@@ -26,6 +26,7 @@ class NewsListView(ListView):
         context = super().get_context_data(**kwargs)
         products = TechnicalSolutions.objects.all()
         news_category = NewsHasTechnicalSolutions.objects.all()
+        latest_news = context['object_list'][:3]
         for news in context['object_list']:
             catList = []
             for category in news_category:
@@ -39,6 +40,7 @@ class NewsListView(ListView):
         print(context['object_list'][0].__dict__.items())
         context.update({'products': products,
                         'news_category': news_category,
+                        'latest_news': latest_news,
         })
         return context
 
