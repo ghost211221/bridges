@@ -14,6 +14,6 @@ class OrderForm(forms.ModelForm):
         qs = []
         if 'queryset' in kwargs and kwargs['queryset'] is not None:
             queryset = kwargs.pop('queryset')
-            qs = Service.objects.filter(technicalsolutionshasservice__technicalsolutions_id=queryset)
+            qs = Service.objects.filter(technicalsolutionshasservice__technicalsolutions_id=queryset).order_by('name')
         super(OrderForm, self).__init__(*args, **kwargs)
         self.fields['service'].queryset = qs
