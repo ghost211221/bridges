@@ -25,6 +25,7 @@ class UsersForEditProfileForm(forms.ModelForm):
             'first_name',
             'patronymic',
             'last_name',
+            'description',
             'gender',
             'birthday',
             'phone',

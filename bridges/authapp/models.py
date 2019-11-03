@@ -76,9 +76,14 @@ class Users(AbstractUser):
     first_name = models.CharField(verbose_name='Имя', max_length=50)
     last_name = models.CharField(verbose_name='Фамилия', max_length=50)
     patronymic = models.CharField(verbose_name='Отчество', max_length=50, default='', null=True, blank=True)
+    avatar = models.ImageField(verbose_name='Аватар', upload_to='users/avatar', default='users/avatar/no_avatar.png',
+                               blank=True)
+    description = models.TextField(verbose_name='Подробно о себе', max_length=5000, blank=True)
     gender = models.CharField(verbose_name='Пол', max_length=6, choices=GENDER_CHOICES, blank=True, null=True)
     birthday = models.DateField(verbose_name='День рождения', blank=True, null=True)
     phone = models.CharField(verbose_name='Телефон*', max_length=50, default='не указан')
+    created = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     class Meta(AbstractUser.Meta):
         verbose_name = "Пользователь"

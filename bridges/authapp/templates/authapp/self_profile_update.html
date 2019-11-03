@@ -17,14 +17,16 @@
                                             {% csrf_token %}
                                             {{ form.as_p }}
                                             {{ formset.as_p }}
-                                            <button type="submit" value="сохранить" class="btn btn-success">
-                                                сохранить
+                                            <button type="submit" value="сохранить" class="wprt-button icon-flash confirm-button">
+                                                СОХРАНИТЬ
                                             </button>
+                                            <a href="{{ user.get_self_absolute_url }}"
+                                               class="wprt-button small cancel-button">
+                                                ВЕРНУТЬСЯ
+                                            </a>
                                         </form>
                                         <div class="wprt-spacer" data-desktop="20" data-mobi="20"
                                                  data-smobi="20"></div>
-                                        <a href="{{user.get_self_absolute_url}}" class="btn btn-info">Вернуться в кабинет</a>
-
                                     </div>
                                     <!-- /.col-md-8 -->
                                 </div><!-- /.row -->
