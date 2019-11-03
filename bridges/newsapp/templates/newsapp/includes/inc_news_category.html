@@ -1,6 +1,6 @@
         {% for item in object_list %}
             {% for category in item.catList %}
-                <li class="cat-item cat-item-3"><a href="{% url 'news:news_list' %}">{{ category.name }}</a></li>
+                <a href="{% url 'news:news_list' %}">{{ category }}</a>
             {% endfor %}
         {% endfor %}
 

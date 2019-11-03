@@ -31,7 +31,7 @@ class NewsListView(ListView):
             for category in news_category:
                 if news.id == category.news_id:
                     catList.append(category.name)
-            setattr(news, 'catLoist', catList)
+            setattr(news, 'catList', catList)
         print(news_category)
         print(news_category[0].__dict__.items())
         print("========================================")

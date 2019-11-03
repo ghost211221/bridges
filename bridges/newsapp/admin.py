@@ -7,6 +7,15 @@ class NewsHasTechnicalSolutionsInline(admin.TabularInline):
     model = NewsHasTechnicalSolutions
     extra = 0
 
+class NewsDiscussItemInline(admin.TabularInline):
+    model = NewsDiscussItem
+    extra = 0
+
+class NewsDiscussMemberInline(admin.TabularInline):
+    model = NewsDiscussMember
+    extra = 0
+
+
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
@@ -14,5 +23,7 @@ class NewsAdmin(admin.ModelAdmin):
     list_display_links = ('name',)
     search_fields = ('name',)
     inlines = [
-        NewsHasTechnicalSolutionsInline
+        NewsHasTechnicalSolutionsInline,
+        NewsDiscussItemInline,
+        NewsDiscussMemberInline
     ]
