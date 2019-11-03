@@ -22,7 +22,7 @@ def restricted_area(request):
         'user_projects': user_projects,
         'user_orders': user_orders
     }
-    return render(request, 'authapp/restricted_area.html', context)
+    return render(request, 'authapp/restricted_area1.html', context)
 
 
 def register(request):
