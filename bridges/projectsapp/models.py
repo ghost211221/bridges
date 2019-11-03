@@ -39,8 +39,8 @@ class Project(models.Model):
     slug = models.SlugField(verbose_name='слаг', max_length=128, blank=True)
     description = models.TextField(verbose_name='описание', blank=True)
     image = ProcessedImageField(upload_to='projects_images/avatars', processors=[ResizeToFill(530, 530)], format='JPEG',
-                              options={'quality': 90})
-    status = models.CharField(verbose_name='статус', max_length=24, choices=STATUS_CHOICES, blank=True)
+                              options={'quality': 90}, blank=True)
+    status = models.CharField(verbose_name='статус', max_length=24, choices=STATUS_CHOICES)
     creation_date = models.DateTimeField(verbose_name='создан', auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(verbose_name='обновлен', auto_now=True)
     city = models.CharField(verbose_name='город', max_length=512, blank=True, null=True)
@@ -144,10 +144,10 @@ class ProjectCompany(models.Model):
         (AGENT, 'агент'),
         (PARTNER, 'партнер'),
     )
-    project = models.ForeignKey(Project, blank=True, null=True, default=None, on_delete=models.CASCADE,
+    project = models.ForeignKey(Project, default=None, on_delete=models.CASCADE,
                                 related_name="companies")
-    role = models.CharField(verbose_name='роль в проекте', max_length=24, choices=STATUS_CHOICES, blank=True)
-    company = models.ForeignKey(Company, verbose_name='Выберите компанию', blank=True, null=True, default=None,
+    role = models.CharField(verbose_name='роль в проекте', max_length=24, choices=STATUS_CHOICES)
+    company = models.ForeignKey(Company, verbose_name='Выберите компанию', default=None,
                                 on_delete=models.CASCADE)
     is_active = models.BooleanField(verbose_name='Активный', default=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
@@ -186,10 +186,9 @@ class ProjectManagers(models.Model):
         (COMMERSANT, 'коммерсант'),
         (ASSISTANT, 'ассистент'),
     )
-    project = models.ForeignKey(Project, verbose_name='проект', on_delete=models.CASCADE, related_name="managers",
-                                blank=True, null=True)
+    project = models.ForeignKey(Project, verbose_name='проект', on_delete=models.CASCADE, related_name="managers", default=0)
     role = models.CharField(verbose_name='роль в проекте', max_length=24, choices=STATUS_CHOICES)
-    manager = models.ForeignKey(Users, verbose_name='Участники', on_delete=models.CASCADE, blank=True, null=True)
+    manager = models.ForeignKey(Users, verbose_name='Участники', on_delete=models.CASCADE, default=None)
     description = models.TextField(verbose_name='комментарий', blank=True)
     is_active = models.BooleanField(verbose_name='Активный', default=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)

@@ -38,7 +38,7 @@ def partner_detail(request, pk):
     return render(request, 'partnersapp/partner_detail.html', context)
 
 
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_staff)
 def partner_create(request):
     if request.method == 'POST':
         form = CompanyForm(request.POST, request.FILES)
@@ -72,7 +72,7 @@ def partner_delete_confirm(request, pk):
     return HttpResponseRedirect(reverse('partners:partners_list'))
 
 
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_staff)
 def partner_user_update(request, pk):
     company = Company.objects.get(pk=pk)
     company_form = CompanyUserUpdateForm(instance=company)
@@ -100,7 +100,7 @@ def partner_user_update(request, pk):
     return render(request, "partnersapp/company_user_create.html", context)
 
 
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_staff)
 def company_search(request):
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']

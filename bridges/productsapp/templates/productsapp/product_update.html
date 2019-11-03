@@ -8,13 +8,16 @@
             {% csrf_token %}
             {{ product_form.as_p }}
             {{ formset.as_p}}
-            <button type="submit" value="сохранить" class="btn btn-success margin-bottom-15">
-                сохранить
+            <button type="submit" value="сохранить" class="wprt-button icon-flash confirm-button">
+                СОХРАНИТЬ
             </button>
+            <a href="{{ product.get_absolute_url }}" class="wprt-button small cancel-button">
+                ВЕРНУТЬСЯ
+            </a>
         </form>
 
 
-    <a href="{{ product.get_absolute_url }}" class="btn btn-info bnt_save">вернуться назад</a>
+
     </div>
 
 {% endblock %}
