@@ -33,11 +33,11 @@ class NewsListView(ListView):
                 if news.id == category.news_id:
                     catList.append(category.name)
             setattr(news, 'catList', catList)
-        print(news_category)
-        print(news_category[0].__dict__.items())
-        print("========================================")
-        print(context)
-        print(context['object_list'][0].__dict__.items())
+        # print(news_category)
+        # print(news_category[0].__dict__.items())
+        # print("========================================")
+        # print(context)
+        # print(context['object_list'][0].__dict__.items())
         context.update({'products': products,
                         'news_category': news_category,
                         'latest_news': latest_news,
