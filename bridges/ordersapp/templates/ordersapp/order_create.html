@@ -8,10 +8,10 @@
             {% csrf_token %}
             {{ form.as_p }}
             {{ formset.as_p}}
-            <button type="submit" value="сохранить" class="wprt-button icon-flash">
+            <button type="submit" value="сохранить" class="wprt-button icon-flash confirm-button">
                 ЗАКАЗАТЬ
             </button>
-            <a href="{{ product.get_absolute_url }}" class="wprt-button light small">
+            <a href="{{ product.get_absolute_url }}" class="wprt-button small cancel-button">
                 ВЕРНУТЬСЯ
             </a>
         </form>
