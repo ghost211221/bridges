@@ -239,6 +239,31 @@ input[type="button"]:focus,
 input[type="reset"]:focus,
 input[type="submit"]:focus { outline: 0; background-color: #4b4b4b; color: #fff; }
 
+.delete-button{
+    background-color: red;
+    border: 3px solid red;
+}
+
+.delete-button:hover{
+    background-color: #4b4b4b;
+    border: 3px solid #4b4b4b;
+    transition: 0.5s;
+}
+
+.confirm-button{
+    background-color: royalblue;
+    border: 3px solid royalblue;
+}
+
+.confirm-button:hover{
+    background-color: darkblue;
+    border: 3px solid darkblue;
+}
+
+.cancel-button{
+    background-color: grey;
+    border: 2px solid grey;
+}
 /* Placeholder color */
 ::-webkit-input-placeholder { color: #c1c1c1; }
 :-moz-placeholder { color: #c1c1c1; }
@@ -954,7 +979,7 @@ body.page #main-content { padding-top: 0; padding-bottom: 0; }
 .widget.widget_instagram .instagram-wrap .instagram_badge_image a:after,
 .widget.widget_flickr .flickr-wrap .flickr_badge_image a:after { content: ""; position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-color: transparent; -webkit-transition: all ease .238s; -moz-transition: all ease .238s; transition: all ease .238s; }
 .widget.widget_instagram .instagram-wrap .instagram_badge_image a:hover:after,
-.widget.widget_flickr .flickr-wrap .flickr_badge_image a:hover:after { background: #337ab7 url(assets/img/icon-plus.png) no-repeat center center; }
+.widget.widget_flickr .flickr-wrap .flickr_badge_image a:hover:after { background: #337ab7 url(../img/icon-plus.png) no-repeat center center; }
 /* 2 columns */
 .widget.widget_instagram .instagram-wrap.col2 .instagram_badge_image,
 .widget.widget_flickr .flickr-wrap.col2 .flickr_badge_image { width: 50%; }
@@ -1083,7 +1108,7 @@ body.page #main-content { padding-top: 0; padding-bottom: 0; }
 #sidebar .widget.widget.widget_information ul.style-2,
 #footer-widgets .widget.widget_information ul.style-2 { position: relative; padding-bottom: 20px; }
 #sidebar .widget.widget.widget_information ul.style-2:after,
-#footer-widgets .widget.widget_information ul.style-2:after { width: 193px; height: 95px; content: ""; position: absolute; right: 0; bottom: 0; background: url(assets/img/map-small.png) no-repeat center center; }
+#footer-widgets .widget.widget_information ul.style-2:after { width: 193px; height: 95px; content: ""; position: absolute; right: 0; bottom: 0; background: url(../img/map-small.png) no-repeat center center; }
 
 /* Re-style Widgets for footer */
 #footer-widgets .widget { margin-top: 0; color: #979797; }
@@ -1304,7 +1329,7 @@ only screen and (        min-device-pixel-ratio: 2),
 only screen and (                min-resolution: 192dpi),
 only screen and (                min-resolution: 2dppx){
 	.wprt-testimonials .customer:after {
-		background: url(assets/img/5-stars@2x.png) no-repeat center center ;
+		background: url(../img/5-stars@2x.png) no-repeat center center ;
 		background-size: 97px 15px;
 	}
 }

@@ -98,7 +98,7 @@
                                                         <i>
                                                             {{ item.role | capfirst }}: <a href="{{ item.company.get_absolute_url }}">{{ item.company.form }} {{ item.company.name }}</a>
                                                         </i>
-                                                    <a href="{% url 'projects:company_delete' item.pk %}">
+                                                    <a href="{% url 'projects:company_delete' object.pk item.pk %}">
                                                         <i class="fa fa-ban" aria-hidden="true" style="color: red"></i>
                                                     </a>
                                                     </li>
@@ -136,7 +136,7 @@
                                                                 <i>,<a href="{{ i.company.get_absolute_url }}"> {{ i.company.form }} {{ i.company.name }}</a></i>
                                                             {% endfor %}
                                                         {% endif %}
-                                                        <a href="{% url 'projects:manager_delete' item.pk %}">
+                                                        <a href="{% url 'projects:manager_delete' object.pk item.pk %}">
                                                             <i class="fa fa-ban" aria-hidden="true"
                                                                style="color: red"></i>
                                                         </a>
@@ -208,7 +208,7 @@
                                                             <td style="text-align: center;">{{ item.techsol.measure }}</td>
                                                             <td>{{ item.techsol.name }}</td>
                                                             <td style="text-align: center; font-weight: bold; width: 5%">
-                                                                <a href="{% url 'projects:product_delete' item.pk %}">
+                                                                <a href="{% url 'projects:product_delete' object.pk item.pk %}">
                                                                     <i class="fa fa-trash" aria-hidden="true" style="color: red;"></i>
                                                                 </a>
                                                             </td>
