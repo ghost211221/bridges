@@ -12,7 +12,7 @@ from .models import *
 def restricted_area(request):
     user = request.user
     user_companies = CompanyUsers.objects.filter(user_id=user.pk, works=True)
-    user_projects = ProjectManagers.objects.filter(manager_id=user.pk)
+    user_projects = ProjectManagers.objects.filter(manager_id=user.pk).order_by('-project__updated')
     user_orders = Order.objects.filter(user_id=user.pk)
     context = {
         'section': 'restricted_area',
@@ -22,7 +22,7 @@ def restricted_area(request):
         'user_projects': user_projects,
         'user_orders': user_orders
     }
-    return render(request, 'authapp/restricted_area1.html', context)
+    return render(request, 'authapp/restricted_area.html', context)
 
 
 def register(request):
@@ -42,7 +42,7 @@ def register(request):
 def user_profile(request, pk):
     user_companies = CompanyUsers.objects.filter(user_id=pk, works=True)
     user = get_object_or_404(Users, pk=pk)
-    user_projects = ProjectManagers.objects.filter(manager_id=pk)
+    user_projects = ProjectManagers.objects.filter(manager_id=pk).order_by('-project__updated')
     context = {
         'user': user,
         'user_projects': user_projects,

@@ -1,0 +1,142 @@
+{% extends 'productsapp/base.html' %}
+{% load static %}
+{% block content-container %}
+    <!-- Main Content -->
+    <div id="main-content" class="site-main clearfix">
+        <div id="content-wrap" class="container">
+            <div id="site-content" class="site-content clearfix">
+                <div id="inner-content" class="inner-content-wrap">
+                    <div class="container-fluid padding-0">
+                        <div class="wprt-spacer" data-desktop="25" data-mobi="25" data-smobi="25"></div>
+                        <div class="row">
+
+                            {# ------------------------------------------- ПОЛУЧЕНИЕ ИНФОРМАЦИИ О ЮЗЕРЕ --------------------------------------------- #}
+
+                            <div class="col-md-4">
+                                <h3 class="line-height-normal margin-bottom-10">
+                                    {% if user.first_name %}
+                                        {{ user.first_name|title }}
+                                    {% endif %}
+                                    {% if user.patronymic %}
+                                        {{ user.patronymic|title }}
+                                    {% endif %}
+                                    {% if user.last_name %}
+                                        {{ user.last_name|title }}
+                                    {% endif %}
+                                </h3>
+                                <div class="wprt-lines style-1 custom-3">
+                                    <div class="line-1"></div>
+                                    <div class="line-2"></div>
+                                </div>
+
+                                <div class="wprt-spacer" data-desktop="30" data-mobi="25" data-smobi="25"></div>
+
+                                <div class="wprt-galleries-grid has-bullets bullet-style-2 bullet30 has-arrows arrow-position-2 arrow-light"
+                                     data-layout="slider" data-column="1" data-column2="1" data-column3="1"
+                                     data-column4="1" data-gaph="30" data-gapv="30" style="height: 270px;">
+                                    <div class="cbp-item">
+                                        <div class="item-wrap">
+                                            <img style="height: 260px" src="/media/{{ user.avatar }}" alt="image"/>
+                                        </div>
+                                    </div><!--/.cbp-item -->
+                                </div>
+                                <a class="wprt-button small" href="{% url 'profile_self_user_update' user.pk %}">
+                                    ред. профиль
+                                </a>
+                                <a class="wprt-button small cancel-button" href="{% url 'password_change' %}">
+                                    сменить пароль
+                                </a>
+                            </div><!-- /.col-md-4 -->
+
+                            <div class="col-md-8">
+                                <div class="wprt-spacer" data-desktop="0" data-mobi="40" data-smobi="40"></div>
+
+                                <h3 class="line-height-normal margin-bottom-10">О себе:</h3>
+                                <div class="wprt-lines style-1 custom-3">
+                                    <div class="line-1"></div>
+                                    <div class="line-2"></div>
+                                </div>
+
+                                <div class="wprt-spacer" data-desktop="25" data-mobi="25" data-smobi="25"></div>
+
+                                <p class="margin-bottom-25">{{ user.description }}</p>
+
+                                <ul class="wprt-list style-1 accent-color">
+                                    {% for company in user_companies %}
+                                        <li>Место работы: {{ company.company.form }} {{ company.company.name }}</li>
+                                        <li>Должность: {{ company.position|default:'не указана' }}</li>
+                                    {% endfor %}
+                                    <li>Дата регистрации: {{ user.created|date:"d.m.Y" }}</li>
+                                    <li>Последнее посещение: {{ user.updated }}</li>
+                                    <li>Дата рождения: {{ user.birthday|date:"d.m.Y" }}</li>
+                                    <li>Телефон (моб): <a href="tel:{{ user.phone }}">{{ user.phone }}</a></li>
+                                    <li>Эл. почта: <a href="mailto:{{ user.email }}">{{ user.email }}</a></li>
+                                </ul>
+                            </div><!-- /.col-md-6 -->
+                        </div><!-- /.row -->
+                    </div><!-- /.container-fluid -->
+                </div><!-- /.inner-content-wrap -->
+            </div><!-- /#site-content -->
+
+           {# ------------------------------------------- ПОЛУЧЕНИЕ ПРОЕКТОВ ЮЗЕРА --------------------------------------------- #}
+
+            <article class="hentry">
+                <div class="post-content-wrap">
+                    <h2 class="post-title">
+                                        <span class="post-title-inner">
+                                            <a href="#">МОИ ПРОЕКТЫ</a>
+                                        </span>
+                        <div class="wprt-lines style-1 custom-3">
+                            <div class="line-1"></div>
+                            <div class="line-2"></div>
+                        </div>
+                    </h2><!-- /.post-title -->
+                    {% if user_projects %}
+                        {% for item in user_projects %}
+                            <div class="post-meta style-2">
+                                <div class="post-meta-content">
+                                    <div class="post-meta-content-inner">
+                                    <span class="post-by-author item">
+                                        <span class="inner"><strong>
+                                            <a href="{{ item.project.get_absolute_url }}" title="" rel="author"># {{ item.project.pk }}</a>
+                                        </strong></span>
+                                    </span>
+                                    <span class="post-by-author item">
+                                        <span class="inner"><a href="{{ item.project.get_absolute_url }}" title="" rel="author">{{ item.project }}</a></span>
+                                    </span>
+
+                                        <span class="post-date item">
+                                        <span class="inner"><span class="entry-date">Создан: {{ item.project.creation_date|date:'d.m.Y' }}</span></span>
+                                    </span>
+                                    <span class="post-comment item">
+                                        <span class="inner">
+                                            <span class="entry-date">Обновлен: {{ item.project.updated|date:'d.m.Y' }}</span>
+                                        </span>
+                                    </span>
+
+                                        <span class="post-meta-categories item">
+                                        <span class="inner">
+                                        {% if item.project.solutions.all %}
+                                            {% for i in item.project.solutions.all %}
+                                                <a href="{{ i.techsol.get_absolute_url }}" rel="category">{{ i.techsol }}</a>
+                                                {% if not forloop.last %}, {% endif %}
+                                            {% endfor %}
+                                        {% else %}
+                                            <span>Продукты не указаны</span>
+                                        {% endif %}
+                                        </span>
+                                    </span>
+                                    </div>
+                                </div>
+                            </div><!-- /.post-meta -->
+                        {% endfor %}
+                    {% else %}
+                        <span>Нет ни одного проекта</span>
+                    {% endif %}
+                </div><!-- /.post-content-wrap -->
+            </article>
+            <div class="wprt-spacer" data-desktop="80" data-mobi="40" data-smobi="40"></div>
+        </div><!-- /#content-wrap -->
+    </div><!-- /#main-content -->
+
+{% endblock %}

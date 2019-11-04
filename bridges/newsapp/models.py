@@ -1,11 +1,8 @@
-# -*- coding: utf-8 -*-
-
-from imagekit.models.fields import  ProcessedImageField
-from imagekit.processors import ResizeToFit, ResizeToFill, Adjust
-
 from django.db import models
+from django.urls import reverse
 
 from productsapp.models import TechnicalSolutions
+
 
 # Create your models here.
 class News(models.Model):
@@ -13,8 +10,7 @@ class News(models.Model):
     name = models.CharField(verbose_name='название', max_length=256, unique=True)
     slug = models.SlugField(verbose_name='слаг', max_length=128, unique=True)
     description = models.TextField(verbose_name='описание', blank=True)
-    # image = models.ImageField(upload_to='news_avatars', blank=True)
-    image = ProcessedImageField(upload_to='news_avatars', processors = [ResizeToFill(840, 470)], format="JPEG", options={'quality': 90}, blank=True)
+    image = models.ImageField(upload_to='news_avatars', blank=True)
     creation_date = models.DateTimeField(verbose_name='создан', auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(verbose_name='обновлен', auto_now=True)
 
@@ -31,6 +27,7 @@ class News(models.Model):
 
     def __unicode__(self):
         return self.name
+
 
 class NewsHasTechnicalSolutions(models.Model):
     """ Модель связи технических решений применяемых на объекте с указанием их объема  """
