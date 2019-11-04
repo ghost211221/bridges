@@ -55,7 +55,7 @@
                                         <h3 class="line-height-normal margin-bottom-10">{{ object.name }}</h3>
                                         {% if request.user.is_superuser %}
                                             <a href="{% url 'projects:project_update' object.pk %}">
-                                                <i class="fa fa-pencil" aria-hidden="true" style="color: black;" y> редактировать</i>
+                                                <i class="fa fa-pencil" aria-hidden="true" style="color: black;"> редактировать</i>
                                             </a>
                                         {% endif %}
 
