@@ -29,3 +29,4 @@ def order_create(request, pk):
 		'bred_title': 'Заказ услуги'
 	}
 	return render(request, 'ordersapp/order_create.html', context)
+
