@@ -36,7 +36,7 @@
                                      data-column4="1" data-gaph="30" data-gapv="30" style="height: 270px;">
                                     <div class="cbp-item">
                                         <div class="item-wrap">
-                                            <img style="height: 260px" src="/media/{{ user.avatar }}" alt="image"/>
+                                            <img style="height: 260px" src="/media/{{ user.avatar|default:'users/avatar/no_avatar.png' }}" alt="image"/>
                                         </div>
                                     </div><!--/.cbp-item -->
                                 </div>

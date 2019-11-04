@@ -83,7 +83,7 @@ def profile_self_user_update(request, pk):
     user = get_object_or_404(Users, pk=pk)
     user_form = UsersForEditProfileForm(instance=user)
     if request.method == 'POST':
-        user_form = UsersForEditProfileForm(request.POST, instance=user)
+        user_form = UsersForEditProfileForm(request.POST, request.FILES, instance=user)
         if user_form.is_valid():
             user_form.save()
             return HttpResponseRedirect(user.get_self_absolute_url())

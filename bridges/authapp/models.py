@@ -2,6 +2,12 @@ from django.contrib import admin
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.urls import reverse
+from imagekit.models import ProcessedImageField
+from pilkit.processors import ResizeToFill
+
+
+def image_upload_to(instance, filename):
+    return 'users/images/user_{0}/{1}'.format(instance.pk, filename)
 
 
 class CategoryCompany(models.Model):
@@ -76,8 +82,8 @@ class Users(AbstractUser):
     first_name = models.CharField(verbose_name='Имя', max_length=50)
     last_name = models.CharField(verbose_name='Фамилия', max_length=50)
     patronymic = models.CharField(verbose_name='Отчество', max_length=50, default='', null=True, blank=True)
-    avatar = models.ImageField(verbose_name='Аватар', upload_to='users/avatar', default='users/avatar/no_avatar.png',
-                               blank=True)
+    avatar = ProcessedImageField(verbose_name='Аватар', upload_to=image_upload_to, processors=[ResizeToFill(462, 462)],
+                                 default='users/avatar/no_avatar.png', blank=True)
     description = models.TextField(verbose_name='Подробно о себе', max_length=5000, blank=True)
     gender = models.CharField(verbose_name='Пол', max_length=6, choices=GENDER_CHOICES, blank=True, null=True)
     birthday = models.DateField(verbose_name='День рождения', blank=True, null=True)
