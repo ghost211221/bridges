@@ -48,17 +48,17 @@ class NewsHasTechnicalSolutions(models.Model):
         verbose_name_plural = 'Тех решения проекта'
 
 class NewsDiscussMember(models.Model):
-    News = models.ForeignKey(News, verbose_name='новость обсуждения', on_delete=models.CASCADE)
+    news = models.ForeignKey(News, verbose_name='новость обсуждения', on_delete=models.CASCADE)
     user = models.ForeignKey(Users, verbose_name='участник обсуждения', on_delete=models.CASCADE)
 
     def __str__(self):
-        return 'участник дискусии {}'.format(self.News)
+        return 'участник дискусии {}'.format(self.news)
 
 
 class NewsDiscussItem(models.Model):
-    News = models.ForeignKey(News, verbose_name='новость обсуждения', on_delete=models.CASCADE)
+    news = models.ForeignKey(News, verbose_name='новость обсуждения', on_delete=models.CASCADE)
     user = models.ForeignKey(Users, verbose_name='участник обсуждения', on_delete=models.CASCADE)
     comment = models.TextField(verbose_name='добавить сообщение', max_length=1500, null=True, blank=True)
 
     def __str__(self):
-        return 'комментарий к дискусии {}'.format(self.News)
+        return 'комментарий к дискусии {}'.format(self.news)

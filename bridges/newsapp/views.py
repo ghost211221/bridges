@@ -9,6 +9,7 @@ from django.contrib.auth.mixins import  PermissionRequiredMixin
 from .models import News
 from .models import TechnicalSolutions
 from .models import NewsHasTechnicalSolutions
+from .models import NewsDiscussItem
 
 
 # Create your views here.
@@ -27,12 +28,20 @@ class NewsListView(ListView):
         products = TechnicalSolutions.objects.all()
         news_category = NewsHasTechnicalSolutions.objects.all()
         latest_news = context['object_list'][:3]
+
+        comments = NewsDiscussItem.objects.all()
         for news in context['object_list']:
             catList = []
+            commentsList = []
             for category in news_category:
-                if news.id == category.news_id:
-                    catList.append(category.name)
+                if news.id == category.news:
+                    catList.append(category.news_id)
+            for comment in comments:
+                if news.id == comment.news_id:
+                    commentsList.append(comment.comment)
             setattr(news, 'catList', catList)
+            setattr(news, 'comments', commentsList)
+            setattr(news, 'commentsLen', len(commentsList))
         context.update({'products': products,
                         'news_category': news_category,
                         'latest_news': latest_news,
