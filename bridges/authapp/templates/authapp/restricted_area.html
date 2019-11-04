@@ -135,6 +135,61 @@
                     {% endif %}
                 </div><!-- /.post-content-wrap -->
             </article>
+
+            {# ------------------------------------------- ПОЛУЧЕНИЕ ЗАКАЗОВ ЮЗЕРА --------------------------------------------- #}
+
+            <article class="hentry">
+                <div class="post-content-wrap">
+                    <h2 class="post-title">
+                                        <span class="post-title-inner">
+                                            <a href="#">МОИ ЗАКАЗЫ</a>
+                                        </span>
+                        <div class="wprt-lines style-1 custom-3">
+                            <div class="line-1"></div>
+                            <div class="line-2"></div>
+                        </div>
+                    </h2><!-- /.post-title -->
+                    {% if user_orders %}
+                        {% for item in user_orders %}
+                            <div class="post-meta style-2">
+                                <div class="post-meta-content">
+                                    <div class="post-meta-content-inner">
+                                    <span class="post-by-author item">
+                                        <span class="inner"><strong>
+                                            <a href="#" title="" rel="author"># {{ item.order_number }}</a>
+                                        </strong></span>
+                                    </span>
+                                    <span class="post-by-author item">
+                                        <span class="inner"><a href="#" title="" rel="author">{{ item.service }}</a></span>
+                                    </span>
+                                    <span class="post-date item">
+                                        <span class="inner"><span class="entry-date">Создан: {{ item.created|date:'d.m.Y' }}</span></span>
+                                    </span>
+                                    <span class="post-date item">
+                                        <span class="inner"><span class="entry-date">Создан: {{ item.created|date:'d.m.Y' }}</span></span>
+                                    </span>
+                                        <span class="post-meta-categories item">
+                                        <span class="inner">
+                                        {% if item.project.solutions.all %}
+                                            {% for i in item.project.solutions.all %}
+                                                <a href="{{ i.techsol.get_absolute_url }}" rel="category">{{ i.techsol }}</a>
+                                                {% if not forloop.last %}, {% endif %}
+                                            {% endfor %}
+                                        {% else %}
+                                            <span>Продукты не указаны</span>
+                                        {% endif %}
+                                        </span>
+                                    </span>
+                                    </div>
+                                </div>
+                            </div><!-- /.post-meta -->
+                        {% endfor %}
+                    {% else %}
+                        <span>Нет ни одного проекта</span>
+                    {% endif %}
+                </div><!-- /.post-content-wrap -->
+            </article>
+
             <div class="wprt-spacer" data-desktop="80" data-mobi="40" data-smobi="40"></div>
         </div><!-- /#content-wrap -->
     </div><!-- /#main-content -->

@@ -4,6 +4,8 @@ from django.db import models
 from django.db.models.signals import pre_save
 from django.urls import reverse
 from django.utils.text import slugify
+from imagekit.models import ProcessedImageField
+from pilkit.processors import ResizeToFill
 from transliterate import translit
 from authapp.models import Company, Users
 from productsapp.models import TechnicalSolutions
@@ -35,7 +37,8 @@ class Project(models.Model):
     name = models.CharField(verbose_name='название', max_length=256, unique=True)
     slug = models.SlugField(verbose_name='слаг', max_length=128, blank=True)
     description = models.TextField(verbose_name='описание', blank=True)
-    image = models.ImageField(upload_to='projects_images/avatars', blank=True)
+    image = ProcessedImageField(verbose_name='Аватар', upload_to='projects_images/avatars',
+                                processors=[ResizeToFill(530, 530)], default='users/avatar/no_avatar.png', blank=True)
     status = models.CharField(verbose_name='статус', max_length=24, choices=STATUS_CHOICES)
     creation_date = models.DateTimeField(verbose_name='создан', auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(verbose_name='обновлен', auto_now=True)
@@ -90,7 +93,8 @@ class ProjectImage(models.Model):
     project = models.ForeignKey(Project, blank=True, null=True, default=None, on_delete=models.CASCADE,
                                 related_name="images")
     alt_desc = models.CharField(verbose_name='alt фотографии', max_length=128, blank=True)
-    image = models.ImageField(upload_to=image_upload_to, blank=True)
+    image = ProcessedImageField(verbose_name='фотографии проекта', upload_to=image_upload_to,
+                                processors=[ResizeToFill(770, 513)], blank=True)
     is_active = models.BooleanField(verbose_name='Показывать', default=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
