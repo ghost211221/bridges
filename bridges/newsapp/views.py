@@ -6,6 +6,8 @@ from django.views.generic import ListView, DetailView, DeleteView, CreateView, U
 
 from django.contrib.auth.mixins import  PermissionRequiredMixin
 
+from django.db.models import Q
+
 from .models import News
 from .models import TechnicalSolutions
 from .models import NewsHasTechnicalSolutions
@@ -52,14 +54,29 @@ class NewsListView(ListView):
 class NewsDetailView(DetailView):
     """docstring for ProductList"""    
     model = News
+
     products = TechnicalSolutions.objects.all()
     latest_news = News.objects.all()[:3]
+    comments = NewsDiscussItem.objects.all()
 
     template_name = 'newsapp/blog_detail.html'
     extra_context = {}
     extra_context.update({'products': products,
                         'latest_news': latest_news,
     })
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pk = kwargs['object'].id
+        news_category = NewsHasTechnicalSolutions.objects.filter(news_id=pk)
+        comments = NewsDiscussItem.objects.filter(news_id=pk)
+        # commentators = NewsDiscussItem.objects.filter(news_id=pk)
+        context.update({
+            'news_category': news_category,
+            'comments': comments,
+            'commentsLen': len(comments),
+        })
+        return context
 
 
 # Create your views here.

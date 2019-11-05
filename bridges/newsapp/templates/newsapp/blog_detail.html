@@ -49,7 +49,7 @@
                                         </span>
 
                                         <span class="post-comment item">
-                                            <span class="inner"><a href="#">3 Comments</a></span>
+                                            <span class="inner"><a href="#">{{ commentsLen }} Comments</a></span>
                                         </span>
                                         {% comment %}
                                         <span class="post-meta-categories item">
@@ -86,8 +86,26 @@
                             </div><!-- /.post-tags -->
 
                             <div id="comments" class="comments-area">
-                                <h2 class="comments-title">3 Comments</h2>
+                                <h2 class="comments-title">{{ commentsLen }} Comments</h2>
                                 <ol class="comment-list">
+                                    {% for comment in comments %}
+                                        <li class="comment">
+                                            <article class="comment-wrap clearfix">
+                                                <div class="gravatar"><img alt="image" src="/media/{{ comment.user.image }}" /></div>
+                                                <div class="comment-content">
+                                                    <div class="comment-meta">
+                                                        <h6 class="comment-author"> {{ comment.user }} </h6>
+                                                        <span class="comment-time">{{ comment.creation_date }}</span>
+                                                        <span class="comment-reply"><a class="comment-reply-link" href="#">Reply</a></span>
+                                                    </div>
+                                                    <div class="comment-text">
+                                                        <p>{{ comment.comment }}</p>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        </li><!-- #comment-## -->
+                                    {% endfor %}
+                                    {% comment %}
                                     <li class="comment">
                                         <article class="comment-wrap clearfix">
                                             <div class="gravatar"><img alt="image" src="assets/img/avatar.png" /></div>
@@ -136,6 +154,7 @@
                                             </div>
                                         </article>
                                     </li><!-- #comment-## -->
+                                    {% endcomment %}
                                 </ol><!-- /.comment-list -->
                                     
                                 <div id="respond" class="comment-respond">
