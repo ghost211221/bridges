@@ -215,7 +215,7 @@
                                     </div><!-- /.thumb -->
 
                                     <div class="texts">
-                                        <h3><a href="#">{{ object.name }}</a></h3>
+                                        <h3><a href="{% url 'news:news_detail' object.pk %}">{{ object.name }}</a></h3>
                                         <span class="post-date"><span class="entry-date">{{ object.creation_date }}</span></span>
                                     </div><!-- /.texts -->
                                 </li>
