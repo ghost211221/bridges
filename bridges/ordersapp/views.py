@@ -14,6 +14,7 @@ def order_create(request, pk):
 		if order_form.is_valid():
 			created_form = order_form.save(commit=False)
 			created_form.user = request.user
+			created_form.product = product
 			if count_orders == 0:
 				created_form.order_number = 1
 			else:
@@ -28,3 +29,4 @@ def order_create(request, pk):
 		'bred_title': 'Заказ услуги'
 	}
 	return render(request, 'ordersapp/order_create.html', context)
+

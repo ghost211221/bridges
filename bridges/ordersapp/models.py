@@ -1,6 +1,6 @@
-from django.db import models
 from django.conf import settings
 from django.db import models
+from productsapp.models import TechnicalSolutions
 from servicesapp.models import Service
 
 
@@ -17,6 +17,7 @@ class Order(models.Model):
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     service = models.ForeignKey(Service, verbose_name='услуга', on_delete=models.CASCADE)
+    product = models.ForeignKey(TechnicalSolutions, verbose_name='техническое решение', on_delete=models.CASCADE)
     order_number = models.IntegerField(verbose_name='номер заказа пользователя', default=0)
     created = models.DateTimeField(verbose_name='создан', auto_now_add=True)
     updated = models.DateTimeField(verbose_name='обновлен', auto_now=True)
