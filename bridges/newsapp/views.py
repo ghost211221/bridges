@@ -19,6 +19,8 @@ class NewsListView(ListView):
     """docstring for ProductList"""    
     model = News
 
+    paginate_by = 6
+
     template_name = 'newsapp/blog.html'
     extra_context = {}
 
@@ -79,32 +81,35 @@ class NewsDetailView(DetailView):
         return context
 
 
-# Create your views here.
-class NewsCreateView(PermissionRequiredMixin, CreateView):
-    """docstring for ProductList"""    
-    model = News
+# # Create your views here.
+# class NewsCreateView(PermissionRequiredMixin, CreateView):
+#     """docstring for ProductList"""    
+#     model = News
 
-    template_name = 'newsapp/blog.html'
-    extra_context = {}
-
-
-# Create your views here.
-class NewsUpdateView(PermissionRequiredMixin, UpdateView):
-    """docstring for ProductList"""    
-    model = News
-
-    template_name = 'newsapp/blog.html'
-    extra_context = {}
+#     template_name = 'newsapp/blog.html'
+#     extra_context = {}
 
 
+# # Create your views here.
+# class NewsUpdateView(PermissionRequiredMixin, UpdateView):
+#     docstring for ProductList    
+#     model = News
 
+#     template_name = 'newsapp/blog.html'
+#     extra_context = {}
 
-# Create your views here.
-class NewsDeleteView(PermissionRequiredMixin, DeleteView):
-    """docstring for ProductList"""    
-    model = News
+# # Create your views here.
+# class NewsDeleteView(PermissionRequiredMixin, DeleteView):
+#     """docstring for ProductList"""    
+#     model = News
 
-    template_name = 'newsapp/blog.html'
-    extra_context = {}
+#     template_name = 'newsapp/blog.html'
+#     extra_context = {}
+
+class CreateDiscussItem(CreateView):
+    """docstring for create discuss item class"""
+    model = NewsDiscussItem
+
+    fields = ['news', 'user', 'comment']
 
 
