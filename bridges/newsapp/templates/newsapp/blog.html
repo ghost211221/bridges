@@ -50,7 +50,7 @@
                                             </span>
                                             
                                             <span class="post-comment item">
-                                                <span class="inner"><a href="#">{{ object.commentsLen }} Comments</a></span>
+                                                <span class="inner"><a href="{% url 'news:news_detail' object.pk %}">{{ object.commentsLen }} Comments</a></span>
                                             </span>
                                             {% comment %}
                                             <span class="post-meta-categories item">

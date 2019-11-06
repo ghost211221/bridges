@@ -91,7 +91,7 @@
                                     {% for comment in comments %}
                                         <li class="comment">
                                             <article class="comment-wrap clearfix">
-                                                <div class="gravatar"><img alt="image" src="/media/{{ comment.user.image }}" /></div>
+                                                <div class="gravatar"><img alt="image" src="/media/{{ comment.user.avatar }}" /></div>
                                                 <div class="comment-content">
                                                     <div class="comment-meta">
                                                         <h6 class="comment-author"> {{ comment.user }} </h6>
@@ -210,6 +210,18 @@
                         <ul class="recent-news clearfix">
                             {% for object in latest_news %}
                                 <li class="clearfix">
+                                    <form action="" method="post">
+                                        {% csrf_token %}
+                                        {{ form.as_p }}
+                                        <input type="hidden" name="next" value="{{ request.path }}">
+                                        <button type="submit" value="добавить" class="wprt-button icon-flash confirm-button">
+                                            СОХРАНИТЬ
+                                        </button>
+                                        <a href="{{ project.get_absolute_url }}" class="wprt-button small cancel-button">
+                                            ВЕРНУТЬСЯ
+                                        </a>
+                                    </form>
+                                    {% comment %}
                                     <div class="thumb">
                                         <img width="150" height="150" src="/media/{{ object.image }}" alt="image">
                                     </div><!-- /.thumb -->
@@ -218,6 +230,7 @@
                                         <h3><a href="{% url 'news:news_detail' object.pk %}">{{ object.name }}</a></h3>
                                         <span class="post-date"><span class="entry-date">{{ object.creation_date }}</span></span>
                                     </div><!-- /.texts -->
+                                    {% endcomment %}
                                 </li>
                             {% endfor %}
                             {% comment %}

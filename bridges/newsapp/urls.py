@@ -11,7 +11,7 @@ urlpatterns = [
     path('', NewsListView.as_view(), name='news_list'),
     path('<int:pk>/', NewsDetailView.as_view(), name='news_detail'),
     path('update/<int:pk>', NewsUpdateView.as_view(), name='news_supdate'),
-    path('create/<int:project_pk>', NewsCreateView.as_view(), name='news_create'),
+    path('create/<int:news_pk>', NewsCreateView.as_view(), name='news_create'),
     path('delete/<int:pk>', NewsDeleteView.as_view(), name='news_delete'),
     # path('discuss/items/<int:pk>', projectsapp.project_discuss_items, name='project_discuss_items'),
     # path('discuss/edit/members/<int:pk>', projectsapp.project_discuss_edit_members,
